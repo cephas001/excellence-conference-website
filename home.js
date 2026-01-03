@@ -163,7 +163,7 @@ const renderSpeakers = () => {
         return `
         <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" style="animation-delay: ${delay}ms; opacity: 0;">
             <div class="aspect-square bg-gray-100 overflow-hidden">
-                <img src="${speaker.image}" alt="${speaker.name}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110">
+                <img src="${speaker.image}" alt="${speaker.name}" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" loading="lazy">
             </div>
             <div class="p-4">
                 <h3 class="text-base font-bold text-gray-900 mb-0.5 leading-tight">${speaker.name}</h3>
@@ -191,7 +191,7 @@ const renderTestimonies = () => {
             <div class="flex items-start gap-4 mb-4">
                 <div class="flex-shrink-0">
                     <div class="w-14 h-14 rounded-full bg-gray-700 overflow-hidden transition-transform duration-300 hover:scale-110">
-                        <img src="${testimony.image}" alt="${testimony.name}" class="w-full h-full object-cover">
+                        <img src="${testimony.image}" alt="${testimony.name}" class="w-full h-full object-cover" loading="lazy">
                     </div>
                 </div>
                 <div class="flex-grow min-w-0">
@@ -265,10 +265,14 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTestimonies();
     initScrollAnimations();
     
-    // Hide loader when everything is ready
+    // Hide loader when page is ready
     if (document.readyState === 'complete') {
         hideLoader();
     } else {
         window.addEventListener('load', hideLoader);
+        // Fallback timeout
+        setTimeout(() => {
+            hideLoader();
+        }, 2000);
     }
 });

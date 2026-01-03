@@ -82,7 +82,7 @@ const renderAgenda = () => {
 
             ${isDetailed && item.speaker ? `
                 <div class="mt-3 border border-gray-700 rounded-2xl p-3 flex items-center gap-3 shadow-sm bg-gray-800 transition-all duration-300 hover:border-gray-600 hover:shadow-md hover:-translate-y-1">
-                    <img src="${item.speaker.image}" alt="${item.speaker.name}" class="w-10 h-10 rounded-full object-cover bg-gray-700 transition-transform duration-300 hover:scale-110">
+                    <img src="${item.speaker.image}" alt="${item.speaker.name}" class="w-10 h-10 rounded-full object-cover bg-gray-700 transition-transform duration-300 hover:scale-110" loading="lazy">
                     <div>
                         <p class="text-sm font-bold text-white">${item.speaker.name}</p>
                         <p class="text-[10px] text-gray-400">${item.speaker.role}</p>
