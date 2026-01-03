@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Excellence Conference - Agenda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Ionicons for icons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body class="bg-gray-900 pb-24">
+  <div id="app" class="max-w-md mx-auto min-h-screen relative bg-gray-900">
+    <!-- Header -->
+    <header class="px-6 pt-8 pb-4 sticky top-0 bg-gray-900 z-10 border-b border-gray-800 animate-fade-in-up">
+      <h1 class="text-3xl font-bold text-white">Agenda</h1>
+    </header>
+
+    <!-- Timeline Container -->
+    <main class="px-6 relative py-4">
+      <!-- Vertical Line -->
+      <div class="absolute left-[5.5rem] top-4 bottom-0 w-px bg-gray-700"></div>
+
+      <div id="agenda-list" class="space-y-8">
+        <!-- Agenda items will be injected here -->
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav
+      class="fixed bottom-8 left-1/2 bg-gray-800/95 backdrop-blur-sm rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.5)] px-6 py-3 flex items-center justify-center gap-12 z-50 border border-gray-700" style="transform: translateX(-50%);">
+      <a href="index.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-red-500 transition-colors">
+        <ion-icon name="home" class="text-xl"></ion-icon>
+        <span class="text-xs font-medium">Home</span>
+      </a>
+      <a href="agenda.html" class="flex flex-col items-center gap-1 text-red-500">
+        <ion-icon name="calendar" class="text-xl"></ion-icon>
+        <span class="text-xs font-medium">Agenda</span>
+      </a>
+      <a href="#" class="flex flex-col items-center gap-1 text-gray-400 hover:text-red-500 transition-colors">
+        <ion-icon name="restaurant" class="text-xl"></ion-icon>
+        <span class="text-xs font-medium">Dinner</span>
+      </a>
+    </nav>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
