@@ -1,18 +1,12 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "cleanUrls": false,
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/agenda",
       "destination": "/agenda.html"
-    },
-    {
-      "source": "/agenda.html",
-      "destination": "/agenda.html"
-    },
-    {
-      "source": "/",
-      "destination": "/index.html"
     }
   ],
   "headers": [
