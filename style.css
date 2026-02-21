@@ -2,10 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tusker Grotesk 6700 Bold – add assets/fonts/TuskerGrotesk-6700Bold.woff2 if you have the font */
+@font-face {
+    font-family: 'Tusker Grotesk 6700 Bold';
+    src: url('./assets/fonts/TuskerGrotesk-6700Bold.woff2') format('woff2'),
+         url('./assets/fonts/TuskerGrotesk-6700Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    /* Logo-style gradient orange (yellow-amber to orange) */
+    --accent-orange: #f97316;
+    --accent-orange-dark: #ea580c;
+    --accent-amber: #fbbf24;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.font-tusker {
+    font-family: 'Tusker Grotesk 6700 Bold', 'Tusker Grotesk', 'Inter', sans-serif;
+}
+
+/* Gradient orange text/accents to match logo */
+.text-gradient-orange {
+    background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 35%, #f97316 70%, #ea580c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Loader: logo fades in/out gently, then fades out on exit */
+.loader-logo {
+    animation: loaderLogoFade 2s ease-in-out infinite;
+}
+@keyframes loaderLogoFade {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+.loader.loader-exit .loader-logo {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
 }
 
 /* Slideshow Styles */
@@ -152,6 +199,18 @@ body {
 
 .animate-fade-in-up-center {
     animation: fadeInUpCenter 0.6s ease-out forwards;
+}
+
+/* Agenda day accordion */
+.agenda-day-content {
+    will-change: max-height;
+}
+.agenda-day-trigger:focus {
+    outline: none;
+}
+.agenda-day-trigger:focus-visible {
+    outline: 2px solid rgba(249, 115, 22, 0.5);
+    outline-offset: 2px;
 }
 
 /* Custom scrollbar hide if needed */

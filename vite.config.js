@@ -6,6 +6,7 @@ export default defineConfig({
       input: {
         main: './index.html',
         agenda: './agenda.html',
+        admin: './admin.html',
       },
     },
   },
