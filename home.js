@@ -58,50 +58,47 @@ const initSlideshow = () => {
     showSlide(0);
 };
 
-// Fallback data when Firestore is empty or unavailable
-const speakersFallback = [
-    { name: "Dr. Sarah James", role: "Keynote Speaker", bio: "Renowned theologian and author with over 20 years of ministry experience", topic: "Renewing Hope", image: "/img/speaker1.jpg" },
-    { name: "Rev. Michael Chen", role: "Youth Pastor", bio: "Passionate about empowering the next generation in faith and purpose", topic: "Next Gen Faith", image: "/img/speaker2.jpg" },
-    { name: "Elena Rodriguez", role: "Worship Leader", bio: "Anointed worship leader bringing hearts into God's presence", topic: "The Heart of Worship", image: "/img/speaker3.jpg" },
-    { name: "Ps. David O'Neill", role: "Senior Pastor", bio: "Leading with grace and wisdom for over three decades", topic: "Leading with Grace", image: "/img/speaker4.jpg" },
-    { name: "Maria Gonzales", role: "Family Counselor", bio: "Dedicated to building strong, healthy families through biblical principles", topic: "Healthy Families", image: "/img/speaker5.jpg" },
-    { name: "Jonathan Wright", role: "Guest Lecturer", bio: "Expert in biblical finance and stewardship principles", topic: "Biblical Finance", image: "/img/speaker6.jpg" }
-];
-
-const testimoniesFallback = [
-    { name: "Michael Thompson", role: "Business Executive", location: "Lagos, Nigeria", image: "/img/testimonial1.jpg", testimony: "The Excellence Conference was a life-changing experience. The speakers were inspiring, and the chapel setting created such a peaceful atmosphere for reflection and growth.", rating: 5 },
-    { name: "Grace Okafor", role: "Entrepreneur", location: "Abuja, Nigeria", image: "/img/testimonial2.jpg", testimony: "I was deeply moved by the worship sessions and the sense of community. The admission process was smooth, and the entire event was well-organized. Can't wait for this year!", rating: 5 },
-    { name: "David Johnson", role: "Ministry Leader", location: "Port Harcourt, Nigeria", image: "/img/testimonial3.jpg", testimony: "The conference exceeded my expectations. The chapel provided the perfect sacred space for spiritual growth. The testimonies shared were powerful and encouraging.", rating: 5 },
-    { name: "Sarah Williams", role: "Youth Coordinator", location: "Ibadan, Nigeria", image: "/img/testimonial4.jpg", testimony: "An incredible weekend of renewal and connection. The speakers brought fresh perspectives, and I left feeling equipped and inspired for ministry.", rating: 5 },
-    { name: "James Okafor", role: "Church Leader", location: "Enugu, Nigeria", image: "/img/testimonial5.jpg", testimony: "The atmosphere in the chapel was truly special. It was more than a conference - it was a divine appointment. Highly recommend to everyone!", rating: 5 },
-    { name: "Maryam Ibrahim", role: "Worship Minister", location: "Kaduna, Nigeria", image: "/img/testimonial6.jpg", testimony: "The worship sessions were powerful, and the teaching was profound. This conference has become a highlight of my year. See you next time!", rating: 5 }
-];
-
 async function getSpeakers() {
-    try {
-        const snap = await getDocs(collection(db, 'speakers'));
-        const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        return list.length ? list : speakersFallback;
-    } catch {
-        return speakersFallback;
-    }
+    const snap = await getDocs(collection(db, 'speakers'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
 async function getTestimonies() {
-    try {
-        const snap = await getDocs(collection(db, 'testimonies'));
-        const list = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-        return list.length ? list : testimoniesFallback;
-    } catch {
-        return testimoniesFallback;
-    }
+    const snap = await getDocs(collection(db, 'testimonies'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
 
-// Render Speakers (accepts data array)
+function renderSpeakersError() {
+    const container = document.getElementById('speakers-grid');
+    if (!container) return;
+    container.innerHTML = `
+        <div class="col-span-full rounded-lg border border-gray-700 bg-gray-800/50 p-6 text-center">
+            <p class="text-red-400 font-medium mb-1">Could not load speakers</p>
+            <p class="text-gray-400 text-sm">The read from the database failed. Please check your connection and try again later.</p>
+        </div>
+    `;
+}
+
+function renderTestimoniesError() {
+    const container = document.getElementById('testimonies-grid');
+    if (!container) return;
+    container.innerHTML = `
+        <div class="rounded-lg border border-gray-700 bg-gray-800/50 p-6 text-center">
+            <p class="text-red-400 font-medium mb-1">Could not load testimonies</p>
+            <p class="text-gray-400 text-sm">The read from the database failed. Please check your connection and try again later.</p>
+        </div>
+    `;
+}
+
+// Render Speakers (accepts data array; shows nothing if empty)
 const renderSpeakers = (speakers) => {
     const container = document.getElementById('speakers-grid');
     if (!container) return;
-    const data = Array.isArray(speakers) && speakers.length ? speakers : speakersFallback;
+    const data = Array.isArray(speakers) ? speakers : [];
+    if (data.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 col-span-full text-center py-8">No speakers to display.</p>';
+        return;
+    }
     container.innerHTML = data.map((speaker, index) => {
         const delay = (index % 4) * 100;
         return `
@@ -123,11 +120,15 @@ const renderSpeakers = (speakers) => {
     }).join('');
 };
 
-// Render Testimonies (accepts data array)
+// Render Testimonies (accepts data array; shows nothing if empty)
 const renderTestimonies = (testimonies) => {
     const container = document.getElementById('testimonies-grid');
     if (!container) return;
-    const data = Array.isArray(testimonies) && testimonies.length ? testimonies : testimoniesFallback;
+    const data = Array.isArray(testimonies) ? testimonies : [];
+    if (data.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-center py-8">No testimonies to display.</p>';
+        return;
+    }
     container.innerHTML = data.map((testimony, index) => {
         const delay = (index % 3) * 100;
         return `
@@ -242,9 +243,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const testimoniesEl = document.getElementById('testimonies-grid');
     if (speakersEl) speakersEl.innerHTML = '<p class="text-gray-400 col-span-full text-center py-8">Loading speakers…</p>';
     if (testimoniesEl) testimoniesEl.innerHTML = '<p class="text-gray-400 col-span-full text-center py-8">Loading testimonies…</p>';
-    const [speakers, testimonies] = await Promise.all([getSpeakers(), getTestimonies()]);
-    renderSpeakers(speakers);
-    renderTestimonies(testimonies);
+    const [speakersResult, testimoniesResult] = await Promise.allSettled([getSpeakers(), getTestimonies()]);
+    if (speakersResult.status === 'fulfilled') {
+        renderSpeakers(speakersResult.value);
+    } else {
+        renderSpeakersError();
+    }
+    if (testimoniesResult.status === 'fulfilled') {
+        renderTestimonies(testimoniesResult.value);
+    } else {
+        renderTestimoniesError();
+    }
     initScrollAnimations();
     updateCountdown();
     setInterval(updateCountdown, 1000);
