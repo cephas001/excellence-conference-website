@@ -13,7 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
-                tusker: ['"Tusker Grotesk 6700 Bold"', '"Tusker Grotesk"', 'Inter', 'sans-serif'],
+                tusker: ['"Tusker Grotesk"', 'Inter', 'sans-serif'],
             },
             colors: {
                 'brand-green': '#00A651',

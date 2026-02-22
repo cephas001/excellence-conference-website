@@ -258,12 +258,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    if (document.readyState === 'complete') {
-        hideLoader();
-    } else {
-        window.addEventListener('load', hideLoader);
-        setTimeout(() => {
-            hideLoader();
-        }, 2000);
-    }
+    // Hide loader when Firebase data is ready (not on window load or timeout)
+    hideLoader();
 });

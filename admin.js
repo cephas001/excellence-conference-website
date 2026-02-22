@@ -1,7 +1,7 @@
 import './style.css';
 import { app, db } from './firebase.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { collection, doc, getDocs, addDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, addDoc, setDoc, deleteDoc, query, orderBy } from 'firebase/firestore';
 
 const auth = getAuth(app);
 
@@ -24,6 +24,7 @@ function showAdmin() {
   adminView.classList.remove('hidden');
   loadSpeakers();
   loadTestimonies();
+  loadAgendaDays();
 }
 
 function setLoginError(msg) {
@@ -300,3 +301,280 @@ function escapeHtml(s) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 }
+
+// --- Agenda (days + items) ---
+const agendaDaysList = document.getElementById('agenda-days-list');
+const addAgendaDayBtn = document.getElementById('add-agenda-day-btn');
+const agendaDayForm = document.getElementById('agenda-day-form');
+const agendaDayIdInput = document.getElementById('agenda-day-id');
+const agendaDayLabelInput = document.getElementById('agenda-day-label');
+const agendaDayDateInput = document.getElementById('agenda-day-date');
+const agendaDayOrderInput = document.getElementById('agenda-day-order');
+const agendaDayFormCancel = document.getElementById('agenda-day-form-cancel');
+
+const agendaItemsPanel = document.getElementById('agenda-items-panel');
+const agendaItemsDayLabel = document.getElementById('agenda-items-day-label');
+const agendaItemsDayIdInput = document.getElementById('agenda-items-day-id');
+const agendaItemsList = document.getElementById('agenda-items-list');
+const addAgendaItemBtn = document.getElementById('add-agenda-item-btn');
+const agendaItemsPanelClose = document.getElementById('agenda-items-panel-close');
+const agendaItemForm = document.getElementById('agenda-item-form');
+const agendaItemIndexInput = document.getElementById('agenda-item-index');
+const agendaItemTimeInput = document.getElementById('agenda-item-time');
+const agendaItemTypeSelect = document.getElementById('agenda-item-type');
+const agendaItemTitleInput = document.getElementById('agenda-item-title');
+const agendaItemDescriptionInput = document.getElementById('agenda-item-description');
+const agendaItemDetailedFields = document.getElementById('agenda-item-detailed-fields');
+const agendaItemTagInput = document.getElementById('agenda-item-tag');
+const agendaItemSpeakerNameInput = document.getElementById('agenda-item-speaker-name');
+const agendaItemSpeakerRoleInput = document.getElementById('agenda-item-speaker-role');
+const agendaItemSpeakerImageInput = document.getElementById('agenda-item-speaker-image');
+const agendaItemFormCancel = document.getElementById('agenda-item-form-cancel');
+
+let agendaDaysData = [];
+let currentAgendaDay = null;
+
+function clearAgendaDayForm() {
+  agendaDayIdInput.value = '';
+  agendaDayLabelInput.value = '';
+  agendaDayDateInput.value = '';
+  agendaDayOrderInput.value = '0';
+  agendaDayForm.classList.add('hidden');
+}
+
+function agendaDayFormData() {
+  return {
+    label: agendaDayLabelInput.value.trim(),
+    date: agendaDayDateInput.value.trim(),
+    order: parseInt(agendaDayOrderInput.value, 10) || 0,
+    items: [],
+  };
+}
+
+async function loadAgendaDays() {
+  try {
+    const q = query(collection(db, 'agendaDays'), orderBy('order', 'asc'));
+    const snap = await getDocs(q);
+    agendaDaysData = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    agendaDaysList.innerHTML = agendaDaysData.length
+      ? agendaDaysData
+          .map(
+            (day) => `
+        <div class="border border-gray-600 rounded-lg p-4 bg-gray-700/30">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="font-medium text-white">${escapeHtml(day.label)}</span>
+              <span class="text-gray-400 text-sm ml-2">${escapeHtml(day.date || '')} · order ${day.order != null ? day.order : 0}</span>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+              <button type="button" class="edit-agenda-day px-3 py-1 rounded bg-gray-600 hover:bg-gray-500 text-xs" data-id="${escapeAttr(day.id)}">Edit day</button>
+              <button type="button" class="manage-agenda-items px-3 py-1 rounded bg-accent-orange/80 hover:bg-orange-600 text-xs" data-id="${escapeAttr(day.id)}">Manage items</button>
+              <button type="button" class="delete-agenda-day px-3 py-1 rounded bg-red-900/50 hover:bg-red-800 text-red-300 text-xs" data-id="${escapeAttr(day.id)}">Delete day</button>
+            </div>
+          </div>
+          <p class="text-gray-500 text-xs mt-1">${(day.items || []).length} session(s)</p>
+        </div>
+      `
+          )
+          .join('')
+      : '<p class="text-gray-500 text-sm py-2">No agenda days yet. Add a day below.</p>';
+
+    agendaDaysList.querySelectorAll('.edit-agenda-day').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const day = agendaDaysData.find((x) => x.id === id);
+        if (!day) return;
+        agendaDayIdInput.value = day.id;
+        agendaDayLabelInput.value = day.label || '';
+        agendaDayDateInput.value = day.date || '';
+        agendaDayOrderInput.value = String(day.order != null ? day.order : 0);
+        agendaDayForm.classList.remove('hidden');
+      });
+    });
+
+    agendaDaysList.querySelectorAll('.delete-agenda-day').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this day and all its sessions?')) return;
+        const id = btn.getAttribute('data-id');
+        try {
+          await deleteDoc(doc(db, 'agendaDays', id));
+          loadAgendaDays();
+          if (currentAgendaDay && currentAgendaDay.id === id) {
+            agendaItemsPanel.classList.add('hidden');
+            currentAgendaDay = null;
+          }
+        } catch (e) {
+          alert('Delete failed: ' + (e.message || e));
+        }
+      });
+    });
+
+    agendaDaysList.querySelectorAll('.manage-agenda-items').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const day = agendaDaysData.find((x) => x.id === id);
+        if (!day) return;
+        currentAgendaDay = { ...day, items: Array.isArray(day.items) ? [...day.items] : [] };
+        agendaItemsDayIdInput.value = day.id;
+        agendaItemsDayLabel.textContent = 'Sessions for: ' + (day.label || 'Day');
+        agendaItemsPanel.classList.remove('hidden');
+        renderAgendaItemsList();
+      });
+    });
+  } catch (e) {
+    agendaDaysList.innerHTML = '<p class="text-red-400 text-sm">Failed to load agenda.</p>';
+  }
+}
+
+addAgendaDayBtn.addEventListener('click', () => {
+  clearAgendaDayForm();
+  agendaDayForm.classList.remove('hidden');
+});
+
+agendaDayFormCancel.addEventListener('click', clearAgendaDayForm);
+
+agendaDayForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = agendaDayIdInput.value.trim();
+  const data = agendaDayFormData();
+  try {
+    if (id) {
+      const day = agendaDaysData.find((d) => d.id === id);
+      await setDoc(doc(db, 'agendaDays', id), { ...data, items: day ? (day.items || []) : [] });
+    } else {
+      await addDoc(collection(db, 'agendaDays'), data);
+    }
+    clearAgendaDayForm();
+    loadAgendaDays();
+  } catch (err) {
+    alert('Save failed: ' + (err.message || err));
+  }
+});
+
+function renderAgendaItemsList() {
+  if (!currentAgendaDay || !agendaItemsList) return;
+  const items = currentAgendaDay.items || [];
+  agendaItemsList.innerHTML = items.length
+    ? items
+        .map(
+          (item, i) => `
+        <div class="flex flex-wrap items-center justify-between gap-2 py-2 border-b border-gray-600">
+          <span class="text-white text-sm">${escapeHtml(item.time)} – ${escapeHtml(item.title)}</span>
+          <div class="flex gap-2">
+            <button type="button" class="edit-agenda-item px-2 py-1 rounded bg-gray-600 hover:bg-gray-500 text-xs" data-index="${i}">Edit</button>
+            <button type="button" class="delete-agenda-item px-2 py-1 rounded bg-red-900/50 hover:bg-red-800 text-red-300 text-xs" data-index="${i}">Delete</button>
+          </div>
+        </div>
+      `
+        )
+        .join('')
+    : '<p class="text-gray-500 text-sm py-2">No sessions. Add one below.</p>';
+
+  agendaItemsList.querySelectorAll('.edit-agenda-item').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const index = parseInt(btn.getAttribute('data-index'), 10);
+      const item = currentAgendaDay.items[index];
+      if (!item) return;
+      agendaItemIndexInput.value = String(index);
+      agendaItemTimeInput.value = item.time || '';
+      agendaItemTitleInput.value = item.title || '';
+      agendaItemDescriptionInput.value = item.description || '';
+      agendaItemTypeSelect.value = item.type === 'detailed' ? 'detailed' : 'simple';
+      agendaItemTagInput.value = item.tag || '';
+      agendaItemSpeakerNameInput.value = item.speaker ? (item.speaker.name || '') : '';
+      agendaItemSpeakerRoleInput.value = item.speaker ? (item.speaker.role || '') : '';
+      agendaItemSpeakerImageInput.value = item.speaker ? (item.speaker.image || '') : '';
+      agendaItemDetailedFields.classList.toggle('hidden', item.type !== 'detailed');
+      agendaItemForm.classList.remove('hidden');
+    });
+  });
+
+  agendaItemsList.querySelectorAll('.delete-agenda-item').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const index = parseInt(btn.getAttribute('data-index'), 10);
+      if (!confirm('Delete this session?')) return;
+      const newItems = currentAgendaDay.items.filter((_, i) => i !== index);
+      try {
+        await setDoc(doc(db, 'agendaDays', currentAgendaDay.id), {
+          label: currentAgendaDay.label,
+          date: currentAgendaDay.date,
+          order: currentAgendaDay.order,
+          items: newItems,
+        });
+        currentAgendaDay.items = newItems;
+        const dayInList = agendaDaysData.find((d) => d.id === currentAgendaDay.id);
+        if (dayInList) dayInList.items = newItems;
+        renderAgendaItemsList();
+      } catch (e) {
+        alert('Delete failed: ' + (e.message || e));
+      }
+    });
+  });
+}
+
+agendaItemTypeSelect.addEventListener('change', () => {
+  agendaItemDetailedFields.classList.toggle('hidden', agendaItemTypeSelect.value !== 'detailed');
+});
+
+addAgendaItemBtn.addEventListener('click', () => {
+  agendaItemIndexInput.value = '';
+  agendaItemTimeInput.value = '';
+  agendaItemTitleInput.value = '';
+  agendaItemDescriptionInput.value = '';
+  agendaItemTypeSelect.value = 'simple';
+  agendaItemTagInput.value = '';
+  agendaItemSpeakerNameInput.value = '';
+  agendaItemSpeakerRoleInput.value = '';
+  agendaItemSpeakerImageInput.value = '';
+  agendaItemDetailedFields.classList.add('hidden');
+  agendaItemForm.classList.remove('hidden');
+});
+
+agendaItemFormCancel.addEventListener('click', () => {
+  agendaItemForm.classList.add('hidden');
+});
+
+agendaItemForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!currentAgendaDay) return;
+  const indexStr = agendaItemIndexInput.value;
+  const index = indexStr === '' ? -1 : parseInt(indexStr, 10);
+  const item = {
+    time: agendaItemTimeInput.value.trim(),
+    title: agendaItemTitleInput.value.trim(),
+    description: agendaItemDescriptionInput.value.trim() || undefined,
+    type: agendaItemTypeSelect.value === 'detailed' ? 'detailed' : 'simple',
+    tag: agendaItemTypeSelect.value === 'detailed' ? (agendaItemTagInput.value.trim() || undefined) : undefined,
+  };
+  if (item.type === 'detailed') {
+    item.speaker = {
+      name: agendaItemSpeakerNameInput.value.trim() || '',
+      role: agendaItemSpeakerRoleInput.value.trim() || '',
+      image: agendaItemSpeakerImageInput.value.trim() || '',
+    };
+  }
+  if (index >= 0 && index < currentAgendaDay.items.length) {
+    currentAgendaDay.items[index] = item;
+  } else {
+    currentAgendaDay.items.push(item);
+  }
+  try {
+    await setDoc(doc(db, 'agendaDays', currentAgendaDay.id), {
+      label: currentAgendaDay.label,
+      date: currentAgendaDay.date,
+      order: currentAgendaDay.order,
+      items: currentAgendaDay.items,
+    });
+    const dayInList = agendaDaysData.find((d) => d.id === currentAgendaDay.id);
+    if (dayInList) dayInList.items = currentAgendaDay.items;
+    agendaItemForm.classList.add('hidden');
+    renderAgendaItemsList();
+  } catch (err) {
+    alert('Save failed: ' + (err.message || err));
+  }
+});
+
+agendaItemsPanelClose.addEventListener('click', () => {
+  agendaItemsPanel.classList.add('hidden');
+  currentAgendaDay = null;
+});

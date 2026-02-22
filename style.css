@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tusker Grotesk 6700 Bold – add assets/fonts/TuskerGrotesk-6700Bold.woff2 if you have the font */
+/* Tusker Grotesk – assets/fonts/TuskerGrotesk-5800Super.otf */
 @font-face {
-    font-family: 'Tusker Grotesk 6700 Bold';
-    src: url('./assets/fonts/TuskerGrotesk-6700Bold.woff2') format('woff2'),
-         url('./assets/fonts/TuskerGrotesk-6700Bold.woff') format('woff');
+    font-family: 'Tusker Grotesk';
+    src: url('./assets/fonts/TuskerGrotesk-5800Super.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -26,7 +25,7 @@ body {
 }
 
 .font-tusker {
-    font-family: 'Tusker Grotesk 6700 Bold', 'Tusker Grotesk', 'Inter', sans-serif;
+    font-family: 'Tusker Grotesk', 'Inter', sans-serif;
 }
 
 /* Gradient orange text/accents to match logo */
