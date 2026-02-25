@@ -221,3 +221,41 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* Announcement marquee (left to right, seamless loop) */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.announcement-marquee {
+    animation: marquee 30s linear infinite;
+    display: inline-block;
+    padding-right: 2em;
+}
+.announcement-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* When announcement banner is visible, push view content down */
+.has-announcement #view-agenda,
+.has-announcement #view-dinner,
+.has-announcement #view-contact,
+.has-announcement #view-merch {
+    padding-top: 7rem;
+}
+.has-announcement #view-agenda header.sticky,
+.has-announcement #view-dinner header.sticky,
+.has-announcement #view-contact header.sticky,
+.has-announcement #view-merch header.sticky {
+    top: 7rem;
+}
+
+/* Accessibility: focus visible */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 2px;
+}

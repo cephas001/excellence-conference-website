@@ -4,10 +4,16 @@ export default {
         "./index.html",
         "./agenda.html",
         "./admin.html",
+        "./dinner.html",
+        "./merch.html",
         "./src/**/*.{js,ts,jsx,tsx}",
         "./main.js",
         "./home.js",
-        "./admin.js"
+        "./admin.js",
+        "./app.js",
+        "./dinner.js",
+        "./merch.js",
+        "./event.js"
     ],
     theme: {
         extend: {

@@ -5,7 +5,15 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Excellence Conference - Home</title>
+  <title>Excellence Conference 2026 – Shining the Light</title>
+  <meta name="description" content="Excellence Conference 2026 – May 19–24. Join us for a weekend of renewal, fellowship, and inspiration. Speakers, agenda, merch, and more." />
+  <meta property="og:title" content="Excellence Conference 2026 – Shining the Light" />
+  <meta property="og:description" content="Join us May 19–24, 2026 for Excellence Conference. Speakers, agenda, conference dinner, and merchandise." />
+  <meta property="og:image" content="/assets/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Excellence Conference 2026" />
+  <meta name="twitter:description" content="Join us May 19–24, 2026 for Excellence Conference. Shining the Light." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,13 +29,23 @@
   </div>
 
   <div id="app" class="min-h-screen relative hidden">
-    <!-- Logo (top center) -->
-    <header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 pb-2 animate-fade-in-up" style="animation-delay: 0.1s; opacity: 0;">
-      <a href="index.html" class="block">
-        <img src="assets/logo.png" alt="Excellence Conference" class="h-12 sm:h-14 md:h-16 w-auto object-contain" />
+    <!-- Announcement banner (marquee, time-based; shown by JS when active) -->
+    <div id="announcement-banner" class="hidden fixed top-0 left-0 right-0 z-[60] bg-accent-orange text-white py-2 overflow-hidden border-b border-orange-700" aria-live="polite">
+      <div class="announcement-marquee whitespace-nowrap inline-block px-4 text-sm font-medium" id="announcement-text"></div>
+    </div>
+    <!-- Header (global: logo center, contact icon right) -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 pt-4 pb-2 animate-fade-in-up transition-[top]" style="animation-delay: 0.1s; opacity: 0;">
+      <div class="w-10 flex-shrink-0" aria-hidden="true"></div>
+      <a href="#" data-route="home" class="block flex-shrink-0">
+        <img src="assets/logo.png" alt="Excellence Conference – Home" class="h-12 sm:h-14 md:h-16 w-auto object-contain" />
+      </a>
+      <a href="#contact" data-route="contact" class="w-10 h-10 flex items-center justify-center rounded-full text-gray-300 hover:text-white hover:bg-gray-700/80 transition-colors flex-shrink-0" aria-label="Contact us">
+        <ion-icon name="mail-outline" class="text-xl" aria-hidden="true"></ion-icon>
       </a>
     </header>
 
+    <!-- View: Home -->
+    <div id="view-home" class="min-h-screen relative">
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-32 pb-32 overflow-hidden">
       <!-- Slideshow Background -->
@@ -125,6 +143,37 @@
       </div>
     </section>
 
+    <!-- Venue / Location Section (dynamic from Firestore) -->
+    <section id="venue-section" class="relative bg-gray-800 py-16 px-6 scroll-animate hidden">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase mb-4 sm:mb-6 scroll-animate text-center" style="transition-delay: 0.1s;">Venue &amp; Location</h2>
+        <div id="venue-content" class="bg-gray-800/80 border border-gray-700 rounded-xl p-6 text-center scroll-animate" style="transition-delay: 0.2s;"></div>
+      </div>
+    </section>
+
+    <!-- FAQ Section (dynamic from Firestore) -->
+    <section id="faq-section" class="relative bg-gray-900 py-16 px-6 scroll-animate hidden">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white uppercase mb-6 scroll-animate text-center" style="transition-delay: 0.1s;">FAQ</h2>
+        <div id="faq-list" class="space-y-3 scroll-animate" style="transition-delay: 0.2s;"></div>
+      </div>
+    </section>
+
+    <!-- Dinner Section -->
+    <section class="relative bg-gray-800 py-16 px-6 scroll-animate">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white uppercase mb-4 sm:mb-6 scroll-animate" style="transition-delay: 0.1s;">
+          Conference Dinner
+        </h2>
+        <p class="text-gray-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed px-4 scroll-animate" style="transition-delay: 0.2s;">
+          Join us for an evening of fellowship and celebration. Details, venue, and timing for the conference dinner are available on the dinner page.
+        </p>
+        <a href="#dinner" data-route="dinner" class="inline-block border-2 border-accent-orange text-white hover:bg-accent-orange hover:text-white px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 scroll-animate" style="transition-delay: 0.3s;">
+          View Dinner Details
+        </a>
+      </div>
+    </section>
+
     <!-- Call-to-Action Section -->
     <section class="relative bg-gray-900 py-20 px-6 scroll-animate">
       <div class="max-w-4xl mx-auto text-center">
@@ -135,7 +184,7 @@
           Don't miss the opportunity to hear from these incredible speakers live. Seats are filling up fast for Excellence Conference 2026.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center scroll-animate" style="transition-delay: 0.3s;">
-          <a href="agenda.html" class="border-2 border-accent-orange text-white hover:bg-accent-orange hover:text-white px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 w-full sm:w-auto text-center">
+          <a href="#agenda" data-route="agenda" class="border-2 border-accent-orange text-white hover:bg-accent-orange hover:text-white px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 w-full sm:w-auto text-center">
             View Full Schedule
           </a>
         </div>
@@ -150,25 +199,122 @@
         </p>
       </div>
     </footer>
+    </div>
 
-    <!-- Bottom Navigation (Mobile) -->
-    <nav
-      class="fixed bottom-6 left-1/2 bg-gray-800/95 backdrop-blur-sm rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-center gap-8 z-50 border border-gray-700 animate-fade-in-up-center" style="animation-delay: 1.2s; opacity: 0;">
-      <a href="index.html" class="flex flex-col items-center gap-1 text-accent-orange">
+    <!-- View: Agenda -->
+    <div id="view-agenda" class="hidden max-w-md mx-auto min-h-screen relative bg-gray-900 pb-24 pt-20">
+      <header class="px-6 pt-4 pb-4 sticky top-20 bg-gray-900 z-10 border-b border-gray-800">
+        <h1 class="text-3xl font-bold text-white">Agenda</h1>
+      </header>
+      <main class="px-6 py-4">
+        <div id="agenda-loading" class="text-gray-500 text-sm py-6">Loading schedule…</div>
+        <div id="agenda-list" class="space-y-2 hidden"></div>
+        <div id="agenda-error" class="hidden rounded-xl border border-gray-700 bg-gray-800 p-4 text-center">
+          <p class="text-gray-400 text-sm mb-3">Could not load the schedule.</p>
+          <button type="button" id="agenda-retry-btn" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-white text-sm font-medium">Try again</button>
+        </div>
+      </main>
+      <div id="speaker-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" aria-hidden="true">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl max-w-sm w-full max-h-[85vh] overflow-hidden shadow-xl">
+          <div class="p-5">
+            <div class="flex justify-end mb-2">
+              <button type="button" id="speaker-modal-close" class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors" aria-label="Close">
+                <ion-icon name="close" class="text-2xl"></ion-icon>
+              </button>
+            </div>
+            <div id="speaker-modal-content" class="text-center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View: Dinner (content loaded from Firestore) -->
+    <div id="view-dinner" class="hidden max-w-md mx-auto min-h-screen relative bg-gray-900 pb-24 pt-20">
+      <header class="px-6 pt-4 pb-4 sticky top-20 bg-gray-900 z-10 border-b border-gray-800">
+        <h1 class="text-3xl font-bold text-white">Conference Dinner</h1>
+      </header>
+      <main class="px-6 py-6 space-y-6">
+        <div id="dinner-loading" class="text-gray-500 text-sm py-4">Loading…</div>
+        <div id="dinner-content" class="hidden space-y-6">
+          <p id="dinner-intro" class="text-gray-300 leading-relaxed"></p>
+          <div id="dinner-details" class="bg-gray-800 border border-gray-700 rounded-xl p-5 space-y-4"></div>
+          <a href="#" data-route="home" class="inline-block border-2 border-accent-orange text-white hover:bg-accent-orange px-6 py-3 rounded-lg text-sm font-semibold transition-colors">Back to Home</a>
+        </div>
+        <div id="dinner-error" class="hidden rounded-xl border border-gray-700 bg-gray-800 p-4 text-center">
+          <p class="text-gray-400 text-sm mb-3">Could not load dinner details.</p>
+          <button type="button" id="dinner-retry-btn" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-white text-sm font-medium">Try again</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- View: Contact (opened from header icon) -->
+    <div id="view-contact" class="hidden max-w-md mx-auto min-h-screen relative bg-gray-900 pb-24 pt-20">
+      <header class="px-6 pt-4 pb-4 sticky top-20 bg-gray-900 z-10 border-b border-gray-800 flex items-center gap-3">
+        <a href="#" data-route="home" class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-orange focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 rounded-lg" aria-label="Back to home">
+          <ion-icon name="arrow-back" class="text-xl"></ion-icon>
+        </a>
+        <h1 class="text-3xl font-bold text-white">Contact</h1>
+      </header>
+      <main class="px-6 py-6 space-y-6">
+        <div id="contact-loading" class="text-gray-500 text-sm py-4">Loading…</div>
+        <div id="contact-content" class="hidden space-y-6">
+          <p class="text-gray-300 leading-relaxed">Get in touch with the Excellence Conference team.</p>
+          <div id="contact-details" class="bg-gray-800 border border-gray-700 rounded-xl p-5 space-y-3"></div>
+          <a href="#" data-route="home" class="inline-block border-2 border-accent-orange text-white hover:bg-accent-orange px-6 py-3 rounded-lg text-sm font-semibold transition-colors">Back to Home</a>
+        </div>
+        <div id="contact-error" class="hidden rounded-xl border border-gray-700 bg-gray-800 p-4 text-center">
+          <p class="text-gray-400 text-sm mb-3">Could not load contact details.</p>
+          <button type="button" id="contact-retry-btn" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-white text-sm font-medium">Try again</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- View: Merch -->
+    <div id="view-merch" class="hidden max-w-md mx-auto min-h-screen relative bg-gray-900 pb-24 pt-20">
+      <header class="px-6 pt-4 pb-4 sticky top-20 bg-gray-900 z-10 border-b border-gray-800">
+        <h1 class="text-3xl font-bold text-white">Conference Merch</h1>
+      </header>
+      <main class="px-6 py-6 space-y-6">
+        <p class="text-gray-300 leading-relaxed">
+          Official Excellence Conference 2026 merchandise. Choose an item, pay via transfer, then submit your receipt using the form below.
+        </p>
+        <div id="merch-items-container" class="space-y-3">
+          <p class="text-gray-500 text-sm">Loading…</p>
+        </div>
+        <div id="merch-error" class="hidden rounded-xl border border-gray-700 bg-gray-800 p-4 text-center">
+          <p class="text-gray-400 text-sm mb-3">Could not load merch.</p>
+          <button type="button" id="merch-retry-btn" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-white text-sm font-medium">Try again</button>
+        </div>
+        <div id="merch-payment-details" class="hidden bg-gray-800 border border-gray-700 rounded-xl p-5 space-y-4">
+          <h2 class="text-lg font-bold text-white">How to pay</h2>
+          <p class="text-gray-400 text-sm">Transfer to the account below. After payment, use the form link to submit your receipt and contact details.</p>
+          <div class="space-y-2 text-sm">
+            <p class="text-white"><span class="text-gray-400">Account name:</span> <span id="merch-display-account-name"></span></p>
+            <p class="text-white"><span class="text-gray-400">Account number:</span> <span id="merch-display-account-number"></span></p>
+          </div>
+          <a id="merch-form-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-block border-2 border-accent-orange text-white hover:bg-accent-orange px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Submit receipt &amp; details (Google Form)</a>
+        </div>
+        <a href="#" data-route="home" class="inline-block border-2 border-accent-orange text-white hover:bg-accent-orange px-6 py-3 rounded-lg text-sm font-semibold transition-colors">Back to Home</a>
+      </main>
+    </div>
+
+    <!-- Bottom Navigation (shared) -->
+    <nav id="bottom-nav" class="fixed bottom-6 left-1/2 bg-gray-800/95 backdrop-blur-sm rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.5)] px-4 py-2.5 flex items-center justify-center gap-8 z-50 border border-gray-700 -translate-x-1/2">
+      <a href="#" data-route="home" class="flex flex-col items-center gap-1 text-accent-orange">
         <ion-icon name="home" class="text-xl"></ion-icon>
         <span class="text-xs font-medium">Home</span>
       </a>
-      <a href="agenda.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-accent-orange transition-colors">
+      <a href="#agenda" data-route="agenda" class="flex flex-col items-center gap-1 text-gray-400 hover:text-accent-orange transition-colors">
         <ion-icon name="calendar" class="text-xl"></ion-icon>
         <span class="text-xs font-medium">Agenda</span>
       </a>
-      <a href="#" class="flex flex-col items-center gap-1 text-gray-400 hover:text-accent-orange transition-colors">
-        <ion-icon name="restaurant" class="text-xl"></ion-icon>
-        <span class="text-xs font-medium">Dinner</span>
+      <a href="#merch" data-route="merch" class="flex flex-col items-center gap-1 text-gray-400 hover:text-accent-orange transition-colors">
+        <ion-icon name="shirt-outline" class="text-xl"></ion-icon>
+        <span class="text-xs font-medium">Merch</span>
       </a>
     </nav>
   </div>
-  <script type="module" src="/home.js"></script>
+  <script type="module" src="/app.js"></script>
 </body>
 
 </html>

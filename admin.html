@@ -36,16 +36,61 @@
     </div>
   </div>
 
-  <div id="admin-view" class="hidden max-w-4xl mx-auto">
-    <header class="flex flex-wrap items-center justify-between gap-4 mb-8">
-      <h1 class="text-2xl font-bold text-white">Speakers &amp; Testimonies</h1>
-      <button type="button" id="sign-out-btn" class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-sm font-medium transition-colors">Sign out</button>
-    </header>
+  <div id="admin-view" class="hidden flex min-h-screen bg-gray-900">
+    <!-- Left sidebar (dashboard-style) -->
+    <aside class="w-56 flex-shrink-0 bg-gray-800/95 border-r border-gray-700 flex flex-col h-screen sticky top-0">
+      <div class="p-4 border-b border-gray-700">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-accent-orange/20 flex items-center justify-center text-accent-orange font-bold text-sm">EC</div>
+          <span class="text-white font-bold">Admin</span>
+        </div>
+      </div>
+      <nav class="flex-1 p-3 space-y-1 overflow-auto">
+        <p class="text-gray-500 text-[10px] font-semibold uppercase tracking-wider px-3 py-2">Main menu</p>
+        <a href="#" data-section="speakers" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">👤</span> Speakers
+        </a>
+        <a href="#" data-section="testimonies" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">💬</span> Testimonies
+        </a>
+        <a href="#" data-section="agenda" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">📅</span> Agenda
+        </a>
+        <p class="text-gray-500 text-[10px] font-semibold uppercase tracking-wider px-3 py-2 mt-4">Merch</p>
+        <a href="#" data-section="merch" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">🛍</span> Merch
+        </a>
+        <p class="text-gray-500 text-[10px] font-semibold uppercase tracking-wider px-3 py-2 mt-4">Event</p>
+        <a href="#" data-section="dinner" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">🍽</span> Dinner
+        </a>
+        <a href="#" data-section="venue" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">📍</span> Venue
+        </a>
+        <a href="#" data-section="announcements" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">📢</span> Announcements
+        </a>
+        <a href="#" data-section="faq" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">❓</span> FAQ
+        </a>
+        <a href="#" data-section="contact" class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors">
+          <span class="text-lg opacity-80">✉</span> Contact
+        </a>
+      </nav>
+      <div class="p-3 border-t border-gray-700 space-y-1">
+        <button type="button" id="sign-out-btn" class="w-full px-3 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm font-medium transition-colors text-left">Sign out</button>
+        <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-400 hover:text-white text-sm transition-colors">
+          <span aria-hidden="true">←</span> Home
+        </a>
+      </div>
+    </aside>
 
-    <div class="space-y-10">
-      <!-- Speakers -->
-      <section class="bg-gray-800 border border-gray-700 rounded-xl p-6">
-        <h2 class="text-lg font-bold text-white mb-4">Speakers</h2>
+    <main class="flex-1 overflow-auto p-6 md:p-8 max-w-4xl">
+      <!-- Panel: Speakers -->
+      <div id="panel-speakers" class="admin-panel hidden">
+      <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+        <h1 class="text-xl font-bold text-white mb-1">Speakers</h1>
+        <p class="text-gray-400 text-sm mb-4">Manage speakers displayed on the home page.</p>
         <div id="speakers-list" class="mb-6 space-y-2"></div>
         <button type="button" id="add-speaker-btn" class="mb-4 px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Add speaker</button>
         <form id="speaker-form" class="hidden mt-4 p-4 bg-gray-700/50 rounded-xl border border-gray-600 space-y-3">
@@ -80,10 +125,13 @@
           </div>
         </form>
       </section>
+      </div>
 
-      <!-- Testimonies -->
-      <section class="bg-gray-800 border border-gray-700 rounded-xl p-6">
-        <h2 class="text-lg font-bold text-white mb-4">Testimonies</h2>
+      <!-- Panel: Testimonies -->
+      <div id="panel-testimonies" class="admin-panel hidden">
+      <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+        <h1 class="text-xl font-bold text-white mb-1">Testimonies</h1>
+        <p class="text-gray-400 text-sm mb-4">Manage testimonies on the home page.</p>
         <div id="testimonies-list" class="mb-6 space-y-2"></div>
         <button type="button" id="add-testimony-btn" class="mb-4 px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Add testimony</button>
         <form id="testimony-form" class="hidden mt-4 p-4 bg-gray-700/50 rounded-xl border border-gray-600 space-y-3">
@@ -122,11 +170,13 @@
           </div>
         </form>
       </section>
+      </div>
 
-      <!-- Agenda -->
-      <section class="bg-gray-800 border border-gray-700 rounded-xl p-6">
-        <h2 class="text-lg font-bold text-white mb-4">Agenda</h2>
-        <p class="text-gray-400 text-sm mb-4">Manage conference days and session items. Add days with any name you choose, then add sessions to each day.</p>
+      <!-- Panel: Agenda -->
+      <div id="panel-agenda" class="admin-panel hidden">
+      <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+        <h1 class="text-xl font-bold text-white mb-1">Agenda</h1>
+        <p class="text-gray-400 text-sm mb-4">Manage conference days and session items. Add a day, then expand it to add sessions.</p>
         <div id="agenda-days-list" class="mb-6 space-y-3"></div>
         <button type="button" id="add-agenda-day-btn" class="mb-4 px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Add day</button>
 
@@ -153,66 +203,243 @@
           </div>
         </form>
 
-        <!-- Per-day: expandable items (shown when "Manage items" clicked) -->
-        <div id="agenda-items-panel" class="hidden mt-4 p-4 bg-gray-700/30 rounded-xl border border-gray-600">
-          <h3 class="text-sm font-bold text-white mb-2" id="agenda-items-day-label">Sessions for: …</h3>
-          <input type="hidden" id="agenda-items-day-id" value="">
-          <div id="agenda-items-list" class="mb-4 space-y-2"></div>
-          <button type="button" id="add-agenda-item-btn" class="mb-4 px-4 py-2 rounded-lg bg-accent-orange/80 hover:bg-orange-600 text-sm font-medium">Add session</button>
-          <button type="button" id="agenda-items-panel-close" class="ml-2 px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-500 text-sm font-medium">Close</button>
-
-          <!-- Item form (add/edit session) -->
-          <form id="agenda-item-form" class="hidden mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 space-y-3">
-            <input type="hidden" id="agenda-item-index" value="">
+        <!-- Shared session form (used when a day is expanded) -->
+        <form id="agenda-item-form" class="hidden mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 space-y-3">
+          <input type="hidden" id="agenda-item-index" value="">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Time</label>
+              <input type="text" id="agenda-item-time" required placeholder="10:00 AM" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Type</label>
+              <select id="agenda-item-type" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+                <option value="simple">Simple</option>
+                <option value="detailed">Detailed (with speaker)</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-400 mb-1">Title</label>
+            <input type="text" id="agenda-item-title" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-400 mb-1">Description (optional)</label>
+            <textarea id="agenda-item-description" rows="2" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none"></textarea>
+          </div>
+          <div id="agenda-item-detailed-fields" class="hidden space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Tag (e.g. Keynote, Panel, Workshop)</label>
+              <input type="text" id="agenda-item-tag" placeholder="Keynote" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker name</label>
+                <input type="text" id="agenda-item-speaker-name" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker role</label>
+                <input type="text" id="agenda-item-speaker-role" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Speaker image URL</label>
+              <input type="text" id="agenda-item-speaker-image" placeholder="https://…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save session</button>
+            <button type="button" id="agenda-item-form-cancel" class="px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-500 text-sm font-medium">Cancel</button>
+          </div>
+        </form>
+      </section>
+      </div>
+
+      <!-- Panel: Merch -->
+      <div id="panel-merch" class="admin-panel hidden">
+        <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+          <h1 class="text-xl font-bold text-white mb-1">Merch</h1>
+          <p class="text-gray-400 text-sm mb-6">Payment details and Google form link are shown on the public merch page. Add items with name and price.</p>
+
+          <div class="space-y-6">
+            <div class="p-4 bg-gray-700/40 rounded-xl border border-gray-600">
+              <h2 class="text-sm font-bold text-white mb-3">Payment / transfer details</h2>
+              <p class="text-gray-400 text-xs mb-4">These appear on the merch page so users know where to pay and where to submit their receipt.</p>
+              <form id="merch-settings-form" class="space-y-3">
+                <div>
+                  <label for="merch-account-number" class="block text-xs font-medium text-gray-400 mb-1">Account number</label>
+                  <input type="text" id="merch-account-number" placeholder="e.g. 0123456789" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+                </div>
+                <div>
+                  <label for="merch-account-name" class="block text-xs font-medium text-gray-400 mb-1">Account name</label>
+                  <input type="text" id="merch-account-name" placeholder="e.g. Excellence Conference" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+                </div>
+                <div>
+                  <label for="merch-google-form-link" class="block text-xs font-medium text-gray-400 mb-1">Google form link (receipt / contact)</label>
+                  <input type="url" id="merch-google-form-link" placeholder="https://docs.google.com/forms/..." class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+                </div>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save payment details</button>
+              </form>
+            </div>
+
+            <div class="p-4 bg-gray-700/40 rounded-xl border border-gray-600">
+              <h2 class="text-sm font-bold text-white mb-3">Merch items</h2>
+              <p class="text-gray-400 text-xs mb-4">Items shown on the merch page with name and price.</p>
+              <div id="merch-items-list" class="mb-4 space-y-2"></div>
+              <button type="button" id="merch-add-item-btn" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Add item</button>
+              <form id="merch-item-form" class="hidden mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 space-y-3">
+                <input type="hidden" id="merch-item-id" value="">
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1">Name</label>
+                  <input type="text" id="merch-item-name" required placeholder="e.g. T-shirt" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1">Price (e.g. 5000 or 5,000 NGN)</label>
+                  <input type="text" id="merch-item-price" required placeholder="5,000 NGN" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1">Description (optional)</label>
+                  <textarea id="merch-item-description" rows="2" placeholder="Size, color options…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none"></textarea>
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-gray-400 mb-1">Images (optional, add multiple for a scrollable catalog)</label>
+                  <div id="merch-item-images-list" class="space-y-2 mt-1"></div>
+                  <button type="button" id="merch-item-add-image-btn" class="mt-2 px-3 py-1.5 rounded-lg bg-gray-600 hover:bg-gray-500 text-gray-200 text-xs font-medium">Add image URL</button>
+                </div>
+                <div class="flex gap-2">
+                  <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save item</button>
+                  <button type="button" id="merch-item-form-cancel" class="px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-500 text-sm font-medium">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panel: Dinner -->
+      <div id="panel-dinner" class="admin-panel hidden">
+        <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+          <h1 class="text-xl font-bold text-white mb-1">Conference Dinner</h1>
+          <p class="text-gray-400 text-sm mb-4">Details shown on the public dinner page.</p>
+          <form id="dinner-settings-form" class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Venue name</label>
+              <input type="text" id="dinner-venue-name" placeholder="e.g. Grand Ballroom" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Venue address</label>
+              <input type="text" id="dinner-venue-address" placeholder="123 Street, City" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Date</label>
+                <input type="text" id="dinner-date" placeholder="e.g. May 22, 2026" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+              </div>
+              <div>
                 <label class="block text-xs font-medium text-gray-400 mb-1">Time</label>
-                <input type="text" id="agenda-item-time" required placeholder="10:00 AM" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Type</label>
-                <select id="agenda-item-type" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
-                  <option value="simple">Simple</option>
-                  <option value="detailed">Detailed (with speaker)</option>
-                </select>
+                <input type="text" id="dinner-time" placeholder="e.g. 7:00 PM" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
               </div>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Title</label>
-              <input type="text" id="agenda-item-title" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+              <label class="block text-xs font-medium text-gray-400 mb-1">Description (intro on dinner page)</label>
+              <textarea id="dinner-description" rows="2" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none" placeholder="Join us for…"></textarea>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Description (optional, HTML ok e.g. &lt;br&gt;)</label>
-              <textarea id="agenda-item-description" rows="2" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none"></textarea>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Map / directions link</label>
+              <input type="url" id="dinner-map-link" placeholder="https://…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
-            <div id="agenda-item-detailed-fields" class="hidden space-y-3">
-              <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Tag (e.g. Keynote, Panel, Workshop)</label>
-                <input type="text" id="agenda-item-tag" placeholder="Keynote" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label class="block text-xs font-medium text-gray-400 mb-1">Speaker name</label>
-                  <input type="text" id="agenda-item-speaker-name" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
-                </div>
-                <div>
-                  <label class="block text-xs font-medium text-gray-400 mb-1">Speaker role</label>
-                  <input type="text" id="agenda-item-speaker-role" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
-                </div>
-              </div>
-              <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker image URL</label>
-                <input type="text" id="agenda-item-speaker-image" placeholder="https://…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
-              </div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save dinner details</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- Panel: Venue (main conference) -->
+      <div id="panel-venue" class="admin-panel hidden">
+        <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+          <h1 class="text-xl font-bold text-white mb-1">Venue &amp; Location</h1>
+          <p class="text-gray-400 text-sm mb-4">Main conference venue shown on the home page.</p>
+          <form id="venue-settings-form" class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Venue name</label>
+              <input type="text" id="venue-name" placeholder="e.g. Excellence Centre" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Address</label>
+              <input type="text" id="venue-address" placeholder="Full address" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Map link</label>
+              <input type="url" id="venue-map-link" placeholder="https://maps.google.com/…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save venue</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- Panel: Announcements -->
+      <div id="panel-announcements" class="admin-panel hidden">
+        <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+          <h1 class="text-xl font-bold text-white mb-1">Announcement banner</h1>
+          <p class="text-gray-400 text-sm mb-4">Time-based marquee at the top of the site. Visible only until the end date/time.</p>
+          <form id="announcement-form" class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Message</label>
+              <input type="text" id="announcement-message" placeholder="e.g. Registration opens March 1" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">End date &amp; time (when to hide)</label>
+              <input type="datetime-local" id="announcement-end" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <p class="text-gray-500 text-xs">Leave message empty to hide the banner. End time is optional; if set, the banner hides after that time.</p>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save announcement</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- Panel: FAQ -->
+      <div id="panel-faq" class="admin-panel hidden">
+        <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+          <h1 class="text-xl font-bold text-white mb-1">FAQ</h1>
+          <p class="text-gray-400 text-sm mb-4">Questions and answers shown on the home page.</p>
+          <div id="faq-list-admin" class="mb-4 space-y-2"></div>
+          <button type="button" id="faq-add-btn" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Add FAQ</button>
+          <form id="faq-item-form" class="hidden mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 space-y-3">
+            <input type="hidden" id="faq-item-id" value="">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Question</label>
+              <input type="text" id="faq-item-question" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Answer</label>
+              <textarea id="faq-item-answer" rows="3" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none"></textarea>
             </div>
             <div class="flex gap-2">
-              <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save session</button>
-              <button type="button" id="agenda-item-form-cancel" class="px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-500 text-sm font-medium">Cancel</button>
+              <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save</button>
+              <button type="button" id="faq-item-cancel" class="px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-500 text-sm font-medium">Cancel</button>
             </div>
           </form>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+
+      <!-- Panel: Contact -->
+      <div id="panel-contact" class="admin-panel hidden">
+        <section class="bg-gray-800 border border-gray-700 rounded-xl p-6 mb-6">
+          <h1 class="text-xl font-bold text-white mb-1">Contact details</h1>
+          <p class="text-gray-400 text-sm mb-4">Shown on the Contact page (header icon).</p>
+          <form id="contact-settings-form" class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Email</label>
+              <input type="email" id="contact-email" placeholder="contact@example.com" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Phone</label>
+              <input type="text" id="contact-phone" placeholder="+234 …" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+            </div>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save contact</button>
+          </form>
+        </section>
+      </div>
+    </main>
   </div>
 
   <script type="module" src="/admin.js"></script>

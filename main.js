@@ -196,8 +196,17 @@ function renderAgenda(agendaByDay) {
 }
 
 function initAgenda() {
-    const container = document.getElementById('agenda-list');
-    if (container) container.innerHTML = '<p class="text-gray-400 text-center py-8">Loading agenda…</p>';
+    const loadingEl = document.getElementById('agenda-loading');
+    const listEl = document.getElementById('agenda-list');
+    const errorEl = document.getElementById('agenda-error');
+    const retryBtn = document.getElementById('agenda-retry-btn');
+    if (loadingEl) loadingEl.classList.remove('hidden');
+    if (listEl) { listEl.classList.add('hidden'); listEl.innerHTML = ''; }
+    if (errorEl) errorEl.classList.add('hidden');
+    if (retryBtn && !retryBtn.dataset.bound) {
+        retryBtn.dataset.bound = '1';
+        retryBtn.addEventListener('click', () => initAgenda());
+    }
 
     const agendaRef = collection(db, 'agendaDays');
     const q = query(agendaRef, orderBy('order', 'asc'));
@@ -214,13 +223,19 @@ function initAgenda() {
                     items: Array.isArray(data.items) ? data.items : [],
                 };
             });
-            renderAgenda(agendaByDay);
+            if (loadingEl) loadingEl.classList.add('hidden');
+            if (errorEl) errorEl.classList.add('hidden');
+            if (listEl) {
+                listEl.classList.remove('hidden');
+                renderAgenda(agendaByDay);
+            }
         })
         .catch(() => {
-            if (container) container.innerHTML = '<p class="text-red-400 text-center py-8">Could not load agenda. Please try again later.</p>';
+            if (loadingEl) loadingEl.classList.add('hidden');
+            if (listEl) listEl.classList.add('hidden');
+            if (errorEl) errorEl.classList.remove('hidden');
         });
 
-    // Load Firestore speakers in the background for speaker modal details
     getDocs(collection(db, 'speakers'))
         .then((snap) => {
             snap.docs.forEach((d) => {
@@ -231,4 +246,4 @@ function initAgenda() {
         .catch(() => {});
 }
 
-document.addEventListener('DOMContentLoaded', initAgenda);
+export { initAgenda };

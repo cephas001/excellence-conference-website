@@ -2,6 +2,7 @@ import './style.css';
 import './firebase.js';
 import { db } from './firebase.js';
 import { collection, getDocs } from 'firebase/firestore';
+import { loadVenue, loadFAQ } from './event.js';
 
 // Slideshow functionality
 let currentSlide = 0;
@@ -237,7 +238,7 @@ function updateCountdown() {
     secsEl.textContent = String(secs).padStart(2, '0');
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+export async function initHome() {
     initSlideshow();
     const speakersEl = document.getElementById('speakers-grid');
     const testimoniesEl = document.getElementById('testimonies-grid');
@@ -257,7 +258,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initScrollAnimations();
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    // Hide loader when Firebase data is ready (not on window load or timeout)
+    loadVenue();
+    loadFAQ();
     hideLoader();
-});
+}
