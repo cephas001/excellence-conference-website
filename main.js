@@ -5,20 +5,26 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 // Session length in minutes for "Live" status
 const SESSION_LENGTH_MINUTES = 30;
 
+/** Nigerian timezone (WAT = UTC+1). Used to interpret agenda times. */
+const WAT_OFFSET = '+01:00';
+
 /**
- * Parse date string (YYYY-MM-DD) and time string (e.g. "10:00 AM") into a Date.
+ * Parse date string (YYYY-MM-DD) and time string (e.g. "10:00 AM") as Nigerian time (WAT) into a Date.
  */
 function parseDateTime(dateStr, timeStr) {
     const [datePart] = dateStr.split('T');
     const [year, month, day] = datePart.split('-').map(Number);
     const timeMatch = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-    if (!timeMatch) return new Date(year, month - 1, day);
+    if (!timeMatch) {
+        return new Date(`${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00${WAT_OFFSET}`);
+    }
     let [, h, m, ampm] = timeMatch;
     h = parseInt(h, 10);
     m = parseInt(m, 10);
     if (ampm.toUpperCase() === 'PM' && h !== 12) h += 12;
     if (ampm.toUpperCase() === 'AM' && h === 12) h = 0;
-    return new Date(year, month - 1, day, h, m, 0, 0);
+    const iso = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00${WAT_OFFSET}`;
+    return new Date(iso);
 }
 
 /**

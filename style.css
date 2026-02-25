@@ -24,6 +24,16 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Main header: background on scroll for legibility */
+#main-header.header-transition {
+    transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+}
+#main-header.header-scrolled {
+    background-color: rgba(17, 24, 39, 0.95);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
 .font-tusker {
     font-family: 'Tusker Grotesk', 'Inter', sans-serif;
 }

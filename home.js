@@ -199,9 +199,9 @@ const initScrollAnimations = () => {
     });
 };
 
-// Countdown to conference start: May 19, 2026 9:00 AM
-const CONFERENCE_START = new Date('2026-05-19T09:00:00');
-const CONFERENCE_END = new Date('2026-05-24T18:00:00');
+// Countdown: conference in Nigerian time (WAT = UTC+1). May 19 09:00 WAT, May 24 18:00 WAT.
+const CONFERENCE_START = new Date(Date.UTC(2026, 4, 19, 8, 0, 0, 0));  // 09:00 WAT = 08:00 UTC
+const CONFERENCE_END = new Date(Date.UTC(2026, 4, 24, 17, 0, 0, 0));   // 18:00 WAT = 17:00 UTC
 
 function updateCountdown() {
     const daysEl = document.getElementById('countdown-days');

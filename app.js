@@ -69,10 +69,19 @@ function handleInPageLinks(e) {
   }
 }
 
+function updateHeaderScroll() {
+  const header = document.getElementById('main-header');
+  if (!header) return;
+  const scrolled = window.scrollY > 24;
+  header.classList.toggle('header-scrolled', scrolled);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initAnnouncement();
   document.body.addEventListener('click', handleNav);
   document.body.addEventListener('click', handleInPageLinks);
   window.addEventListener('hashchange', () => showView(getRouteFromHash()));
   showView(getRouteFromHash());
+  window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+  updateHeaderScroll();
 });
