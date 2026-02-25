@@ -29,7 +29,7 @@ body {
     transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
 }
 #main-header.header-scrolled {
-    background-color: rgba(17, 24, 39, 0.95);
+    background-color: rgba(17, 24, 39, 0.82);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
@@ -232,6 +232,15 @@ body {
     scrollbar-width: none;
 }
 
+/* Announcement banner: translucent orange, minimal height */
+#announcement-banner {
+    background-color: rgba(249, 115, 22, 0.88);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    line-height: 1.25;
+    min-height: 0;
+}
+
 /* Announcement marquee (left to right, seamless loop) */
 @keyframes marquee {
     0% { transform: translateX(0); }
@@ -251,13 +260,13 @@ body {
 .has-announcement #view-dinner,
 .has-announcement #view-contact,
 .has-announcement #view-merch {
-    padding-top: 7rem;
+    padding-top: 6.25rem;
 }
 .has-announcement #view-agenda header.sticky,
 .has-announcement #view-dinner header.sticky,
 .has-announcement #view-contact header.sticky,
 .has-announcement #view-merch header.sticky {
-    top: 7rem;
+    top: 6.25rem;
 }
 
 /* Accessibility: focus visible */

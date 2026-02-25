@@ -47,7 +47,7 @@ export async function initAnnouncement() {
     }
     textEl.innerHTML = escapeHtml(message) + ' &nbsp; — &nbsp; ' + escapeHtml(message);
     banner.classList.remove('hidden');
-    header.style.top = '2.5rem';
+    header.style.top = '1.75rem';
     const app = document.getElementById('app');
     if (app) app.classList.add('has-announcement');
   } catch (e) {
