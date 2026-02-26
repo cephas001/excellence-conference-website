@@ -350,6 +350,7 @@ const addAgendaDayBtn = document.getElementById('add-agenda-day-btn');
 const agendaDayForm = document.getElementById('agenda-day-form');
 const agendaDayIdInput = document.getElementById('agenda-day-id');
 const agendaDayLabelInput = document.getElementById('agenda-day-label');
+const agendaDaySublabelInput = document.getElementById('agenda-day-sublabel');
 const agendaDayDateInput = document.getElementById('agenda-day-date');
 const agendaDayOrderInput = document.getElementById('agenda-day-order');
 const agendaDayFormCancel = document.getElementById('agenda-day-form-cancel');
@@ -374,6 +375,7 @@ let currentAgendaDay = null;
 function clearAgendaDayForm() {
   agendaDayIdInput.value = '';
   agendaDayLabelInput.value = '';
+  agendaDaySublabelInput.value = '';
   agendaDayDateInput.value = '';
   agendaDayOrderInput.value = '0';
   agendaDayForm.classList.add('hidden');
@@ -382,6 +384,7 @@ function clearAgendaDayForm() {
 function agendaDayFormData() {
   return {
     label: agendaDayLabelInput.value.trim(),
+    sublabel: agendaDaySublabelInput.value.trim() || undefined,
     date: agendaDayDateInput.value.trim(),
     order: parseInt(agendaDayOrderInput.value, 10) || 0,
     items: [],
@@ -427,6 +430,7 @@ async function loadAgendaDays() {
         if (!day) return;
         agendaDayIdInput.value = day.id;
         agendaDayLabelInput.value = day.label || '';
+        agendaDaySublabelInput.value = day.sublabel || '';
         agendaDayDateInput.value = day.date || '';
         agendaDayOrderInput.value = String(day.order != null ? day.order : 0);
         agendaDayForm.classList.remove('hidden');

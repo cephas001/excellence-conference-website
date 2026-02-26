@@ -144,8 +144,11 @@ function renderAgenda(agendaByDay) {
             (day, dayIndex) => `
       <div class="agenda-day border-b border-gray-800 last:border-b-0">
         <button type="button" class="agenda-day-trigger w-full flex items-center justify-between px-4 py-4 text-left bg-gray-800/50 hover:bg-gray-800 rounded-xl transition-colors" data-day="${escapeAttr(day.id)}" aria-expanded="${dayIndex === 0}">
-          <span class="font-semibold text-white">${escapeAttr(day.label)}</span>
-          <ion-icon name="chevron-down" class="agenda-day-icon text-2xl text-gray-400 transition-transform duration-200"></ion-icon>
+          <div class="min-w-0 text-left">
+            <span class="font-semibold text-white block">${escapeAttr(day.label)}</span>
+            ${day.sublabel ? `<span class="text-gray-400 text-xs font-normal block mt-0.5">${escapeAttr(day.sublabel)}</span>` : ''}
+          </div>
+          <ion-icon name="chevron-down" class="agenda-day-icon text-2xl text-gray-400 flex-shrink-0 transition-transform duration-200"></ion-icon>
         </button>
         <div class="agenda-day-content overflow-hidden transition-all duration-300 relative pl-0" data-day="${escapeAttr(day.id)}" style="max-height: ${dayIndex === 0 ? 'none' : '0'};">
           <div class="absolute left-[5.5rem] top-4 bottom-0 w-px bg-gray-700"></div>
@@ -224,6 +227,7 @@ function initAgenda() {
                 return {
                     id: d.id,
                     label: data.label || 'Day',
+                    sublabel: data.sublabel || '',
                     date: data.date || '',
                     order: data.order != null ? data.order : 0,
                     items: Array.isArray(data.items) ? data.items : [],
