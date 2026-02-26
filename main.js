@@ -64,7 +64,7 @@ function showSpeakerModal(payload) {
             <img src="${payload.image || ''}" alt="${escapeAttr(payload.name)}" class="w-full h-full object-cover" onerror="this.style.display='none'">
         </div>
         <h3 class="text-xl font-bold text-white mb-1">${escapeAttr(payload.name)}</h3>
-        <p class="text-accent-orange text-sm font-semibold mb-3">${escapeAttr(payload.role)}</p>
+        ${payload.role && String(payload.role).trim() ? `<p class="text-accent-orange text-sm font-semibold mb-3">${escapeAttr(payload.role)}</p>` : ''}
         ${bio ? `<p class="text-gray-300 text-sm leading-relaxed text-left mb-3">${escapeAttr(bio)}</p>` : ''}
         ${topic ? `<div class="pt-3 border-t border-gray-700 text-left"><p class="text-[10px] font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Speaking on</p><p class="text-white font-semibold text-sm">${escapeAttr(topic)}</p></div>` : ''}
     `;
@@ -102,10 +102,10 @@ function renderAgendaItem(item, dateStr, index) {
               ? 'bg-gray-800 text-gray-400 border-gray-700'
               : 'bg-gray-700 text-gray-300 border-gray-600';
     const tagList = getAgendaItemTags(item);
-    const tagsHtml = tagList.length
-        ? '<div class="mt-3 p-3 rounded-xl border border-gray-700 bg-gray-800/60 flex flex-wrap gap-2">' +
+    const tagsPillsHtml = tagList.length
+        ? '<div class="flex flex-wrap items-center gap-2">' +
           tagList.map(function (t) {
-              return '<span class="agenda-tag inline-block bg-[#1F2D3F] text-gray-200 text-xs font-medium px-3 py-1.5 rounded-full">' + escapeAttr(t) + '</span>';
+              return '<span class="agenda-tag inline-block bg-[#1F2D3F] text-gray-200 text-[10px] font-medium px-3 py-1 rounded-full border border-gray-600">' + escapeAttr(t) + '</span>';
           }).join('') +
           '</div>'
         : '';
@@ -118,10 +118,11 @@ function renderAgendaItem(item, dateStr, index) {
             </div>
         </div>
         <div class="flex-grow pb-8">
-            <div class="flex items-center justify-between mb-2">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
                 <span class="${statusClass} text-[10px] font-medium px-3 py-1 rounded-full border transition-all duration-300 hover:scale-105">
                     ${status}
                 </span>
+                ${tagsPillsHtml}
             </div>
             <h3 class="text-base font-bold text-white mb-1 leading-tight transition-colors duration-300 hover:text-accent-orange">
                 ${escapeAttr(item.title)}
@@ -136,12 +137,11 @@ function renderAgendaItem(item, dateStr, index) {
                     <img src="${escapeAttr(item.speaker.image)}" alt="${escapeAttr(item.speaker.name)}" class="w-10 h-10 rounded-full object-cover bg-gray-700 flex-shrink-0" loading="lazy">
                     <div class="min-w-0">
                         <p class="text-sm font-bold text-white">${escapeAttr(item.speaker.name)}</p>
-                        <p class="text-[10px] text-gray-400">${escapeAttr(item.speaker.role)}</p>
+                        ${item.speaker.role && String(item.speaker.role).trim() ? `<p class="text-[10px] text-gray-400">${escapeAttr(item.speaker.role)}</p>` : ''}
                     </div>
                     <ion-icon name="chevron-forward" class="text-gray-500 ml-auto flex-shrink-0"></ion-icon>
                 </button>
             ` : ''}
-            ${tagsHtml}
         </div>
       </div>
     `;
