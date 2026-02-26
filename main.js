@@ -81,6 +81,16 @@ function closeSpeakerModal() {
     modal.setAttribute('aria-hidden', 'true');
 }
 
+function getAgendaItemTags(item) {
+    if (Array.isArray(item.tags) && item.tags.length) {
+        return item.tags.map(function (t) { return String(t).trim(); }).filter(Boolean);
+    }
+    if (item.tag && String(item.tag).trim()) {
+        return String(item.tag).split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+    }
+    return [];
+}
+
 function renderAgendaItem(item, dateStr, index) {
     const status = getStatusForItem(dateStr, item.time);
     const isDetailed = item.type === 'detailed';
@@ -91,6 +101,14 @@ function renderAgendaItem(item, dateStr, index) {
             : status === 'Completed'
               ? 'bg-gray-800 text-gray-400 border-gray-700'
               : 'bg-gray-700 text-gray-300 border-gray-600';
+    const tagList = getAgendaItemTags(item);
+    const tagsHtml = tagList.length
+        ? '<div class="mt-3 p-3 rounded-xl border border-gray-700 bg-gray-800/60 flex flex-wrap gap-2">' +
+          tagList.map(function (t) {
+              return '<span class="agenda-tag inline-block bg-[#1F2D3F] text-gray-200 text-xs font-medium px-3 py-1.5 rounded-full">' + escapeAttr(t) + '</span>';
+          }).join('') +
+          '</div>'
+        : '';
 
     return `
       <div class="relative flex gap-6 animate-fade-in-up" style="animation-delay: ${delay}ms; opacity: 0;">
@@ -104,7 +122,6 @@ function renderAgendaItem(item, dateStr, index) {
                 <span class="${statusClass} text-[10px] font-medium px-3 py-1 rounded-full border transition-all duration-300 hover:scale-105">
                     ${status}
                 </span>
-                ${item.tag ? `<span class="bg-gray-800 text-gray-400 text-[10px] font-medium px-3 py-1 rounded-full border border-gray-700">${escapeAttr(item.tag)}</span>` : ''}
             </div>
             <h3 class="text-base font-bold text-white mb-1 leading-tight transition-colors duration-300 hover:text-accent-orange">
                 ${escapeAttr(item.title)}
@@ -124,6 +141,7 @@ function renderAgendaItem(item, dateStr, index) {
                     <ion-icon name="chevron-forward" class="text-gray-500 ml-auto flex-shrink-0"></ion-icon>
                 </button>
             ` : ''}
+            ${tagsHtml}
         </div>
       </div>
     `;
@@ -144,9 +162,16 @@ function renderAgenda(agendaByDay) {
             (day, dayIndex) => `
       <div class="agenda-day border-b border-gray-800 last:border-b-0">
         <button type="button" class="agenda-day-trigger w-full flex items-center justify-between px-4 py-4 text-left bg-gray-800/50 hover:bg-gray-800 rounded-xl transition-colors" data-day="${escapeAttr(day.id)}" aria-expanded="${dayIndex === 0}">
-          <div class="min-w-0 text-left">
+          <div class="min-w-0 text-left flex-1">
             <span class="font-semibold text-white block">${escapeAttr(day.label)}</span>
-            ${day.sublabel ? `<span class="text-gray-400 text-xs font-normal block mt-0.5">${escapeAttr(day.sublabel)}</span>` : ''}
+            ${(function () {
+              if (!day.sublabel || !String(day.sublabel).trim()) return '';
+              const parts = String(day.sublabel).split(',').map(function (p) { return p.trim(); }).filter(Boolean);
+              if (!parts.length) return '';
+              return '<div class="flex flex-wrap gap-2 mt-1.5">' + parts.map(function (p) {
+                return '<span class="inline-block bg-[#1F2D3F] text-gray-200 text-xs font-medium px-3 py-1 rounded-full border border-gray-600">' + escapeAttr(p) + '</span>';
+              }).join('') + '</div>';
+            })()}
           </div>
           <ion-icon name="chevron-down" class="agenda-day-icon text-2xl text-gray-400 flex-shrink-0 transition-transform duration-200"></ion-icon>
         </button>
