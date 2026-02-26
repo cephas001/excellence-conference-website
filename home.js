@@ -121,6 +121,12 @@ const renderSpeakers = (speakers) => {
     }).join('');
 };
 
+// Default B&W avatar (SVG data URI) for testimonies without an image — person silhouette in gray
+const TESTIMONY_DEFAULT_AVATAR = "data:image/svg+xml," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="#6b7280"><circle cx="50" cy="38" r="18"/><path d="M20 92c0-18 13-30 30-30s30 12 30 30H20z"/></svg>'
+);
+if (typeof window !== 'undefined') window.__testimonyDefaultAvatar = TESTIMONY_DEFAULT_AVATAR;
+
 // Render Testimonies (accepts data array; shows nothing if empty)
 const renderTestimonies = (testimonies) => {
     const container = document.getElementById('testimonies-grid');
@@ -132,23 +138,19 @@ const renderTestimonies = (testimonies) => {
     }
     container.innerHTML = data.map((testimony, index) => {
         const delay = (index % 3) * 100;
+        const hasImage = testimony.image && String(testimony.image).trim();
+        const avatarSrc = hasImage ? testimony.image.trim() : TESTIMONY_DEFAULT_AVATAR;
         return `
         <div class="bg-gray-900 border border-gray-700 rounded-lg p-6 hover:border-gray-600 transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" style="animation-delay: ${delay}ms; opacity: 0;">
             <div class="flex items-start gap-4 mb-4">
                 <div class="flex-shrink-0">
                     <div class="w-14 h-14 rounded-full bg-gray-700 overflow-hidden transition-transform duration-300 hover:scale-110">
-                        <img src="${testimony.image}" alt="${testimony.name}" class="w-full h-full object-cover" loading="lazy">
+                        <img src="${avatarSrc}" alt="${testimony.name}" class="w-full h-full object-cover" loading="lazy" onerror="if(window.__testimonyDefaultAvatar){this.src=window.__testimonyDefaultAvatar;this.onerror=null;}">
                     </div>
                 </div>
                 <div class="flex-grow min-w-0">
                     <h4 class="text-white font-bold text-base mb-1">${testimony.name}</h4>
-                    <p class="text-gray-400 text-xs mb-0.5">${testimony.role}</p>
-                    <p class="text-gray-500 text-xs">${testimony.location}</p>
-                </div>
-                <div class="flex gap-0.5 flex-shrink-0">
-                    ${Array(testimony.rating).fill(0).map(() => `
-                        <ion-icon name="star" class="text-yellow-400 text-sm"></ion-icon>
-                    `).join('')}
+                    ${testimony.location ? `<p class="text-gray-500 text-xs">${testimony.location}</p>` : ''}
                 </div>
             </div>
             <p class="text-gray-300 text-sm leading-relaxed italic">"${testimony.testimony}"</p>

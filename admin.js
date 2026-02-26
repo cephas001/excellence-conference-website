@@ -210,31 +210,22 @@ const addTestimonyBtn = document.getElementById('add-testimony-btn');
 const testimonyFormCancel = document.getElementById('testimony-form-cancel');
 const testimonyIdInput = document.getElementById('testimony-id');
 const testimonyNameInput = document.getElementById('testimony-name');
-const testimonyRoleInput = document.getElementById('testimony-role');
 const testimonyLocationInput = document.getElementById('testimony-location');
-const testimonyImageInput = document.getElementById('testimony-image');
 const testimonyTextInput = document.getElementById('testimony-text');
-const testimonyRatingInput = document.getElementById('testimony-rating');
 
 function testimonyFormData() {
   return {
     name: testimonyNameInput.value.trim(),
-    role: testimonyRoleInput.value.trim(),
     location: testimonyLocationInput.value.trim(),
-    image: testimonyImageInput.value.trim() || '/img/testimonial1.jpg',
     testimony: testimonyTextInput.value.trim(),
-    rating: Math.min(5, Math.max(1, parseInt(testimonyRatingInput.value, 10) || 5)),
   };
 }
 
 function clearTestimonyForm() {
   testimonyIdInput.value = '';
   testimonyNameInput.value = '';
-  testimonyRoleInput.value = '';
   testimonyLocationInput.value = '';
-  testimonyImageInput.value = '';
   testimonyTextInput.value = '';
-  testimonyRatingInput.value = '5';
   testimonyForm.classList.add('hidden');
 }
 
@@ -248,7 +239,7 @@ async function loadTestimonies() {
             (t) => `
         <div class="flex flex-wrap items-center justify-between gap-2 py-2 border-b border-gray-700">
           <span class="text-white font-medium">${escapeHtml(t.name)}</span>
-          <span class="text-gray-400 text-sm">${escapeHtml(t.role)} · ${escapeHtml((t.testimony || '').slice(0, 40))}…</span>
+          <span class="text-gray-400 text-sm">${escapeHtml((t.testimony || '').slice(0, 50))}…</span>
           <div class="flex gap-2">
             <button type="button" class="edit-testimony px-3 py-1 rounded bg-gray-600 hover:bg-gray-500 text-xs" data-id="${escapeAttr(t.id)}">Edit</button>
             <button type="button" class="delete-testimony px-3 py-1 rounded bg-red-900/50 hover:bg-red-800 text-red-300 text-xs" data-id="${escapeAttr(t.id)}">Delete</button>
@@ -266,11 +257,8 @@ async function loadTestimonies() {
         if (!item) return;
         testimonyIdInput.value = id;
         testimonyNameInput.value = item.name || '';
-        testimonyRoleInput.value = item.role || '';
         testimonyLocationInput.value = item.location || '';
-        testimonyImageInput.value = item.image || '';
         testimonyTextInput.value = item.testimony || '';
-        testimonyRatingInput.value = String(item.rating != null ? item.rating : 5);
         testimonyForm.classList.remove('hidden');
       });
     });
