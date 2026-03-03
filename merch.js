@@ -58,7 +58,7 @@ export async function initMerch() {
         `
                 : `<img src="${escapeHtml(urls[0])}" alt="${escapeHtml(item.name || '')}" class="w-full h-40 object-cover rounded-lg mb-3">`;
           return `
-        <div class="bg-gray-800 border border-gray-700 rounded-xl p-4">
+        <div class="merch-item-card bg-gray-800 border border-gray-700 rounded-xl p-4 cursor-pointer hover:border-accent-orange/70 transition-colors">
           ${imagesHtml}
           <h3 class="font-semibold text-white">${escapeHtml(item.name)}</h3>
           <p class="text-accent-orange font-medium mt-1">${escapeHtml(item.price)}</p>
@@ -67,6 +67,16 @@ export async function initMerch() {
       `;
         })
         .join('');
+
+      // When a merch item is clicked, scroll to the "How to pay" section for better UX
+      if (!itemsEl.dataset.scrollToPaymentBound) {
+        itemsEl.dataset.scrollToPaymentBound = '1';
+        itemsEl.addEventListener('click', (event) => {
+          const card = event.target.closest('.merch-item-card');
+          if (!card || !paymentEl || paymentEl.classList.contains('hidden')) return;
+          paymentEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
     }
 
     const hasPayment =
