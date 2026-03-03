@@ -12,9 +12,12 @@ const loginError = document.getElementById('login-error');
 const loginBtn = document.getElementById('login-btn');
 const signOutBtn = document.getElementById('sign-out-btn');
 
+const ADMIN_VIEW_LAYOUT = ['flex', 'flex-col', 'lg:flex-row'];
+
 function showLogin() {
   loginView.classList.remove('hidden');
   adminView.classList.add('hidden');
+  adminView.classList.remove(...ADMIN_VIEW_LAYOUT);
   loginError.classList.add('hidden');
   loginError.textContent = '';
 }
@@ -22,6 +25,7 @@ function showLogin() {
 function showAdmin() {
   loginView.classList.add('hidden');
   adminView.classList.remove('hidden');
+  adminView.classList.add(...ADMIN_VIEW_LAYOUT);
   switchAdminPanel('speakers');
   loadSpeakers();
   loadTestimonies();
