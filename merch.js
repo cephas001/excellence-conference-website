@@ -15,6 +15,7 @@ export async function initMerch() {
   const itemsEl = document.getElementById('merch-items-container');
   const paymentEl = document.getElementById('merch-payment-details');
   const accountNameEl = document.getElementById('merch-display-account-name');
+  const accountBankEl = document.getElementById('merch-display-account-bank');
   const accountNumberEl = document.getElementById('merch-display-account-number');
   const formLinkEl = document.getElementById('merch-form-link');
   const errorEl = document.getElementById('merch-error');
@@ -70,6 +71,7 @@ export async function initMerch() {
 
     const hasPayment =
       (settings.accountName && settings.accountName.trim()) ||
+      (settings.accountBank && settings.accountBank.trim()) ||
       (settings.accountNumber && settings.accountNumber.trim()) ||
       (settings.googleFormLink && settings.googleFormLink.trim());
 
@@ -77,6 +79,7 @@ export async function initMerch() {
       paymentEl.classList.toggle('hidden', !hasPayment);
     }
     if (accountNameEl) accountNameEl.textContent = settings.accountName || '—';
+    if (accountBankEl) accountBankEl.textContent = settings.accountBank || '—';
     if (accountNumberEl) accountNumberEl.textContent = settings.accountNumber || '—';
     if (formLinkEl) {
       formLinkEl.href = settings.googleFormLink || '#';
