@@ -101,21 +101,21 @@
               <input type="text" id="speaker-name" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Role</label>
-              <input type="text" id="speaker-role" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+              <label class="block text-xs font-medium text-gray-400 mb-1">Role (optional)</label>
+              <input type="text" id="speaker-role" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
           </div>
           <div>
-            <label class="block text-xs font-medium text-gray-400 mb-1">Bio</label>
+            <label class="block text-xs font-medium text-gray-400 mb-1">Bio (optional)</label>
             <textarea id="speaker-bio" rows="2" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none"></textarea>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Topic</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Topic (optional)</label>
               <input type="text" id="speaker-topic" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Image URL</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Image URL (optional)</label>
               <input type="text" id="speaker-image" placeholder="/img/speaker1.jpg" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
           </div>
@@ -142,7 +142,7 @@
               <input type="text" id="testimony-name" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Location</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Location (optional)</label>
               <input type="text" id="testimony-location" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
           </div>
@@ -175,7 +175,7 @@
               <input type="text" id="agenda-day-label" required placeholder="e.g. Day 1 – Tuesday, 19 May 2026" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div class="sm:col-span-2">
-              <label class="block text-xs font-medium text-gray-400 mb-1">Label text (shown under day name on agenda page)</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Label text (optional, shown under day name on agenda page)</label>
               <input type="text" id="agenda-day-sublabel" placeholder="e.g. Opening &amp; worship" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
@@ -183,7 +183,7 @@
               <input type="text" id="agenda-day-date" required placeholder="2026-05-19" pattern="\d{4}-\d{2}-\d{2}" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Order (number for sorting)</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Order (optional, number for sorting)</label>
               <input type="number" id="agenda-day-order" min="0" value="0" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
           </div>
@@ -219,21 +219,21 @@
           </div>
           <div id="agenda-item-detailed-fields" class="hidden space-y-3">
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Tag (e.g. Keynote, Panel, Workshop)</label>
-              <input type="text" id="agenda-item-tag" placeholder="Keynote" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
+              <label class="block text-xs font-medium text-gray-400 mb-1">Tags (optional, comma-separated e.g. Keynote, Workshop)</label>
+              <input type="text" id="agenda-item-tag" placeholder="Keynote, Workshop" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker name</label>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker name (optional)</label>
                 <input type="text" id="agenda-item-speaker-name" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
               </div>
               <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker role</label>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Speaker role (optional)</label>
                 <input type="text" id="agenda-item-speaker-role" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
               </div>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Speaker image URL</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Speaker image URL (optional)</label>
               <input type="text" id="agenda-item-speaker-image" placeholder="https://…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
           </div>
@@ -257,15 +257,15 @@
               <p class="text-gray-400 text-xs mb-4">These appear on the merch page so users know where to pay and where to submit their receipt.</p>
               <form id="merch-settings-form" class="space-y-3">
                 <div>
-                  <label for="merch-account-number" class="block text-xs font-medium text-gray-400 mb-1">Account number</label>
+                  <label for="merch-account-number" class="block text-xs font-medium text-gray-400 mb-1">Account number (optional)</label>
                   <input type="text" id="merch-account-number" placeholder="e.g. 0123456789" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
                 </div>
                 <div>
-                  <label for="merch-account-name" class="block text-xs font-medium text-gray-400 mb-1">Account name</label>
+                  <label for="merch-account-name" class="block text-xs font-medium text-gray-400 mb-1">Account name (optional)</label>
                   <input type="text" id="merch-account-name" placeholder="e.g. Excellence Conference" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
                 </div>
                 <div>
-                  <label for="merch-google-form-link" class="block text-xs font-medium text-gray-400 mb-1">Google form link (receipt / contact)</label>
+                  <label for="merch-google-form-link" class="block text-xs font-medium text-gray-400 mb-1">Google form link (optional, receipt / contact)</label>
                   <input type="url" id="merch-google-form-link" placeholder="https://docs.google.com/forms/..." class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
                 </div>
                 <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save payment details</button>
@@ -313,29 +313,29 @@
           <p class="text-gray-400 text-sm mb-4">Details shown on the public dinner page.</p>
           <form id="dinner-settings-form" class="space-y-3">
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Venue name</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Venue name (optional)</label>
               <input type="text" id="dinner-venue-name" placeholder="e.g. Grand Ballroom" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Venue address</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Venue address (optional)</label>
               <input type="text" id="dinner-venue-address" placeholder="123 Street, City" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Date</label>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Date (optional)</label>
                 <input type="text" id="dinner-date" placeholder="e.g. May 22, 2026" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
               </div>
               <div>
-                <label class="block text-xs font-medium text-gray-400 mb-1">Time</label>
+                <label class="block text-xs font-medium text-gray-400 mb-1">Time (optional)</label>
                 <input type="text" id="dinner-time" placeholder="e.g. 7:00 PM" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
               </div>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Description (intro on dinner page)</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Description (optional, intro on dinner page)</label>
               <textarea id="dinner-description" rows="2" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none" placeholder="Join us for…"></textarea>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Map / directions link</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Map / directions link (optional)</label>
               <input type="url" id="dinner-map-link" placeholder="https://…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save dinner details</button>
@@ -350,15 +350,15 @@
           <p class="text-gray-400 text-sm mb-4">Main conference venue shown on the home page.</p>
           <form id="venue-settings-form" class="space-y-3">
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Venue name</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Venue name (optional)</label>
               <input type="text" id="venue-name" placeholder="e.g. Excellence Centre" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Address</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Address (optional)</label>
               <input type="text" id="venue-address" placeholder="Full address" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Map link</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Map link (optional)</label>
               <input type="url" id="venue-map-link" placeholder="https://maps.google.com/…" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save venue</button>
@@ -373,11 +373,11 @@
           <p class="text-gray-400 text-sm mb-4">Time-based marquee at the top of the site. Visible only until the end date/time.</p>
           <form id="announcement-form" class="space-y-3">
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Message</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Message (optional, leave empty to hide banner)</label>
               <input type="text" id="announcement-message" placeholder="e.g. Registration opens March 1" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">End date &amp; time (when to hide)</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">End date &amp; time (optional, when to hide)</label>
               <input type="datetime-local" id="announcement-end" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <p class="text-gray-500 text-xs">Leave message empty to hide the banner. End time is optional; if set, the banner hides after that time.</p>
@@ -400,7 +400,7 @@
               <input type="text" id="faq-item-question" required class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Answer</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Answer (optional)</label>
               <textarea id="faq-item-answer" rows="3" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm resize-none"></textarea>
             </div>
             <div class="flex gap-2">
@@ -418,11 +418,11 @@
           <p class="text-gray-400 text-sm mb-4">Shown on the Contact page (header icon).</p>
           <form id="contact-settings-form" class="space-y-3">
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Email</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Email (optional)</label>
               <input type="email" id="contact-email" placeholder="contact@example.com" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-400 mb-1">Phone</label>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Phone (optional)</label>
               <input type="text" id="contact-phone" placeholder="+234 …" class="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 text-white text-sm">
             </div>
             <button type="submit" class="px-4 py-2 rounded-lg bg-accent-orange hover:bg-orange-600 text-sm font-medium">Save contact</button>
