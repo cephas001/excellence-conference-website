@@ -97,7 +97,7 @@ const renderSpeakers = (speakers) => {
     if (!container) return;
     const data = Array.isArray(speakers) ? speakers : [];
     if (data.length === 0) {
-        container.innerHTML = '<p class="text-gray-500 col-span-full text-center py-8">No speakers to display.</p>';
+        container.innerHTML = '<p class="text-gray-500 col-span-full text-center py-8">Stay tuned for updates.</p>';
         return;
     }
     container.innerHTML = data.map((speaker, index) => {
