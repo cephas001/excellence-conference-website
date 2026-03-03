@@ -42,7 +42,7 @@ function showView(route) {
     initContact();
   }
   currentRoute = route;
-  const titles = { home: 'Excellence Conference - Home', agenda: 'Agenda', dinner: 'Conference Dinner', merch: 'Merch', contact: 'Contact' };
+  const titles = { home: 'Excellence Conference - Home', agenda: 'Agenda', dinner: 'Workers Dinner', merch: 'Merch', contact: 'Contact' };
   document.title = titles[route] || `Excellence Conference - ${route.charAt(0).toUpperCase() + route.slice(1)}`;
 }
 
