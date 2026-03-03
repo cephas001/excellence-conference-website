@@ -637,6 +637,7 @@ const MERCH_SETTINGS_ID = 'config';
 const merchSettingsForm = document.getElementById('merch-settings-form');
 const merchAccountNumberInput = document.getElementById('merch-account-number');
 const merchAccountNameInput = document.getElementById('merch-account-name');
+const merchAccountBankInput = document.getElementById('merch-account-bank');
 const merchGoogleFormLinkInput = document.getElementById('merch-google-form-link');
 const merchItemsList = document.getElementById('merch-items-list');
 const merchAddItemBtn = document.getElementById('merch-add-item-btn');
@@ -680,6 +681,7 @@ async function loadMerchSettings() {
     const d = snap.exists() ? snap.data() : {};
     merchAccountNumberInput.value = d.accountNumber || '';
     merchAccountNameInput.value = d.accountName || '';
+    merchAccountBankInput.value = d.accountBank || '';
     merchGoogleFormLinkInput.value = d.googleFormLink || '';
   } catch (e) {
     console.warn('Merch settings load failed', e);
@@ -692,6 +694,7 @@ merchSettingsForm.addEventListener('submit', async (e) => {
     await setDoc(doc(db, 'merchSettings', MERCH_SETTINGS_ID), stripUndefined({
       accountNumber: merchAccountNumberInput.value.trim() || null,
       accountName: merchAccountNameInput.value.trim() || null,
+      accountBank: merchAccountBankInput.value.trim() || null,
       googleFormLink: merchGoogleFormLinkInput.value.trim() || null,
     }));
     alert('Payment details saved.');
