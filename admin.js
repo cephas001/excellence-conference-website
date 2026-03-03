@@ -49,6 +49,17 @@ function switchAdminPanel(section) {
   });
   const panel = document.getElementById('panel-' + section);
   if (panel) panel.classList.remove('hidden');
+  closeAdminSidebar();
+}
+
+function openAdminSidebar() {
+  adminView.classList.add('sidebar-open');
+  document.body.classList.add('overflow-hidden');
+}
+
+function closeAdminSidebar() {
+  adminView.classList.remove('sidebar-open');
+  document.body.classList.remove('overflow-hidden');
 }
 
 adminView.addEventListener('click', (e) => {
@@ -58,6 +69,10 @@ adminView.addEventListener('click', (e) => {
   const section = link.getAttribute('data-section');
   if (section) switchAdminPanel(section);
 });
+
+document.getElementById('admin-menu-btn')?.addEventListener('click', openAdminSidebar);
+document.getElementById('admin-sidebar-close')?.addEventListener('click', closeAdminSidebar);
+document.getElementById('admin-sidebar-backdrop')?.addEventListener('click', closeAdminSidebar);
 
 function setLoginError(msg) {
   loginError.textContent = msg || '';

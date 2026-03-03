@@ -111,13 +111,13 @@ function renderAgendaItem(item, dateStr, index) {
         : '';
 
     return `
-      <div class="relative flex gap-6 animate-fade-in-up" style="animation-delay: ${delay}ms; opacity: 0;">
+      <div class="relative flex gap-3 sm:gap-6 animate-fade-in-up" style="animation-delay: ${delay}ms; opacity: 0;">
         <div class="flex-shrink-0 z-10">
-            <div class="bg-gray-800 border border-gray-700 rounded-full px-3 py-1 text-xs font-medium text-gray-300 w-[85px] text-center transition-all duration-300 hover:scale-105">
+            <div class="bg-gray-800 border border-gray-700 rounded-full px-2 sm:px-3 py-1 text-xs font-medium text-gray-300 min-w-[70px] sm:min-w-[85px] w-[70px] sm:w-[85px] text-center transition-all duration-300 hover:scale-105">
                 ${escapeAttr(item.time)}
             </div>
         </div>
-        <div class="flex-grow pb-8">
+        <div class="flex-grow min-w-0 pb-6 sm:pb-8">
             <div class="flex flex-wrap items-center gap-2 mb-2">
                 <span class="${statusClass} text-[10px] font-medium px-3 py-1 rounded-full border transition-all duration-300 hover:scale-105">
                     ${status}
@@ -161,9 +161,9 @@ function renderAgenda(agendaByDay) {
         .map(
             (day, dayIndex) => `
       <div class="agenda-day border-b border-gray-800 last:border-b-0">
-        <button type="button" class="agenda-day-trigger w-full flex items-center justify-between px-4 py-4 text-left bg-gray-800/50 hover:bg-gray-800 rounded-xl transition-colors" data-day="${escapeAttr(day.id)}" aria-expanded="${dayIndex === 0}">
+        <button type="button" class="agenda-day-trigger w-full flex items-center justify-between px-3 sm:px-4 py-3 sm:py-4 text-left bg-gray-800/50 hover:bg-gray-800 rounded-xl transition-colors" data-day="${escapeAttr(day.id)}" aria-expanded="${dayIndex === 0}">
           <div class="min-w-0 text-left flex-1">
-            <span class="font-semibold text-white block">${escapeAttr(day.label)}</span>
+            <span class="font-semibold text-white block text-sm sm:text-base">${escapeAttr(day.label)}</span>
             ${(function () {
               if (!day.sublabel || !String(day.sublabel).trim()) return '';
               const parts = String(day.sublabel).split(',').map(function (p) { return p.trim(); }).filter(Boolean);
@@ -176,8 +176,8 @@ function renderAgenda(agendaByDay) {
           <ion-icon name="chevron-down" class="agenda-day-icon text-2xl text-gray-400 flex-shrink-0 transition-transform duration-200"></ion-icon>
         </button>
         <div class="agenda-day-content overflow-hidden transition-all duration-300 relative pl-0" data-day="${escapeAttr(day.id)}" style="max-height: ${dayIndex === 0 ? 'none' : '0'};">
-          <div class="absolute left-[5.5rem] top-4 bottom-0 w-px bg-gray-700"></div>
-          <div class="pt-4 pb-6 space-y-8">
+          <div class="absolute left-8 sm:left-[5.5rem] top-4 bottom-0 w-px bg-gray-700"></div>
+          <div class="pt-4 pb-6 space-y-6 sm:space-y-8">
             ${(day.items || []).map((item, i) => renderAgendaItem(item, day.date || '', i)).join('')}
           </div>
         </div>

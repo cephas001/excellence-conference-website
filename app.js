@@ -76,7 +76,39 @@ function updateHeaderScroll() {
   header.classList.toggle('header-scrolled', scrolled);
 }
 
+const THEME_KEY = 'theme';
+
+function getTheme() {
+  return document.documentElement.getAttribute('data-theme') || 'dark';
+}
+
+function setTheme(theme) {
+  theme = theme === 'light' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  try {
+    localStorage.setItem(THEME_KEY, theme);
+  } catch (e) {}
+  const iconLight = document.getElementById('theme-icon-light');
+  const iconDark = document.getElementById('theme-icon-dark');
+  if (iconLight && iconDark) {
+    iconLight.classList.toggle('hidden', theme !== 'light');
+    iconDark.classList.toggle('hidden', theme === 'light');
+  }
+}
+
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  setTheme(saved === 'light' ? 'light' : 'dark');
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   initAnnouncement();
   document.body.addEventListener('click', handleNav);
   document.body.addEventListener('click', handleInPageLinks);
