@@ -241,10 +241,14 @@ body {
     min-height: 0;
 }
 
-/* Announcement marquee (left to right, seamless loop) */
+/* Announcement marquee (scrolls fully across the top, seamless loop) */
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 .announcement-marquee {
     animation: marquee 30s linear infinite;
