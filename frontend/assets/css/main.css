@@ -1,0 +1,441 @@
+@import '@fontsource/bebas-neue/400.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/poppins';
+
+
+@theme {
+    --font-poppins: "Poppins", sans-serif;
+}
+
+:root {
+    /* Logo-style gradient orange (yellow-amber to orange) */
+    --accent-orange: #f97316;
+    --accent-orange-dark: #ea580c;
+    --accent-amber: #fbbf24;
+}
+
+/* Light theme overrides (default is dark) */
+[data-theme="light"] body,
+[data-theme="light"] #app {
+    background-color: #f3f4f6;
+}
+
+[data-theme="light"] .bg-gray-900 {
+    background-color: #f9fafb !important;
+}
+
+[data-theme="light"] .bg-gray-800,
+[data-theme="light"] .bg-gray-800\/95,
+[data-theme="light"] .bg-gray-800\/90,
+[data-theme="light"] .bg-gray-800\/80 {
+    background-color: #e5e7eb !important;
+}
+
+[data-theme="light"] .bg-gray-800\/50 {
+    background-color: rgba(229, 231, 235, 0.8) !important;
+}
+
+[data-theme="light"] .text-white {
+    color: #111827 !important;
+}
+
+[data-theme="light"] .text-gray-300 {
+    color: #374151 !important;
+}
+
+[data-theme="light"] .text-gray-400 {
+    color: #4b5563 !important;
+}
+
+[data-theme="light"] .text-gray-500 {
+    color: #6b7280 !important;
+}
+
+[data-theme="light"] .border-gray-700 {
+    border-color: #d1d5db !important;
+}
+
+[data-theme="light"] .border-gray-800 {
+    border-color: #e5e7eb !important;
+}
+
+[data-theme="light"] .loader,
+[data-theme="light"] #loader {
+    background-color: #f3f4f6 !important;
+}
+
+[data-theme="light"] #main-header.header-scrolled {
+    background-color: rgba(249, 250, 251, 0.9) !important;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] #announcement-banner {
+    background-color: rgba(249, 250, 251, 0.95) !important;
+    border-color: #e5e7eb !important;
+}
+
+[data-theme="light"] #announcement-banner .announcement-marquee {
+    color: #111827 !important;
+}
+
+[data-theme="light"] #bottom-nav {
+    background-color: rgba(229, 231, 235, 0.95) !important;
+    border-color: #d1d5db !important;
+}
+
+[data-theme="light"] #bottom-nav .text-gray-400 {
+    color: #6b7280 !important;
+}
+
+[data-theme="light"] #bottom-nav .hover\:text-accent-orange:hover {
+    color: var(--accent-orange) !important;
+}
+
+[data-theme="light"] .dot.active {
+    background-color: #111827 !important;
+}
+
+[data-theme="light"] .dot:not(.active) {
+    border-color: #374151 !important;
+}
+
+[data-theme="light"] a[data-route="contact"].rounded-full:hover,
+[data-theme="light"] #theme-toggle:hover {
+    background-color: rgba(209, 213, 219, 0.8) !important;
+    color: #111827 !important;
+}
+
+[data-theme="light"] #theme-toggle .text-gray-300 {
+    color: #4b5563 !important;
+}
+
+[data-theme="light"] #theme-toggle:hover .text-gray-300 {
+    color: #111827 !important;
+}
+
+[data-theme="light"] .focus-visible\:ring-offset-gray-900 {
+    --tw-ring-offset-color: #f9fafb;
+}
+
+/* Hero overlay: lighter in light mode so headline stays readable */
+[data-theme="light"] #view-home section:first-of-type .absolute.inset-0.bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, rgba(17, 24, 39, 0.35), rgba(17, 24, 39, 0.25), rgba(17, 24, 39, 0.55)) !important;
+}
+
+html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; */
+}
+
+/* Bottom nav: respect safe area on notched devices (e.g. iPhone) */
+.bottom-nav-safe {
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom, 0));
+}
+
+/* Responsive: prevent horizontal overflow on small screens */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Main header: background on scroll for legibility */
+#main-header.header-transition {
+    transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+}
+
+#main-header.header-scrolled {
+    background-color: rgba(17, 24, 39, 0.82);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+.font-tusker {
+    font-family: 'Tusker Grotesk', 'Inter', sans-serif;
+}
+
+/* Gradient orange text/accents to match logo */
+.text-gradient-orange {
+    background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 35%, #f97316 70%, #ea580c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Loader: logo fades in/out gently, then fades out on exit */
+.loader-logo {
+    animation: loaderLogoFade 2s ease-in-out infinite;
+}
+
+@keyframes loaderLogoFade {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loader.loader-exit .loader-logo {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+}
+
+/* Slideshow Styles */
+.slideshow-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slideshow-image.active {
+    opacity: 1;
+}
+
+/* Animation Classes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Stagger animations */
+.animate-delay-100 {
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+.animate-delay-200 {
+    animation-delay: 0.2s;
+    opacity: 0;
+}
+
+.animate-delay-300 {
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.animate-delay-400 {
+    animation-delay: 0.4s;
+    opacity: 0;
+}
+
+.animate-delay-500 {
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+
+/* Smooth transitions for hover effects */
+.transition-smooth {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Scroll animation styles */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Bottom nav animation that preserves centering */
+@keyframes fadeInUpCenter {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.animate-fade-in-up-center {
+    animation: fadeInUpCenter 0.6s ease-out forwards;
+}
+
+/* Agenda day accordion */
+.agenda-day-content {
+    will-change: max-height;
+}
+
+.agenda-day-trigger:focus {
+    outline: none;
+}
+
+.agenda-day-trigger:focus-visible {
+    outline: 2px solid rgba(249, 115, 22, 0.5);
+    outline-offset: 2px;
+}
+
+/* Custom scrollbar hide if needed */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Announcement banner: translucent orange, minimal height */
+#announcement-banner {
+    background-color: rgba(249, 115, 22, 0.88);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    line-height: 1.25;
+    min-height: 0;
+}
+
+/* Announcement marquee (scrolls fully across the top, seamless loop) */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.announcement-marquee {
+    animation: marquee 30s linear infinite;
+    display: inline-block;
+    padding-right: 2em;
+}
+
+.announcement-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* When announcement banner is visible, push view content down */
+.has-announcement #view-agenda,
+.has-announcement #view-dinner,
+.has-announcement #view-contact,
+.has-announcement #view-merch {
+    padding-top: 6.25rem;
+}
+
+.has-announcement #view-agenda header.sticky,
+.has-announcement #view-dinner header.sticky,
+.has-announcement #view-contact header.sticky,
+.has-announcement #view-merch header.sticky {
+    top: 6.25rem;
+}
+
+/* Accessibility: focus visible */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 2px;
+}
+
+/* Admin: hamburger menu – sidebar slides in from left on mobile/tablet */
+@media (max-width: 1023px) {
+    #admin-view.sidebar-open #admin-sidebar {
+        transform: translateX(0);
+    }
+
+    #admin-view.sidebar-open #admin-sidebar-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+}

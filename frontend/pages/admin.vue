@@ -1,17 +1,5 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Excellence Conference – Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body
+<template>
+  <div
     class="bg-gray-900 min-h-screen text-gray-100 font-sans p-4 md:p-8 overflow-x-hidden"
   >
     <div id="login-view" class="max-w-sm w-full mx-auto mt-8 sm:mt-16 px-0">
@@ -74,34 +62,6 @@
       id="admin-view"
       class="hidden min-h-screen bg-gray-900 overflow-x-hidden"
     >
-      <!-- Top bar with hamburger (mobile/tablet only) -->
-      <header
-        class="admin-topbar flex lg:hidden items-center gap-3 px-4 py-3 bg-gray-800/95 border-b border-gray-700 flex-shrink-0 z-40"
-      >
-        <button
-          type="button"
-          id="admin-menu-btn"
-          class="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-          aria-label="Open menu"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
-        <span class="text-white font-bold">Admin</span>
-      </header>
-
       <!-- Backdrop when sidebar is open (mobile only) -->
       <div
         id="admin-sidebar-backdrop"
@@ -131,103 +91,9 @@
             class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 lg:hidden"
             aria-label="Close menu"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <IconsClose class="w-5 h-5" />
           </button>
         </div>
-        <nav
-          class="flex-1 p-3 space-y-1 overflow-auto flex-shrink-0 lg:min-h-0"
-        >
-          <p
-            class="text-gray-500 text-[10px] font-semibold uppercase tracking-wider px-3 py-2"
-          >
-            Main menu
-          </p>
-          <a
-            href="#"
-            data-section="speakers"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">👤</span> Speakers
-          </a>
-          <a
-            href="#"
-            data-section="testimonies"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">💬</span> Testimonies
-          </a>
-          <a
-            href="#"
-            data-section="agenda"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">📅</span> Agenda
-          </a>
-          <p
-            class="text-gray-500 text-[10px] font-semibold uppercase tracking-wider px-3 py-2 mt-4"
-          >
-            Merch
-          </p>
-          <a
-            href="#"
-            data-section="merch"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">🛍</span> Merch
-          </a>
-          <p
-            class="text-gray-500 text-[10px] font-semibold uppercase tracking-wider px-3 py-2 mt-4"
-          >
-            Event
-          </p>
-          <a
-            href="#"
-            data-section="dinner"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">🍽</span> Dinner
-          </a>
-          <a
-            href="#"
-            data-section="venue"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">📍</span> Venue
-          </a>
-          <a
-            href="#"
-            data-section="announcements"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">📢</span> Announcements
-          </a>
-          <a
-            href="#"
-            data-section="faq"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">❓</span> FAQ
-          </a>
-          <a
-            href="#"
-            data-section="contact"
-            class="admin-nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white text-sm transition-colors"
-          >
-            <span class="text-lg opacity-80">✉</span> Contact
-          </a>
-        </nav>
         <div class="p-3 border-t border-gray-700 space-y-1">
           <button
             type="button"
@@ -236,12 +102,12 @@
           >
             Sign out
           </button>
-          <a
-            href="index.html"
+          <NuxtLink
+            to="/"
             class="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-400 hover:text-white text-sm transition-colors"
           >
             <span aria-hidden="true">←</span> Home
-          </a>
+          </NuxtLink>
         </div>
       </aside>
 
@@ -439,7 +305,6 @@
               Add day
             </button>
 
-            <!-- Day form (add/edit day) -->
             <form
               id="agenda-day-form"
               class="hidden mt-4 p-4 bg-gray-700/50 rounded-xl border border-gray-600 space-y-3"
@@ -513,7 +378,6 @@
               </div>
             </form>
 
-            <!-- Shared session form (used when a day is expanded) -->
             <form
               id="agenda-item-form"
               class="hidden mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 space-y-3"
@@ -1101,6 +965,5 @@
         </div>
       </main>
     </div>
-  </body>
-  <script type="module" src="/admin.js"></script>
-</html>
+  </div>
+</template>
