@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gray-950 text-gray-200 font-sans antialiased selection:bg-orange-500/30"
+    class="min-h-screen bg-gray-950 text-gray-200 font-sans antialiased selection:bg-orange-500/30 pt-20"
   >
     <div
       v-if="!isAuthenticated"
@@ -242,14 +242,14 @@
                     class="flex sm:flex-col gap-2 w-full sm:w-auto shrink-0 mt-4 sm:mt-0"
                   >
                     <button
-                      @click="editItem(speaker, speakerForm)"
+                      @click="editSpeaker(speaker)"
                       class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 transition-colors text-xs font-semibold uppercase tracking-wider border border-gray-700"
                     >
                       <Icon name="heroicons:pencil-square" class="w-4 h-4" />
                       Edit
                     </button>
                     <button
-                      @click="deleteItem(speaker.id, speakers)"
+                      @click="handleDeleteSpeaker(speaker.id)"
                       class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-red-900/20 hover:bg-red-900/40 text-red-400 transition-colors text-xs font-semibold uppercase tracking-wider border border-red-900/30"
                     >
                       <Icon name="heroicons:trash" class="w-4 h-4" /> Delete
@@ -272,10 +272,7 @@
                   />
                   {{ speakerForm.id ? "Edit Speaker" : "Add New Speaker" }}
                 </h3>
-                <form
-                  @submit.prevent="saveItem(speakerForm, speakers)"
-                  class="space-y-4"
-                >
+                <form @submit.prevent="handleSpeakerSubmit" class="space-y-4">
                   <div class="space-y-1.5">
                     <label
                       class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1"
@@ -341,7 +338,7 @@
                     </button>
                     <button
                       v-if="speakerForm.id"
-                      @click="resetForm(speakerForm)"
+                      @click="resetSpeakerForm"
                       type="button"
                       class="px-6 bg-gray-800 py-3 rounded-xl text-white font-bold uppercase tracking-widest text-xs border border-gray-700 hover:bg-gray-700 transition-all"
                     >
@@ -395,13 +392,13 @@
                   </div>
                   <div class="flex sm:flex-col gap-2 shrink-0">
                     <button
-                      @click="editItem(testimony, testimonyForm)"
+                      @click="editTestimony(testimony)"
                       class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-xs font-semibold uppercase border border-gray-700"
                     >
                       Edit
                     </button>
                     <button
-                      @click="deleteItem(testimony.id, testimonies)"
+                      @click="handleDeleteTestimony(testimony.id)"
                       class="px-4 py-2 rounded-lg bg-red-900/20 text-red-400 text-xs font-semibold uppercase border border-red-900/30"
                     >
                       Delete
@@ -424,10 +421,7 @@
                   />
                   {{ testimonyForm.id ? "Edit Testimony" : "Add Testimony" }}
                 </h3>
-                <form
-                  @submit.prevent="saveItem(testimonyForm, testimonies)"
-                  class="space-y-4"
-                >
+                <form @submit.prevent="handleTestimonySubmit" class="space-y-4">
                   <div class="space-y-1.5">
                     <label
                       class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1"
@@ -470,7 +464,7 @@
                     </button>
                     <button
                       v-if="testimonyForm.id"
-                      @click="resetForm(testimonyForm)"
+                      @click="resetTestimonyForm"
                       type="button"
                       class="px-6 bg-gray-800 py-3 rounded-xl text-white font-bold uppercase tracking-widest text-xs border border-gray-700"
                     >
@@ -503,7 +497,10 @@
             >
               Payment & Order Config
             </h3>
-            <form @submit.prevent="alertSave" class="grid sm:grid-cols-2 gap-4">
+            <form
+              @submit.prevent="handleMerchSettingsSubmit"
+              class="grid sm:grid-cols-2 gap-4"
+            >
               <div>
                 <label
                   class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
@@ -581,13 +578,13 @@
                 </div>
                 <div class="flex gap-2">
                   <button
-                    @click="editItem(item, merchForm)"
+                    @click="editMerchItem(item)"
                     class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-xs font-semibold uppercase border border-gray-700"
                   >
                     Edit
                   </button>
                   <button
-                    @click="deleteItem(item.id, merchItems)"
+                    @click="handleDeleteMerchItem(item.id)"
                     class="px-4 py-2 rounded-lg bg-red-900/20 text-red-400 text-xs font-semibold uppercase border border-red-900/30"
                   >
                     Delete
@@ -605,10 +602,7 @@
                 >
                   {{ merchForm.id ? "Edit Product" : "Add Product" }}
                 </h3>
-                <form
-                  @submit.prevent="saveItem(merchForm, merchItems)"
-                  class="space-y-4"
-                >
+                <form @submit.prevent="handleMerchItemSubmit" class="space-y-4">
                   <div>
                     <label
                       class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
@@ -661,7 +655,7 @@
                     </button>
                     <button
                       v-if="merchForm.id"
-                      @click="resetForm(merchForm)"
+                      @click="resetMerchForm"
                       type="button"
                       class="px-6 bg-gray-800 text-white rounded-xl font-bold uppercase text-xs border border-gray-700"
                     >
@@ -703,7 +697,7 @@
                 Main Venue
               </h3>
               <form
-                @submit.prevent="alertSave"
+                @submit.prevent="handleVenueSettingsSubmit"
                 class="grid sm:grid-cols-2 gap-4"
               >
                 <div>
@@ -757,7 +751,7 @@
                 Workers Dinner
               </h3>
               <form
-                @submit.prevent="alertSave"
+                @submit.prevent="handleDinnerSettingsSubmit"
                 class="grid sm:grid-cols-2 gap-4"
               >
                 <div>
@@ -801,7 +795,10 @@
                 />
                 Global Announcement Banner
               </h3>
-              <form @submit.prevent="alertSave" class="space-y-4">
+              <form
+                @submit.prevent="handleAnnouncementSubmit"
+                class="space-y-4"
+              >
                 <div>
                   <label class="text-[10px] font-bold uppercase text-gray-500"
                     >Banner Text (Leave blank to hide)</label
@@ -832,8 +829,31 @@
 <script setup>
 import { ref } from "vue";
 
-// --- Global App State ---
-const isAuthenticated = ref(false); // Toggle to test login vs dashboard
+const {
+  getSpeakers,
+  getTestimonies,
+  getMerch,
+  getMerchSettings,
+  getEventSettings,
+} = useConferenceData();
+
+const {
+  addSpeaker,
+  updateSpeaker,
+  deleteSpeaker,
+  addTestimony,
+  updateTestimony,
+  deleteTestimony,
+  addMerchItem,
+  updateMerchItem,
+  deleteMerchItem,
+  updateMerchSettings,
+  updateVenueSettings,
+  updateDinnerSettings,
+  updateAnnouncementSettings,
+} = useAdminMutations();
+
+const isAuthenticated = ref(false);
 const isLoading = ref(false);
 const loginError = ref("");
 const loginForm = ref({ email: "", password: "" });
@@ -850,78 +870,7 @@ const navigation = [
   { id: "settings", label: "Event Settings", icon: "heroicons:cog-8-tooth" },
 ];
 
-const handleLogin = () => {
-  isLoading.value = true;
-  loginError.value = "";
-  // Mock Auth Delay
-  setTimeout(() => {
-    isAuthenticated.value = true;
-    isLoading.value = false;
-  }, 800);
-};
-
-const handleLogout = () => {
-  isAuthenticated.value = false;
-};
-
-// --- Generic CRUD Logic ---
-// Generates a random ID for mock new items
-const generateId = () => Math.random().toString(36).substr(2, 9);
-
-const resetForm = (formRef) => {
-  Object.keys(formRef).forEach((key) => {
-    formRef[key] = "";
-  });
-};
-
-const editItem = (item, formRef) => {
-  Object.assign(formRef, item);
-};
-
-const deleteItem = (id, listRef) => {
-  if (confirm("Are you sure you want to delete this item?")) {
-    const index = listRef.findIndex((i) => i.id === id);
-    if (index !== -1) listRef.splice(index, 1);
-  }
-};
-
-const saveItem = (formRef, listRef) => {
-  if (formRef.id) {
-    // Update existing
-    const index = listRef.findIndex((i) => i.id === formRef.id);
-    if (index !== -1) listRef[index] = { ...formRef };
-  } else {
-    // Create new
-    listRef.push({ ...formRef, id: generateId() });
-  }
-  resetForm(formRef);
-};
-
-const alertSave = () => {
-  alert("Settings saved successfully! (Mock)");
-};
-
-// --- MOCK DATABASE ARRAYS (Using your provided context) ---
-
-// 1. Speakers [cite: 1, 4]
-const speakers = ref([
-  {
-    id: "s1",
-    name: "Rev. Ibiwunmi Alo",
-    role: "University Chaplain",
-    topic: "Opening Ceremony",
-    image: "/img/slide1.jpeg",
-    bio: "Building a people of excellence and integrity for service.",
-  },
-  {
-    id: "s2",
-    name: "Minister Taiwo Ibidapo",
-    role: "Guest Minister",
-    topic: "Worship Session: Shining the Light",
-    image: "/img/slide4.jpeg",
-    bio: "Worship Session on Thursday, 21st May, 2026.",
-  },
-]);
+const speakers = ref([]);
 const speakerForm = ref({
   id: "",
   name: "",
@@ -931,72 +880,393 @@ const speakerForm = ref({
   bio: "",
 });
 
-// 2. Testimonies
-const testimonies = ref([
-  {
-    id: "t1",
-    name: "David O.",
-    location: "2025 Attendee",
-    testimony:
-      "The light I received at last year's conference completely transformed my academic journey.",
-  },
-  {
-    id: "t2",
-    name: "Mary A.",
-    location: "2025 Attendee",
-    testimony:
-      "I came feeling burnt out, but the teachings renewed my strength.",
-  },
-]);
+const testimonies = ref([]);
 const testimonyForm = ref({ id: "", name: "", location: "", testimony: "" });
 
-// 3. Merch
-const merchItems = ref([
-  {
-    id: "m1",
-    name: "Premium Hoodie",
-    price: "₦15,000",
-    description: "Heavyweight cotton-blend fabric.",
-    image: "/img/slide4.jpeg",
-  },
-  {
-    id: "m2",
-    name: "Minimalist T-Shirt",
-    price: "₦7,000",
-    description: "Premium organic cotton.",
-    image: "/img/slide3.jpeg",
-  },
-]);
+const merchItems = ref([]);
 const merchForm = ref({
   id: "",
   name: "",
   price: "",
   description: "",
   image: "",
+  order: 0,
 });
 
 const merchSettings = ref({
-  accountBank: "Guaranty Trust Bank (GTB)",
-  accountNumber: "0123456789",
-  accountName: "McPherson Chapel Of Praise",
-  googleFormLink: "https://forms.google.com/...",
+  accountBank: "",
+  accountNumber: "",
+  accountName: "",
+  googleFormLink: "",
 });
 
-// 4. Event Settings
 const venueSettings = ref({
-  name: "McPherson University Chapel", // [cite: 1, 8]
-  address: "Seriki-Sotayo, Ogun State, Nigeria.", // [cite: 1, 2, 3]
-  mapLink: "https://maps.google.com",
+  name: "",
+  address: "",
+  mapLink: "",
 });
 
 const dinnerSettings = ref({
-  venueName: "University Grand Pavilion",
-  dateTime: "Sunday, May 24th, 2026 at 6:00 PM",
+  venueName: "",
+  dateTime: "",
 });
 
-const announcement = ref(
-  "Welcome to the Excellence Conference 2026 Admin Portal.",
-);
+const announcement = ref("");
+const eventSettingsCache = ref({
+  dinner: {},
+  venue: {},
+  current: {},
+  contact: {},
+});
+
+const getErrorMessage = (errorRef) => {
+  const err = errorRef?.value;
+  if (!err) return "Request failed";
+  return (
+    err?.data?.error || err?.data?.message || err?.message || "Request failed"
+  );
+};
+
+const callApi = async (requestPromise) => {
+  const { data, error } = await requestPromise;
+  if (error.value) {
+    throw new Error(getErrorMessage(error));
+  }
+  return data.value;
+};
+
+const resetSpeakerForm = () => {
+  speakerForm.value = {
+    id: "",
+    name: "",
+    role: "",
+    topic: "",
+    image: "",
+    bio: "",
+  };
+};
+
+const resetTestimonyForm = () => {
+  testimonyForm.value = { id: "", name: "", location: "", testimony: "" };
+};
+
+const resetMerchForm = () => {
+  merchForm.value = {
+    id: "",
+    name: "",
+    price: "",
+    description: "",
+    image: "",
+    order: 0,
+  };
+};
+
+const normalizeMerchItem = (item = {}) => {
+  const image = Array.isArray(item.images)
+    ? item.images[0] || ""
+    : item.image || "";
+  return {
+    ...item,
+    image,
+  };
+};
+
+const loadSpeakersData = async () => {
+  const data = await callApi(getSpeakers());
+  speakers.value = Array.isArray(data) ? data : [];
+};
+
+const loadTestimoniesData = async () => {
+  const data = await callApi(getTestimonies());
+  testimonies.value = Array.isArray(data) ? data : [];
+};
+
+const loadMerchData = async () => {
+  const data = await callApi(getMerch());
+  merchItems.value = (Array.isArray(data) ? data : []).map((item) =>
+    normalizeMerchItem(item),
+  );
+};
+
+const loadMerchSettingsData = async () => {
+  try {
+    const data = await callApi(getMerchSettings());
+    merchSettings.value = {
+      accountBank: data?.accountBank || "",
+      accountNumber: data?.accountNumber || "",
+      accountName: data?.accountName || "",
+      googleFormLink: data?.googleFormLink || "",
+    };
+  } catch {
+    merchSettings.value = {
+      accountBank: "",
+      accountNumber: "",
+      accountName: "",
+      googleFormLink: "",
+    };
+  }
+};
+
+const loadEventSettingsData = async () => {
+  const settings = await callApi(getEventSettings());
+  eventSettingsCache.value = {
+    dinner: settings?.dinner || {},
+    venue: settings?.venue || {},
+    current: settings?.current || {},
+    contact: settings?.contact || {},
+  };
+
+  venueSettings.value = {
+    name: eventSettingsCache.value.venue.venueName || "",
+    address: eventSettingsCache.value.venue.address || "",
+    mapLink: eventSettingsCache.value.venue.mapLink || "",
+  };
+
+  const dinnerDate = eventSettingsCache.value.dinner.date || "";
+  const dinnerTime = eventSettingsCache.value.dinner.time || "";
+  dinnerSettings.value = {
+    venueName: eventSettingsCache.value.dinner.venueName || "",
+    dateTime: [dinnerDate, dinnerTime].filter(Boolean).join(" "),
+  };
+
+  announcement.value = eventSettingsCache.value.current.message || "";
+};
+
+const loadAdminData = async () => {
+  try {
+    await Promise.all([
+      loadSpeakersData(),
+      loadTestimoniesData(),
+      loadMerchData(),
+      loadMerchSettingsData(),
+      loadEventSettingsData(),
+    ]);
+  } catch (error) {
+    alert(error.message || "Failed to load admin data.");
+  }
+};
+
+const handleLogin = () => {
+  isLoading.value = true;
+  loginError.value = "";
+
+  if (!loginForm.value.email.trim() || !loginForm.value.password.trim()) {
+    loginError.value = "Email and password are required.";
+    isLoading.value = false;
+    return;
+  }
+
+  setTimeout(async () => {
+    isAuthenticated.value = true;
+    isLoading.value = false;
+    await loadAdminData();
+  }, 400);
+};
+
+const handleLogout = () => {
+  isAuthenticated.value = false;
+  loginForm.value = { email: "", password: "" };
+  loginError.value = "";
+};
+
+const editSpeaker = (speaker) => {
+  speakerForm.value = {
+    id: speaker.id || "",
+    name: speaker.name || "",
+    role: speaker.role || "",
+    topic: speaker.topic || "",
+    image: speaker.image || "",
+    bio: speaker.bio || "",
+  };
+};
+
+const handleSpeakerSubmit = async () => {
+  const payload = {
+    name: speakerForm.value.name.trim(),
+    role: speakerForm.value.role.trim(),
+    topic: speakerForm.value.topic.trim(),
+    image: speakerForm.value.image.trim(),
+    bio: speakerForm.value.bio.trim(),
+  };
+
+  try {
+    if (speakerForm.value.id) {
+      await callApi(updateSpeaker(speakerForm.value.id, payload));
+    } else {
+      await callApi(addSpeaker(payload));
+    }
+    resetSpeakerForm();
+    await loadSpeakersData();
+  } catch (error) {
+    alert(error.message || "Failed to save speaker.");
+  }
+};
+
+const handleDeleteSpeaker = async (id) => {
+  if (!confirm("Are you sure you want to delete this item?")) return;
+  try {
+    await callApi(deleteSpeaker(id));
+    speakers.value = speakers.value.filter((item) => item.id !== id);
+    if (speakerForm.value.id === id) resetSpeakerForm();
+  } catch (error) {
+    alert(error.message || "Failed to delete speaker.");
+  }
+};
+
+const editTestimony = (testimony) => {
+  testimonyForm.value = {
+    id: testimony.id || "",
+    name: testimony.name || "",
+    location: testimony.location || "",
+    testimony: testimony.testimony || "",
+  };
+};
+
+const handleTestimonySubmit = async () => {
+  const payload = {
+    name: testimonyForm.value.name.trim(),
+    location: testimonyForm.value.location.trim(),
+    testimony: testimonyForm.value.testimony.trim(),
+  };
+
+  try {
+    if (testimonyForm.value.id) {
+      await callApi(updateTestimony(testimonyForm.value.id, payload));
+    } else {
+      await callApi(addTestimony(payload));
+    }
+    resetTestimonyForm();
+    await loadTestimoniesData();
+  } catch (error) {
+    alert(error.message || "Failed to save testimony.");
+  }
+};
+
+const handleDeleteTestimony = async (id) => {
+  if (!confirm("Are you sure you want to delete this item?")) return;
+  try {
+    await callApi(deleteTestimony(id));
+    testimonies.value = testimonies.value.filter((item) => item.id !== id);
+    if (testimonyForm.value.id === id) resetTestimonyForm();
+  } catch (error) {
+    alert(error.message || "Failed to delete testimony.");
+  }
+};
+
+const editMerchItem = (item) => {
+  merchForm.value = {
+    id: item.id || "",
+    name: item.name || "",
+    price: item.price || "",
+    description: item.description || "",
+    image: item.image || "",
+    order: Number.isFinite(item.order) ? item.order : 0,
+  };
+};
+
+const handleMerchItemSubmit = async () => {
+  const image = merchForm.value.image.trim();
+  const payload = {
+    name: merchForm.value.name.trim(),
+    price: merchForm.value.price.trim(),
+    description: merchForm.value.description.trim(),
+    images: image ? [image] : [],
+    order: Number.isFinite(merchForm.value.order)
+      ? merchForm.value.order
+      : merchItems.value.length,
+  };
+
+  try {
+    if (merchForm.value.id) {
+      await callApi(updateMerchItem(merchForm.value.id, payload));
+    } else {
+      await callApi(addMerchItem(payload));
+    }
+    resetMerchForm();
+    await loadMerchData();
+  } catch (error) {
+    alert(error.message || "Failed to save merch item.");
+  }
+};
+
+const handleDeleteMerchItem = async (id) => {
+  if (!confirm("Are you sure you want to delete this item?")) return;
+  try {
+    await callApi(deleteMerchItem(id));
+    merchItems.value = merchItems.value.filter((item) => item.id !== id);
+    if (merchForm.value.id === id) resetMerchForm();
+  } catch (error) {
+    alert(error.message || "Failed to delete merch item.");
+  }
+};
+
+const handleMerchSettingsSubmit = async () => {
+  const payload = {
+    accountBank: merchSettings.value.accountBank.trim(),
+    accountNumber: merchSettings.value.accountNumber.trim(),
+    accountName: merchSettings.value.accountName.trim(),
+    googleFormLink: merchSettings.value.googleFormLink.trim(),
+  };
+
+  try {
+    await callApi(updateMerchSettings(payload));
+    alert("Payment details saved.");
+  } catch (error) {
+    alert(error.message || "Failed to save payment details.");
+  }
+};
+
+const handleVenueSettingsSubmit = async () => {
+  const payload = {
+    venueName: venueSettings.value.name.trim() || null,
+    address: venueSettings.value.address.trim() || null,
+    mapLink: venueSettings.value.mapLink.trim() || null,
+  };
+
+  try {
+    await callApi(updateVenueSettings(payload));
+    eventSettingsCache.value.venue = { ...payload };
+    alert("Venue saved.");
+  } catch (error) {
+    alert(error.message || "Failed to save venue.");
+  }
+};
+
+const handleDinnerSettingsSubmit = async () => {
+  const current = eventSettingsCache.value.dinner || {};
+  const payload = {
+    venueName: dinnerSettings.value.venueName.trim() || null,
+    venueAddress: current.venueAddress || null,
+    date: dinnerSettings.value.dateTime.trim() || null,
+    time: current.time || null,
+    description: current.description || null,
+    mapLink: current.mapLink || null,
+  };
+
+  try {
+    await callApi(updateDinnerSettings(payload));
+    eventSettingsCache.value.dinner = { ...payload };
+    alert("Dinner details saved.");
+  } catch (error) {
+    alert(error.message || "Failed to save dinner details.");
+  }
+};
+
+const handleAnnouncementSubmit = async () => {
+  const current = eventSettingsCache.value.current || {};
+  const payload = {
+    message: announcement.value.trim() || null,
+    endTime: current.endTime || null,
+  };
+
+  try {
+    await callApi(updateAnnouncementSettings(payload));
+    eventSettingsCache.value.current = { ...payload };
+    alert("Announcement saved.");
+  } catch (error) {
+    alert(error.message || "Failed to save announcement.");
+  }
+};
 </script>
 
 <style scoped>
