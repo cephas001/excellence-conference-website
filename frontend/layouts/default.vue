@@ -1,3 +1,5 @@
 <template>
-  <div class="relative"><AppNavbar /> <slot /> <AppFooter /></div>
+  <div class="relative overflow-x-hidden">
+    <AppNavbar /> <slot /> <AppFooter />
+  </div>
 </template>

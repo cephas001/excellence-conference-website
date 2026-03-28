@@ -1,42 +1,133 @@
 <template>
-  <div>
-    <!-- Bottom Navigation -->
-    <nav
-      id="bottom-nav"
-      class="fixed bottom-4 sm:bottom-6 left-1/2 bg-gray-800/95 backdrop-blur-sm rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.5)] px-3 py-2 sm:px-4 sm:py-2.5 flex items-center justify-center gap-4 sm:gap-6 md:gap-8 z-50 border border-gray-700 -translate-x-1/2 bottom-nav-safe"
-    >
-      <NuxtLink
-        to="/"
-        class="flex flex-col items-center gap-1 text-accent-orange"
-      >
-        <IconsHome class="text-xl" />
-        <span class="text-xs font-medium">Home</span>
-      </NuxtLink>
-      <NuxtLink
-        to="/#agenda"
-        class="flex flex-col items-center gap-1 text-gray-400 hover:text-accent-orange transition-colors"
-      >
-        <IconsCalendar class="text-xl" />
-        <span class="text-xs font-medium">Agenda</span>
-      </NuxtLink>
-      <NuxtLink
-        to="/#merch"
-        class="flex flex-col items-center gap-1 text-gray-400 hover:text-accent-orange transition-colors"
-      >
-        <IconsShirt class="text-xl" />
-        <span class="text-xs font-medium">Merch</span>
-      </NuxtLink>
-    </nav>
+  <footer
+    class="bg-black py-16 px-6 border-t border-gray-900 relative overflow-hidden"
+  >
+    <div
+      class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"
+    ></div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-6 px-4 sm:px-6">
-      <div class="max-w-6xl mx-auto text-center w-full">
-        <p class="text-gray-400 text-sm">
-          © 2026 Excellence Conference. All rights reserved.
-        </p>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-2">
+          <h2
+            class="font-display font-bold text-3xl text-white tracking-tight uppercase mb-4"
+          >
+            Excellence <span class="text-orange-500">2026</span>
+          </h2>
+          <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
+            Shining the Light. A premier gathering at McPherson University
+            Chapel of Praise.
+          </p>
+          <div class="flex gap-4">
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-orange-500 hover:text-black transition-colors"
+            >
+              <Icon name="bi:twitter-x" class="w-4 h-4" />
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-orange-500 hover:text-black transition-colors"
+            >
+              <Icon name="bi:instagram" class="w-4 h-4" />
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-orange-500 hover:text-black transition-colors"
+            >
+              <Icon name="bi:youtube" class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4
+            class="font-sans font-bold text-white uppercase tracking-widest text-xs mb-6"
+          >
+            Quick Links
+          </h4>
+          <ul class="space-y-3">
+            <li>
+              <NuxtLink
+                to="/agenda"
+                class="text-gray-500 hover:text-orange-500 text-sm transition-colors"
+                >Schedule & Agenda</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink
+                to="/merch"
+                class="text-gray-500 hover:text-orange-500 text-sm transition-colors"
+                >Official Merchandise</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink
+                to="/dinner"
+                class="text-gray-500 hover:text-orange-500 text-sm transition-colors"
+                >Workers Dinner</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink
+                to="/admin"
+                class="text-gray-500 hover:text-orange-500 text-sm transition-colors"
+                >Executive Portal</NuxtLink
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4
+            class="font-sans font-bold text-white uppercase tracking-widest text-xs mb-6"
+          >
+            Contact
+          </h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3 text-gray-500 text-sm">
+              <Icon
+                name="heroicons:map-pin"
+                class="w-5 h-5 text-gray-600 shrink-0"
+              />
+              <span>McPherson University,<br />Seriki-Sotayo, Ogun State.</span>
+            </li>
+            <li class="flex items-center gap-3 text-gray-500 text-sm mt-2">
+              <Icon
+                name="heroicons:envelope"
+                class="w-5 h-5 text-gray-600 shrink-0"
+              />
+              <span>{{ eventSettings.contact.email }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </footer>
-  </div>
+
+      <div
+        class="pt-8 border-t border-gray-900 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <p class="text-gray-600 text-xs font-medium tracking-wider uppercase">
+          © 2026 McPherson University Chapel. All rights reserved.
+        </p>
+        <div class="flex gap-6 text-xs font-medium text-gray-600">
+          <a href="#" class="hover:text-gray-300 transition-colors"
+            >Privacy Policy</a
+          >
+          <a href="#" class="hover:text-gray-300 transition-colors"
+            >Terms of Service</a
+          >
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 
-<script setup></script>
+<script setup>
+const api = useConferenceData();
+
+const {
+  data: eventSettings,
+  pending: settingsLoading,
+  error: settingsError,
+} = await api.getEventSettings();
+</script>
