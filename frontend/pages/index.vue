@@ -22,7 +22,7 @@
     v-if="!loading"
   >
     <section
-      class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-15"
+      class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-13"
     >
       <div class="absolute inset-0 z-0">
         <TransitionGroup
@@ -145,7 +145,7 @@
           <AppImage
             src="/img/homepage_second_section.jpg"
             :alt="'Worship'"
-            imgClass="grayscale hover:grayscale-0 transition-all duration-700 w-full aspect-4/5 object-cover border border-gray-800"
+            imgClass="transition-all duration-700 w-full aspect-4/5 object-cover border border-gray-800"
           />
           <div
             class="absolute bottom-0 right-0 bg-orange-500 p-6 translate-x-8 translate-y-8 hidden lg:block"
@@ -220,7 +220,7 @@
               The Voices
             </span>
             <h2
-              class="text-4xl md:text-5xl font-display font-bold uppercase mt-2"
+              class="text-3xl md:text-4xl font-display font-bold uppercase mt-2"
             >
               Meet Our Ministers
             </h2>
@@ -301,11 +301,20 @@
 
     <section class="py-20 md:py-24 bg-black border-t border-gray-800">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="mb-12 text-center">
-          <span
-            class="text-orange-500 font-display font-semibold text-md tracking-[0.2em] uppercase"
-            >Testimonies</span
-          >
+        <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
+          <div>
+            <span
+              class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
+            >
+              Be Inspired
+            </span>
+            <h2
+              class="text-3xl md:text-4xl font-display font-bold uppercase mt-2"
+            >
+              Testimonies
+            </h2>
+          </div>
+          <div class="h-px grow bg-gray-800 mx-12 hidden md:block mb-4"></div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
@@ -351,7 +360,7 @@
             >Location</span
           >
           <h2
-            class="text-4xl md:text-5xl font-display font-bold uppercase mt-2 mb-8"
+            class="text-3xl md:text-4xl font-display font-bold uppercase mt-2 mb-8"
           >
             The Venue
           </h2>
@@ -394,7 +403,7 @@
             >Details</span
           >
           <h2
-            class="text-4xl md:text-5xl font-display font-bold uppercase mt-2 mb-8"
+            class="text-3xl md:text-4xl font-display font-bold uppercase mt-2 mb-8"
           >
             FAQ
           </h2>
