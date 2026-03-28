@@ -21,13 +21,6 @@
     class="relative min-h-screen bg-gray-950 text-gray-200 font-sans selection:bg-orange-500 selection:text-black"
     v-if="!loading"
   >
-    <div
-      v-if="announcement"
-      class="fixed top-0 left-0 right-0 z-60 bg-orange-600/90 backdrop-blur-md text-white py-2 px-4 text-center text-sm font-medium border-b border-orange-500"
-    >
-      {{ announcement }}
-    </div>
-
     <section
       class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-15"
     >
@@ -102,7 +95,7 @@
         </div>
       </div>
       <div
-        class="absolute -right-20 -top-20 w-150 h-150 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none"
+        class="absolute -right-20 -top-20 w-37.5 h-37.5 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none"
       ></div>
     </section>
 
@@ -150,7 +143,7 @@
             class="absolute -inset-4 bg-orange-500/5 -z-10 translate-x-4 translate-y-4"
           ></div>
           <img
-            src="/img/slide2.jpeg"
+            src="/img/slide1.jpeg"
             alt="Worship"
             class="grayscale hover:grayscale-0 transition-all duration-700 w-full aspect-4/5 object-cover border border-gray-800"
           />
@@ -189,7 +182,7 @@
                 >
                   Spiritual Revival
                 </h4>
-                <p class="text-gray-400 text-sm md:text-base mt-1 font=poppins">
+                <p class="text-gray-400 text-sm md:text-base mt-1 font-poppins">
                   Deep encounters through prophetic ministrations and intense
                   worship sessions.
                 </p>
@@ -231,9 +224,7 @@
               Meet Our Ministers
             </h2>
           </div>
-          <div
-            class="h-[1px] flex-grow bg-gray-800 mx-12 hidden md:block mb-4"
-          ></div>
+          <div class="h-px grow bg-gray-800 mx-12 hidden md:block mb-4"></div>
         </div>
 
         <div
@@ -242,20 +233,27 @@
           <div
             v-for="speaker in speakers"
             :key="speaker.id"
-            class="group relative overflow-hidden aspect-3/4 border-r border-b border-gray-800 last:border-r-0"
-            @click="openSpeakerModal(speaker)"
+            class="group relative overflow-hidden aspect-3/4 border-r border-b border-gray-800 last:border-r-0 cursor-pointer"
+            @click="openModal(speaker)"
           >
             <div
               class="absolute inset-0 bg-gray-950 transition-transform duration-500 group-hover:scale-105"
             >
               <img
+                v-if="speaker.image"
                 src="/img/slide1.jpeg"
                 :alt="speaker.name"
                 class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-700"
               />
+              <div
+                v-else
+                class="w-full h-full flex items-center justify-center bg-gray-900"
+              >
+                <Icon name="heroicons:user" class="w-16 h-16 text-gray-700" />
+              </div>
             </div>
             <div
-              class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent"
+              class="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950/40 to-transparent"
             ></div>
             <div class="relative h-full p-6 md:p-8 flex flex-col justify-end">
               <span
@@ -320,8 +318,8 @@
                 </h4>
                 <span
                   class="text-orange-500 text-[10px] md:text-xs tracking-widest uppercase"
-                  >{{ testimony.location }}
-                </span>
+                  >{{ testimony.location }}</span
+                >
               </div>
             </div>
           </div>
@@ -350,7 +348,7 @@
             >
               <Icon name="heroicons:map" class="w-40 h-40 opacity-20" />
             </div>
-            <div class="relative z-10">
+            <div class="relative z-10" v-if="eventSettings?.venue">
               <h3
                 class="font-display font-bold text-2xl md:text-3xl text-white mb-2"
               >
@@ -374,7 +372,7 @@
           </div>
         </div>
 
-        <div class="pt-15 border-t border-t-gray-50 md:border-0 md:pt-0">
+        <div class="pt-15 border-t border-gray-800 md:border-0 md:pt-0">
           <span
             class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
             >Details</span
@@ -386,182 +384,47 @@
           </h2>
 
           <div class="border-t border-gray-800">
-            <div
-              v-for="(faq, index) in faqsWithState"
-              :key="index"
-              class="border-b border-gray-800"
-            >
-              <button
-                @click="faq.isOpen = !faq.isOpen"
-                class="w-full flex items-center justify-between py-5 text-left group"
-              >
-                <span
-                  class="font-display font-semibold tracking-wide text-lg md:text-xl text-gray-200 group-hover:text-orange-500 transition-colors pr-6"
-                >
-                  {{ faq.question }}
-                </span>
-                <Icon
-                  name="heroicons:plus"
-                  class="w-5 h-5 text-gray-500 transition-transform duration-300 shrink-0"
-                  :class="faq.isOpen ? 'rotate-45 text-orange-500' : ''"
-                />
-              </button>
-              <div
-                v-show="faq.isOpen"
-                class="pb-5 text-gray-400 text-sm md:text-base font-light leading-relaxed pr-6 font-poppins"
-              >
-                {{ faq.answer }}
-              </div>
-            </div>
+            <HomeFaq v-for="faq in faqs" :key="faq.id" :faq="faq" />
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="py-24 md:py-32 relative overflow-hidden bg-black border-t border-gray-800"
-    >
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px] -z-10 pointer-events-none"
-      ></div>
-      <div class="max-w-3xl mx-auto px-6 text-center">
-        <h2
-          class="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight leading-tight mb-6 uppercase"
-        >
-          BE THE <span class="text-orange-500">LIGHT</span> IN THE ROOM.
-        </h2>
-        <p
-          class="text-gray-400 text-lg md:text-xl font-light mb-7 font-poppins"
-        >
-          Prepare your heart. The revival begins May 19th.
-        </p>
-        <div class="flex justify-center">
-          <NuxtLink
-            to="/agenda"
-            class="bg-linear-to-r from-orange-500 to-yellow-500 text-black px-10 py-4 rounded-sm font-sans font-semibold text-base md:text-lg tracking-wide uppercase hover:shadow-lg hover:shadow-orange-500/20 transition-all"
-          >
-            See The Agenda
-          </NuxtLink>
         </div>
       </div>
     </section>
   </div>
 
-  <Transition
-    enter-active-class="transition duration-300 ease-out"
-    enter-from-class="opacity-0 scale-95"
-    enter-to-class="opacity-100 scale-100"
-    leave-active-class="transition duration-200 ease-in"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-95"
-  >
-    <div
-      v-if="isModalOpen"
-      class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-      @click.self="closeModal"
-    >
-      <div
-        class="bg-gray-900 border border-gray-800 rounded-sm max-w-md w-full overflow-hidden shadow-2xl relative"
-      >
-        <div
-          class="absolute -top-24 -right-24 w-48 h-48 bg-orange-500/10 blur-3xl rounded-full pointer-events-none"
-        ></div>
-
-        <div class="p-6 md:p-8 relative z-10">
-          <button
-            @click="closeModal"
-            class="absolute top-4 right-4 p-2 text-gray-500 hover:text-white hover:bg-gray-800 rounded-sm transition-colors"
-          >
-            <Icon name="heroicons:x-mark" class="w-6 h-6" />
-          </button>
-
-          <div class="text-center pt-4">
-            <div
-              class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-2 border-orange-500 p-1 shrink-0"
-            >
-              <img
-                v-if="activeSpeaker?.image"
-                :src="activeSpeaker?.image"
-                :alt="activeSpeaker?.name"
-                class="w-full h-full object-cover rounded-full bg-gray-800"
-              />
-              <div
-                v-else
-                class="w-full h-full rounded-full bg-gray-800 flex items-center justify-center"
-              >
-                <Icon name="heroicons:user" class="w-10 h-10 text-gray-600" />
-              </div>
-            </div>
-
-            <h3
-              class="font-display font-bold text-3xl text-white mb-1 uppercase"
-            >
-              {{ activeSpeaker?.name }}
-            </h3>
-            <p
-              class="text-orange-500 text-sm font-semibold tracking-wider uppercase mb-6"
-            >
-              {{ activeSpeaker?.role }}
-            </p>
-
-            <div
-              v-if="activeSpeaker?.topic"
-              class="text-left bg-gray-950 p-4 rounded-sm border border-gray-800 mb-6"
-            >
-              <p
-                class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1"
-              >
-                Speaking On
-              </p>
-              <p class="text-gray-200 font-semibold text-sm">
-                {{ activeSpeaker?.topic }}
-              </p>
-            </div>
-
-            <div
-              class="text-left border-t border-gray-800 pt-6 max-h-48 overflow-y-auto pr-2 custom-scrollbar"
-            >
-              <p
-                class="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap"
-              >
-                {{ activeSpeaker?.bio || "Detailed biography coming soon." }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Transition>
+  <SpeakerModal
+    :is-open="isModalOpen"
+    :speaker="activeSpeaker"
+    @close="closeModal"
+  />
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+// Auto-imported composables (useCountdown, useConferenceData)
+// Auto-imported components (HomeFaq, SpeakerModal)
 
 const api = useConferenceData();
 
-// Page States
+// --- Page State ---
 const loading = ref(true);
-const announcement = ref("");
 
+// --- Modal State ---
 const isModalOpen = ref(false);
 const activeSpeaker = ref(null);
 
-const openSpeakerModal = (speaker) => {
+const openModal = (speaker) => {
   activeSpeaker.value = speaker;
   isModalOpen.value = true;
-  // Prevent background scrolling when modal is open
-  document.body.style.overflow = "hidden";
 };
 
 const closeModal = () => {
   isModalOpen.value = false;
   setTimeout(() => {
     activeSpeaker.value = null;
-    document.body.style.overflow = "";
-  }, 300); // Wait for transition to finish
+  }, 300);
 };
 
-// Slideshow Logic
+// --- Hero Slider ---
 const currentSlide = ref(0);
 const slides = [
   "/img/slide1.jpeg",
@@ -571,65 +434,18 @@ const slides = [
 ];
 let slideInterval;
 
-// Countdown Timer Logic
-const targetDate = new Date("2026-05-19T00:00:00+01:00").getTime(); // WAT Timezone
-const timeLeft = ref({ days: "00", hours: "00", mins: "00", secs: "00" });
-let countdownInterval;
+// --- Extracted Countdown Logic ---
+const { timeLeft } = useCountdown("2026-05-19T00:00:00+01:00");
 
-const updateTimer = () => {
-  const now = new Date().getTime();
-  const distance = targetDate - now;
+// --- Data Fetching ---
+const { data: speakers } = await api.getSpeakers();
+const { data: testimonies } = await api.getTestimonies();
+const { data: faqs } = await api.getFaqs();
+const { data: eventSettings } = await api.getEventSettings();
 
-  if (distance < 0) {
-    timeLeft.value = { days: "00", hours: "00", mins: "00", secs: "00" };
-    clearInterval(countdownInterval);
-    return;
-  }
-
-  timeLeft.value = {
-    days: String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, "0"),
-    hours: String(
-      Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    ).padStart(2, "0"),
-    mins: String(
-      Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-    ).padStart(2, "0"),
-    secs: String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, "0"),
-  };
-};
-
-// Data: Speakers
-const {
-  data: speakers,
-  pending: speakersLoading,
-  error: speakersError,
-} = await api.getSpeakers();
-
-// Data: Testimonies
-const {
-  data: testimonies,
-  pending: testimoniesLoading,
-  error: testimoniesError,
-} = await api.getTestimonies();
-
-// Data: Settings
-const {
-  data: eventSettings,
-  pending: settingsLoading,
-  error: settingsError,
-} = await api.getEventSettings();
-
-// Data: FAQs
-const {
-  data: faqs,
-  pending: faqsLoading,
-  error: faqsError,
-} = await api.getFaqs();
-
-const faqsWithState = faqs.value.map((faq) => ({ ...faq, isOpen: false }));
-
-// Lifecycle Hooks
+// --- Lifecycle Hooks ---
 onMounted(() => {
+  // Simulate loading screen to allow fonts/images to settle
   setTimeout(() => {
     loading.value = false;
   }, 800);
@@ -638,13 +454,9 @@ onMounted(() => {
     currentSlide.value =
       currentSlide.value === slides.length - 1 ? 0 : currentSlide.value + 1;
   }, 5000);
-
-  updateTimer();
-  countdownInterval = setInterval(updateTimer, 1000);
 });
 
 onUnmounted(() => {
   clearInterval(slideInterval);
-  clearInterval(countdownInterval);
 });
 </script>

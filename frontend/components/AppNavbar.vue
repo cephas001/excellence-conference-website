@@ -10,7 +10,7 @@
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
       <NuxtLink to="/" class="flex items-center gap-3 group relative z-50">
         <div
-          class="w-10 h-10 rounded-sm bg-gradient-to-br from-orange-500 to-yellow-500 p-[1px]"
+          class="w-10 h-10 rounded-sm bg-linear-to-br from-orange-500 to-yellow-500 p-px"
         >
           <div
             class="w-full h-full bg-gray-950 flex items-center justify-center rounded-[3px] group-hover:bg-transparent transition-colors duration-300"
@@ -57,7 +57,7 @@
 
       <div class="hidden md:flex items-center gap-4">
         <button
-          class="bg-gradient-to-r from-orange-500 to-yellow-500 text-black px-6 py-2.5 rounded-sm font-sans font-bold uppercase tracking-widest text-xs hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all"
+          class="bg-linear-to-r from-orange-500 to-yellow-500 text-black px-6 py-2.5 rounded-sm font-sans font-bold uppercase tracking-widest text-xs hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all"
         >
           Contact Us
         </button>
@@ -118,7 +118,7 @@
         </nav>
         <div class="pt-6 border-t border-gray-800">
           <button
-            class="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-black px-6 py-4 rounded-sm font-sans font-bold uppercase tracking-widest text-sm shadow-lg"
+            class="w-full bg-linear-to-r from-orange-500 to-yellow-500 text-black px-6 py-4 rounded-sm font-sans font-bold uppercase tracking-widest text-sm shadow-lg"
           >
             Contact Us
           </button>

@@ -3,7 +3,7 @@
     class="bg-black py-16 px-6 border-t border-gray-900 relative overflow-hidden"
   >
     <div
-      class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"
+      class="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"
     ></div>
 
     <div class="max-w-7xl mx-auto relative z-10">
