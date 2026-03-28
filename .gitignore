@@ -31,3 +31,5 @@ logs
 # Firebase Auth
 
 serviceAccountKey.json
+
+.config
