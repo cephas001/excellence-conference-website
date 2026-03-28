@@ -233,11 +233,11 @@
           class="flex flex-col items-center justify-center py-24 px-6 border border-dashed border-gray-800 rounded-2xl bg-gray-950/50 text-center"
         >
           <div
-            class="w-20 h-20 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center mb-6"
+            class="w-15 h-15 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center mb-6"
           >
-            <Icon name="heroicons:microphone" class="w-10 h-10 text-gray-700" />
+            <Icon name="heroicons:microphone" class="w-5 h-5 text-gray-700" />
           </div>
-          <h3 class="text-2xl font-display font-bold text-white uppercase mb-3">
+          <h3 class="text-xl font-display font-bold text-white uppercase mb-3">
             To be Revealed
           </h3>
           <p class="text-gray-500 font-light max-w-md text-md leading-relaxed">
