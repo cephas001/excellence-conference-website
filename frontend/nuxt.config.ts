@@ -6,7 +6,8 @@ export default defineNuxtConfig({
   modules: ["@nuxt/icon", "@nuxt/ui", "@pinia/nuxt", "@nuxt/image"],
   runtimeConfig: {
     public: {
-      apiBase: "http://localhost:5000/api",
+      // Nuxt automatically overrides this with NUXT_PUBLIC_API_BASE_URL from your .env or Vercel!
+      apiBaseUrl: "http://localhost:5000/api",
     },
   },
 });
