@@ -16,6 +16,7 @@
     "@fontsource/montserrat": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
     "@nuxt/icon": "^2.2.1",
+    "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.5.1",
     "@nuxtjs/color-mode": "^4.0.0",
     "@nuxtjs/tailwindcss": "^6.14.0",

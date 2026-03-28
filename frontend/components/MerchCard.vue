@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group flex flex-col h-full bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden transition-all duration-500 hover:border-orange-500/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer"
+    class="group flex flex-col h-full bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer"
     @click="$emit('select')"
   >
     <div
@@ -77,11 +77,6 @@
         <span class="font-sans font-bold text-xl text-orange-400">
           {{ item.price }}
         </span>
-        <button
-          class="w-full py-3 px-4 rounded-lg border border-orange-500/30 bg-gray-950 text-white font-sans font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-linear-to-r hover:from-orange-500 hover:to-yellow-500 hover:text-black hover:border-transparent active:scale-95 shadow-lg"
-        >
-          Pre-order
-        </button>
       </div>
     </div>
   </div>

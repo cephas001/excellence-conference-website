@@ -97,7 +97,12 @@
                 name="heroicons:envelope"
                 class="w-5 h-5 text-gray-600 shrink-0"
               />
-              <span>{{ eventSettings.contact.email }}</span>
+              <span
+                >{{
+                  eventSettings?.contact.email ||
+                  "mcucopexcellenceconference@gmail.com"
+                }}
+              </span>
             </li>
           </ul>
         </div>

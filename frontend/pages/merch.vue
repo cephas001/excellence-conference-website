@@ -12,14 +12,21 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-10">
-      <header class="mb-14 text-center md:text-left">
+      <header class="mb-14 relative">
+        <div
+          class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
+        ></div>
         <h1
-          class="font-display text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tighter break-words text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-500 mb-6 uppercase"
+          class="font-display font-bold text-5xl md:text-7xl tracking-tighter text-white leading-none mb-4 uppercase"
         >
-          OFFICIAL MERCHANDISE
+          OFFICIAL
+          <span
+            class="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-yellow-400"
+            >Merchandise</span
+          >
         </h1>
         <p
-          class="font-sans text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed"
+          class="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed font-poppins"
         >
           Equip yourself with the official 'Shining the Light' merchandise
           collection.

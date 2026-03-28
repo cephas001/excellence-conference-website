@@ -10,7 +10,7 @@
       class="fixed inset-0 bg-gray-950 z-100 flex items-center justify-center transition-colors duration-300"
     >
       <img
-        src="/assets/logo.png"
+        src="/img/logo.png"
         alt="Excellence Conference"
         class="h-16 md:h-20 w-auto object-contain animate-pulse"
       />
@@ -142,10 +142,10 @@
           <div
             class="absolute -inset-4 bg-orange-500/5 -z-10 translate-x-4 translate-y-4"
           ></div>
-          <img
-            src="/img/slide1.jpeg"
-            alt="Worship"
-            class="grayscale hover:grayscale-0 transition-all duration-700 w-full aspect-4/5 object-cover border border-gray-800"
+          <AppImage
+            src="/img/homepage_second_section.jpg"
+            :alt="'Worship'"
+            imgClass="grayscale hover:grayscale-0 transition-all duration-700 w-full aspect-4/5 object-cover border border-gray-800"
           />
           <div
             class="absolute bottom-0 right-0 bg-orange-500 p-6 translate-x-8 translate-y-8 hidden lg:block"
@@ -216,8 +216,9 @@
           <div>
             <span
               class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
-              >The Voices</span
             >
+              The Voices
+            </span>
             <h2
               class="text-4xl md:text-5xl font-display font-bold uppercase mt-2"
             >
@@ -228,6 +229,25 @@
         </div>
 
         <div
+          v-if="!speakers || speakers.length === 0"
+          class="flex flex-col items-center justify-center py-24 px-6 border border-dashed border-gray-800 rounded-2xl bg-gray-950/50 text-center"
+        >
+          <div
+            class="w-20 h-20 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center mb-6"
+          >
+            <Icon name="heroicons:microphone" class="w-10 h-10 text-gray-700" />
+          </div>
+          <h3 class="text-2xl font-display font-bold text-white uppercase mb-3">
+            To be Revealed
+          </h3>
+          <p class="text-gray-500 font-light max-w-md text-md leading-relaxed">
+            Check back soon as we announce the voices for Excellence Conference
+            2026.
+          </p>
+        </div>
+
+        <div
+          v-else
           class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 border border-gray-800"
         >
           <div
@@ -239,27 +259,23 @@
             <div
               class="absolute inset-0 bg-gray-950 transition-transform duration-500 group-hover:scale-105"
             >
-              <img
-                v-if="speaker.image"
-                src="/img/slide1.jpeg"
+              <AppImage
+                :src="speaker.image"
                 :alt="speaker.name"
-                class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-700"
+                imgClass="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-700"
               />
-              <div
-                v-else
-                class="w-full h-full flex items-center justify-center bg-gray-900"
-              >
-                <Icon name="heroicons:user" class="w-16 h-16 text-gray-700" />
-              </div>
             </div>
+
             <div
               class="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950/40 to-transparent"
             ></div>
+
             <div class="relative h-full p-6 md:p-8 flex flex-col justify-end">
               <span
                 class="text-yellow-400 font-sans font-semibold text-xs mb-1 tracking-widest uppercase"
-                >{{ speaker.role }}</span
               >
+                {{ speaker.role }}
+              </span>
               <h3
                 class="text-xl md:text-2xl font-display font-bold uppercase mb-2 group-hover:text-orange-500 transition-colors"
               >

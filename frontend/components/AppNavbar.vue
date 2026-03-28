@@ -8,55 +8,77 @@
     "
   >
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-      <NuxtLink to="/" class="flex items-center gap-3 group relative z-50">
-        <div
-          class="w-10 h-10 rounded-sm bg-linear-to-br from-orange-500 to-yellow-500 p-px"
-        >
-          <div
-            class="w-full h-full bg-gray-950 flex items-center justify-center rounded-[3px] group-hover:bg-transparent transition-colors duration-300"
-          >
-            <Icon
-              name="heroicons:sparkles-solid"
-              class="w-6 h-6 text-orange-500 group-hover:text-black transition-colors duration-300"
-            />
-          </div>
-        </div>
-        <span
-          class="font-display font-bold text-xl tracking-widest text-white uppercase"
-        >
-          EC <span class="text-orange-500">2026</span>
-        </span>
+      <NuxtLink
+        to="/"
+        class="relative z-50 flex items-center group transition-transform duration-300 hover:scale-[1.02] active:scale-95"
+      >
+        <img
+          src="/img/logo.png"
+          alt="Excellence Conference Logo"
+          class="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(249,115,22,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all duration-300"
+        />
       </NuxtLink>
 
       <nav class="hidden md:flex items-center gap-8">
         <NuxtLink
           to="/"
-          class="font-sans font-semibold text-sm tracking-widest text-gray-300 hover:text-orange-500 uppercase transition-colors"
-          active-class="text-orange-500"
+          class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
+          :class="
+            isActive('/')
+              ? 'text-orange-500'
+              : 'text-gray-300 hover:text-orange-500'
+          "
           >Home</NuxtLink
         >
+
         <NuxtLink
           to="/agenda"
-          class="font-sans font-semibold text-sm tracking-widest text-gray-300 hover:text-orange-500 uppercase transition-colors"
-          active-class="text-orange-500"
+          class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
+          :class="
+            isActive('/agenda')
+              ? 'text-orange-500'
+              : 'text-gray-300 hover:text-orange-500'
+          "
           >Schedule</NuxtLink
         >
+
         <NuxtLink
           to="/merch"
-          class="font-sans font-semibold text-sm tracking-widest text-gray-300 hover:text-orange-500 uppercase transition-colors"
-          active-class="text-orange-500"
+          class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
+          :class="
+            isActive('/merch')
+              ? 'text-orange-500'
+              : 'text-gray-300 hover:text-orange-500'
+          "
           >Merch</NuxtLink
         >
+
+        <NuxtLink
+          to="/about"
+          class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
+          :class="
+            isActive('/about')
+              ? 'text-orange-500'
+              : 'text-gray-300 hover:text-orange-500'
+          "
+          >About</NuxtLink
+        >
+
         <NuxtLink
           to="/dinner"
-          class="font-sans font-semibold text-sm tracking-widest text-gray-300 hover:text-orange-500 uppercase transition-colors"
-          active-class="text-orange-500"
+          class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
+          :class="
+            isActive('/dinner')
+              ? 'text-orange-500'
+              : 'text-gray-300 hover:text-orange-500'
+          "
           >Dinner</NuxtLink
         >
       </nav>
 
       <div class="hidden md:flex items-center gap-4">
         <button
+          @click="goToContactPage"
           class="bg-linear-to-r from-orange-500 to-yellow-500 text-black px-6 py-2.5 rounded-sm font-sans font-bold uppercase tracking-widest text-xs hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all"
         >
           Contact Us
@@ -90,35 +112,68 @@
           <NuxtLink
             @click="closeMobileMenu"
             to="/"
-            class="font-display text-2xl font-bold text-gray-200 hover:text-orange-500 uppercase transition-colors"
-            active-class="text-orange-500"
+            class="font-display text-2xl font-bold uppercase transition-colors"
+            :class="
+              isActive('/')
+                ? 'text-orange-500'
+                : 'text-gray-200 hover:text-orange-500'
+            "
             >Home</NuxtLink
           >
+
           <NuxtLink
             @click="closeMobileMenu"
             to="/agenda"
-            class="font-display text-2xl font-bold text-gray-200 hover:text-orange-500 uppercase transition-colors"
-            active-class="text-orange-500"
+            class="font-display text-2xl font-bold uppercase transition-colors"
+            :class="
+              isActive('/agenda')
+                ? 'text-orange-500'
+                : 'text-gray-200 hover:text-orange-500'
+            "
             >Schedule</NuxtLink
           >
+
           <NuxtLink
             @click="closeMobileMenu"
             to="/merch"
-            class="font-display text-2xl font-bold text-gray-200 hover:text-orange-500 uppercase transition-colors"
-            active-class="text-orange-500"
+            class="font-display text-2xl font-bold uppercase transition-colors"
+            :class="
+              isActive('/merch')
+                ? 'text-orange-500'
+                : 'text-gray-200 hover:text-orange-500'
+            "
             >Merch</NuxtLink
           >
+
+          <NuxtLink
+            @click="closeMobileMenu"
+            to="/about"
+            class="font-display text-2xl font-bold uppercase transition-colors"
+            :class="
+              isActive('/about')
+                ? 'text-orange-500'
+                : 'text-gray-200 hover:text-orange-500'
+            "
+            >About</NuxtLink
+          >
+
           <NuxtLink
             @click="closeMobileMenu"
             to="/dinner"
-            class="font-display text-2xl font-bold text-gray-200 hover:text-orange-500 uppercase transition-colors"
-            active-class="text-orange-500"
+            class="font-display text-2xl font-bold uppercase transition-colors"
+            :class="
+              isActive('/dinner')
+                ? 'text-orange-500'
+                : 'text-gray-200 hover:text-orange-500'
+            "
             >Workers Dinner</NuxtLink
           >
         </nav>
+
         <div class="pt-6 border-t border-gray-800">
           <button
             class="w-full bg-linear-to-r from-orange-500 to-yellow-500 text-black px-6 py-4 rounded-sm font-sans font-bold uppercase tracking-widest text-sm shadow-lg"
+            @click="goToContactPage"
           >
             Contact Us
           </button>
@@ -129,10 +184,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
+// Auto-imported in Nuxt, but good practice to explicitly define dependencies if needed
+const route = useRoute();
 
 const isScrolled = ref(false);
 const isMobileMenuOpen = ref(false);
+
+// The manual route checker
+const isActive = (path) => {
+  return route.path === path;
+};
+
+// WATCHER: Force the mobile menu closed if the route changes (e.g., using browser back button)
+watch(
+  () => route.path,
+  () => {
+    isMobileMenuOpen.value = false;
+  },
+);
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20;
@@ -144,6 +214,11 @@ const toggleMobileMenu = () => {
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false;
+};
+
+const goToContactPage = () => {
+  closeMobileMenu();
+  navigateTo("/contact");
 };
 
 onMounted(() => {
