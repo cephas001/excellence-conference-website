@@ -108,7 +108,7 @@
           <NuxtLink
             @click="closeMobileMenu"
             to="/"
-            class="font-display text-2xl font-bold uppercase transition-colors"
+            class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/')
                 ? 'text-orange-500'
@@ -120,7 +120,7 @@
           <NuxtLink
             @click="closeMobileMenu"
             to="/agenda"
-            class="font-display text-2xl font-bold uppercase transition-colors"
+            class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/agenda')
                 ? 'text-orange-500'
@@ -132,7 +132,7 @@
           <NuxtLink
             @click="closeMobileMenu"
             to="/merch"
-            class="font-display text-2xl font-bold uppercase transition-colors"
+            class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/merch')
                 ? 'text-orange-500'
@@ -144,7 +144,7 @@
           <NuxtLink
             @click="closeMobileMenu"
             to="/about"
-            class="font-display text-2xl font-bold uppercase transition-colors"
+            class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/about')
                 ? 'text-orange-500'
@@ -156,7 +156,7 @@
           <NuxtLink
             @click="closeMobileMenu"
             to="/dinner"
-            class="font-display text-2xl font-bold uppercase transition-colors"
+            class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/dinner')
                 ? 'text-orange-500'
