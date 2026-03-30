@@ -12,7 +12,7 @@
           <h2
             class="font-display font-bold text-3xl text-white tracking-tight uppercase mb-4"
           >
-            EC <span class="text-orange-500">2026</span>
+            EC'<span class="text-orange-500">26</span>
           </h2>
           <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
             Shining the Light. A premier gathering at McPherson University
@@ -66,13 +66,6 @@
                 to="/dinner"
                 class="text-gray-500 hover:text-orange-500 text-sm transition-colors"
                 >Workers Dinner</NuxtLink
-              >
-            </li>
-            <li>
-              <NuxtLink
-                to="/admin"
-                class="text-gray-500 hover:text-orange-500 text-sm transition-colors"
-                >Executive Portal</NuxtLink
               >
             </li>
           </ul>

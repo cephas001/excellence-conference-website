@@ -12,29 +12,13 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-10">
-      <header class="mb-14 relative">
-        <div
-          class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
-        ></div>
-        <h1
-          class="font-display font-bold text-5xl md:text-7xl tracking-tighter text-white leading-none mb-4 uppercase"
-        >
-          About <br />
-          <span
-            class="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-yellow-400 pr-1"
-            >EC 2026</span
-          >
-        </h1>
-        <p
-          class="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed font-poppins"
-        >
-          A transformative assembly dedicated to raising spiritual and academic
-          giants who will dominate their spheres through the uncompromised light
-          of truth and intellect.
-        </p>
-      </header>
+      <AppPageHeader
+        plainText="About"
+        styledText="EC 2026"
+        description="A gathering dedicated to raising giants who will dominate their spheres through the uncompromised light of truth."
+      />
 
-      <section class="grid lg:grid-cols-2 gap-16 items-center mb-40">
+      <section class="grid lg:grid-cols-2 gap-16 items-center mb-35">
         <div class="relative group">
           <div
             class="p-10 md:p-12 bg-gray-900/50 backdrop-blur-xl rounded-2xl border-l-4 border-orange-500 shadow-2xl transition-all duration-500 hover:bg-gray-900 border border-t-gray-800 border-r-gray-800 border-b-gray-800"
@@ -44,7 +28,7 @@
               class="text-orange-500 w-10 h-10 mb-6 opacity-80"
             />
             <blockquote
-              class="text-3xl md:text-4xl font-display font-bold text-white leading-tight italic uppercase"
+              class="text-2xl md:text-3xl font-display font-bold text-white leading-tight italic uppercase"
             >
               "The light shines in the darkness, and the darkness has not
               overcome it."
@@ -61,7 +45,7 @@
 
         <div class="space-y-8">
           <h2
-            class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight"
+            class="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight"
           >
             Shining the Light
           </h2>
@@ -103,23 +87,20 @@
                 >Our Roots</span
               >
               <h2
-                class="text-4xl md:text-5xl font-display font-bold text-white uppercase mb-6"
+                class="text-2xl md:text-4xl font-display font-bold text-white uppercase mb-6"
               >
                 The Sanctuary
               </h2>
-              <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+              <p class="text-gray-400 text-md md:text-lg mb-8 leading-relaxed">
                 Join us at the Chapel of Praise, a cathedral of intellectual and
                 spiritual fervor located within the serene campus of McPherson
                 University.
               </p>
               <div
-                class="flex items-start gap-4 p-6 rounded-xl bg-gray-950/50 border border-gray-800 hover:border-orange-500/30 transition-all duration-300"
+                class="flex-col gap-4 p-6 rounded-xl bg-gray-950/50 border border-gray-800 hover:border-orange-500/30 transition-all duration-300"
               >
-                <Icon
-                  name="heroicons:map-pin"
-                  class="text-orange-500 w-8 h-8 shrink-0 mt-1"
-                />
                 <div>
+                  <LocationButton />
                   <h4
                     class="font-bold text-white text-lg mb-1 uppercase tracking-wide"
                   >
@@ -134,10 +115,10 @@
             <div
               class="aspect-video md:aspect-square rounded-2xl overflow-hidden relative shadow-2xl group border border-gray-800"
             >
-              <img
-                src="/img/slide2.jpeg"
+              <AppImage
+                src="/img/about_page.jpg"
                 alt="Chapel of Praise Atmosphere"
-                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                imgClass="w-full h-full object-cover  transition-all duration-700 scale-105 group-hover:scale-100"
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"
@@ -147,7 +128,7 @@
         </div>
       </section>
 
-      <section class="mb-40">
+      <section class="mb-30">
         <div class="text-center mb-16">
           <span
             class="text-orange-500 font-sans font-bold text-xs tracking-[0.2em] uppercase mb-4 block"
@@ -167,16 +148,13 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="group">
             <div
-              class="aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 mb-6 relative flex items-center justify-center"
+              class="aspect-square rounded-2xl overflow-hidden border border-gray-800 mb-6 relative flex items-center justify-center"
             >
-              <Icon
-                name="heroicons:user"
-                class="w-16 h-16 text-gray-800 absolute z-0"
-              />
-              <img
-                src=""
-                alt=""
-                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 z-10 opacity-0"
+              <!-- Change image -->
+              <AppImage
+                src="/img/peter-okodugha.jpg"
+                alt="Peter Okodugha"
+                imgClass="w-full h-full object-cover transition-all duration-500 z-10 object-top"
               />
               <div
                 class="absolute inset-0 bg-gray-950/50 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none"
@@ -190,7 +168,7 @@
             <p
               class="text-orange-500 text-xs font-bold uppercase tracking-widest"
             >
-              Chairperson, Excellence 2026
+              Chairperson, EC'26
             </p>
           </div>
 
@@ -198,14 +176,10 @@
             <div
               class="aspect-square rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 mb-6 relative flex items-center justify-center"
             >
-              <Icon
-                name="heroicons:user"
-                class="w-16 h-16 text-gray-800 absolute z-0"
-              />
-              <img
+              <AppImage
                 src="/img/slide1.jpeg"
                 alt="Rev. Ibiwunmi Alo"
-                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 z-10"
+                imgClass="w-full h-full object-cover transition-all duration-500 z-10"
               />
               <div
                 class="absolute inset-0 bg-gray-950/50 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none"
@@ -259,21 +233,20 @@
             >Save The Date</span
           >
           <h2
-            class="text-4xl md:text-5xl font-display font-black text-white mb-8 uppercase leading-tight"
+            class="text-3xl md:text-4xl font-display font-black text-white mb-8 uppercase leading-tight"
           >
             MAY 19TH, 2026
           </h2>
           <p
-            class="text-gray-400 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto"
+            class="text-gray-400 text-md md:text-lg font-light mb-10 max-w-2xl mx-auto"
           >
-            Experience the Radiance. Witness the Shift. Prepare your heart for
-            the gathering of spiritual and academic giants.
+            Experience the Radiance. Witness the Shift. Prepare your heart.
           </p>
           <NuxtLink
             to="/agenda"
-            class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-black px-10 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-orange-500/20 transition-all hover:-translate-y-1"
+            class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-black px-10 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-orange-500/20 transition-all hover:-translate-y-1 text-md"
           >
-            VIEW THE AGENDA
+            SEE AGENDA
             <Icon name="heroicons:arrow-right" class="w-5 h-5" />
           </NuxtLink>
         </div>

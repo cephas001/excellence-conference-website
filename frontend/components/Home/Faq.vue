@@ -5,7 +5,7 @@
       class="w-full flex items-center justify-between py-5 text-left group"
     >
       <span
-        class="font-display font-semibold tracking-wide text-lg md:text-xl text-gray-200 group-hover:text-orange-500 transition-colors pr-6"
+        class="font-display font-semibold tracking-wide text-md md:text-lg text-gray-200 group-hover:text-orange-500 transition-colors pr-6"
       >
         {{ faq.question }}
       </span>

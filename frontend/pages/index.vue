@@ -1,44 +1,15 @@
 <template>
-  <Transition
-    enter-active-class="transition-opacity duration-500"
-    leave-active-class="transition-opacity duration-500"
-    enter-from-class="opacity-0"
-    leave-to-class="opacity-0"
-  >
-    <div
-      v-if="loading"
-      class="fixed inset-0 bg-gray-950 z-100 flex items-center justify-center transition-colors duration-300"
-    >
-      <img
-        src="/img/logo.png"
-        alt="Excellence Conference"
-        class="h-16 md:h-20 w-auto object-contain animate-pulse"
-      />
-    </div>
-  </Transition>
+  <LargeLoader :loading="loading" />
 
   <div
     class="relative min-h-screen bg-gray-950 text-gray-200 font-sans selection:bg-orange-500 selection:text-black"
     v-if="!loading"
   >
     <section
-      class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-13"
+      class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-12"
     >
       <div class="absolute inset-0 z-0">
-        <TransitionGroup
-          enter-active-class="transition-opacity duration-1000 ease-in-out"
-          leave-active-class="transition-opacity duration-1000 ease-in-out"
-          enter-from-class="opacity-0"
-          leave-to-class="opacity-0"
-        >
-          <div
-            v-for="(slide, index) in slides"
-            :key="slide"
-            v-show="currentSlide === index"
-            class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 grayscale mix-blend-luminosity"
-            :style="{ backgroundImage: `url(${slide})` }"
-          ></div>
-        </TransitionGroup>
+        <SlideShow :slides="slides" :currentSlide="currentSlide" />
         <div
           class="absolute inset-0 bg-linear-to-b from-gray-950 via-gray-950/80 to-gray-950"
         ></div>
@@ -58,24 +29,7 @@
               SHINING THE<br />LIGHT
             </h1>
 
-            <div class="mb-10 w-full max-w-lg">
-              <div class="grid grid-cols-4 gap-3 sm:gap-4">
-                <div
-                  v-for="(value, unit) in timeLeft"
-                  :key="unit"
-                  class="bg-gray-900/50 backdrop-blur-md p-3 border-l-2 border-orange-500/50 flex flex-col items-start justify-center"
-                >
-                  <span
-                    class="font-display font-bold block text-2xl md:text-3xl text-yellow-400 leading-none"
-                    >{{ value }}</span
-                  >
-                  <span
-                    class="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest mt-1"
-                    >{{ unit }}</span
-                  >
-                </div>
-              </div>
-            </div>
+            <Timer :timeLeft="timeLeft" />
 
             <div class="flex flex-col sm:flex-row gap-4 mt-8">
               <NuxtLink
@@ -215,12 +169,12 @@
         <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
           <div>
             <span
-              class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
+              class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >
               The Voices
             </span>
             <h2
-              class="text-3xl md:text-4xl font-display font-bold uppercase mt-2"
+              class="text-2xl md:text-3xl font-display font-bold uppercase mt-2"
             >
               Meet Our Ministers
             </h2>
@@ -230,20 +184,11 @@
 
         <div
           v-if="!speakers || speakers.length === 0"
-          class="flex flex-col items-center justify-center py-24 px-6 border border-dashed border-gray-800 rounded-2xl bg-gray-950/50 text-center"
+          class="flex flex-col items-center justify-center py-16 px-6 border border-dashed border-gray-800 rounded-2xl bg-gray-950/50 text-center"
         >
-          <div
-            class="w-15 h-15 bg-gray-900 border border-gray-800 rounded-full flex items-center justify-center mb-6"
-          >
-            <Icon name="heroicons:microphone" class="w-5 h-5 text-gray-700" />
-          </div>
-          <h3 class="text-xl font-display font-bold text-white uppercase mb-3">
+          <h3 class="text-sm italic font-display text-white uppercase">
             To be Revealed
           </h3>
-          <p class="text-gray-500 font-light max-w-md text-md leading-relaxed">
-            Check back soon as we announce the voices for Excellence Conference
-            2026.
-          </p>
         </div>
 
         <div
@@ -304,12 +249,12 @@
         <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
           <div>
             <span
-              class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
+              class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >
               Be Inspired
             </span>
             <h2
-              class="text-3xl md:text-4xl font-display font-bold uppercase mt-2"
+              class="text-2xl md:text-3xl font-display font-bold uppercase mt-2"
             >
               Testimonies
             </h2>
@@ -356,11 +301,11 @@
       <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
         <div>
           <span
-            class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
+            class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >Location</span
           >
           <h2
-            class="text-3xl md:text-4xl font-display font-bold uppercase mt-2 mb-8"
+            class="text-2xl md:text-3xl font-display font-bold uppercase mt-2 mb-8"
           >
             The Venue
           </h2>
@@ -375,35 +320,25 @@
             </div>
             <div class="relative z-10" v-if="eventSettings?.venue">
               <h3
-                class="font-display font-bold text-2xl md:text-3xl text-white mb-2"
+                class="font-display font-bold text-xl md:text-3xl text-white mb-2"
               >
                 {{ eventSettings.venue.venueName }}
               </h3>
               <p class="text-gray-400 text-base md:text-lg mb-6">
                 {{ eventSettings.venue.address }}
               </p>
-              <a
-                :href="eventSettings.venue.mapLink"
-                target="_blank"
-                class="inline-flex items-center gap-2 border-b-2 border-orange-500 text-orange-500 pb-1 font-sans font-semibold text-sm tracking-widest uppercase hover:text-yellow-400 hover:border-yellow-400 transition-colors"
-              >
-                Open in Maps
-                <Icon
-                  name="heroicons:arrow-top-right-on-square"
-                  class="w-4 h-4"
-                />
-              </a>
+              <LocationButton v-if="eventSettings.venue.mapLink" />
             </div>
           </div>
         </div>
 
         <div class="pt-15 border-t border-gray-800 md:border-0 md:pt-0">
           <span
-            class="text-orange-500 font-sans font-semibold text-sm tracking-[0.2em] uppercase"
+            class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >Details</span
           >
           <h2
-            class="text-3xl md:text-4xl font-display font-bold uppercase mt-2 mb-8"
+            class="text-2xl md:text-3xl font-display font-bold uppercase mt-2 mb-8"
           >
             FAQ
           </h2>
@@ -424,14 +359,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-// Auto-imported composables (useCountdown, useConferenceData)
-// Auto-imported components (HomeFaq, SpeakerModal)
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const api = useConferenceData();
-
-// --- Page State ---
-const loading = ref(true);
 
 // --- Modal State ---
 const isModalOpen = ref(false);
@@ -462,19 +392,36 @@ let slideInterval;
 // --- Extracted Countdown Logic ---
 const { timeLeft } = useCountdown("2026-05-19T00:00:00+01:00");
 
-// --- Data Fetching ---
-const { data: speakers } = await api.getSpeakers();
-const { data: testimonies } = await api.getTestimonies();
-const { data: faqs } = await api.getFaqs();
-const { data: eventSettings } = await api.getEventSettings();
+// --- Data Fetching (Parallelized for Speed) ---
+// Using Promise.all fires all 4 requests at the exact same time,
+// cutting your fetching time drastically.
+const [
+  { data: speakers, pending: pendingSpeakers },
+  { data: testimonies, pending: pendingTestimonies },
+  { data: faqs, pending: pendingFaqs },
+  { data: eventSettings, pending: pendingSettings },
+] = await Promise.all([
+  api.getSpeakers(),
+  api.getTestimonies(),
+  api.getFaqs(),
+  api.getEventSettings(),
+]);
+
+// --- Accurate Loading State ---
+// This ties the loader strictly to the actual network requests.
+// Note: Due to SSR, initial page loads will clear this instantly.
+// It will only remain on screen during client-side navigation.
+const loading = computed(() => {
+  return (
+    pendingSpeakers.value ||
+    pendingTestimonies.value ||
+    pendingFaqs.value ||
+    pendingSettings.value
+  );
+});
 
 // --- Lifecycle Hooks ---
 onMounted(() => {
-  // Simulate loading screen to allow fonts/images to settle
-  setTimeout(() => {
-    loading.value = false;
-  }, 800);
-
   slideInterval = setInterval(() => {
     currentSlide.value =
       currentSlide.value === slides.length - 1 ? 0 : currentSlide.value + 1;

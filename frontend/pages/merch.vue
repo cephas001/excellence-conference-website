@@ -12,26 +12,12 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 relative z-10">
-      <header class="mb-14 relative">
-        <div
-          class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
-        ></div>
-        <h1
-          class="font-display font-bold text-5xl md:text-7xl tracking-tighter text-white leading-none mb-4 uppercase"
-        >
-          OFFICIAL
-          <span
-            class="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-yellow-400"
-            >Merchandise</span
-          >
-        </h1>
-        <p
-          class="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed font-poppins"
-        >
-          Equip yourself with the official 'Shining the Light' merchandise
-          collection.
-        </p>
-      </header>
+      <AppPageHeader
+        plainText="OFFICIAL"
+        styledText="Merchandise"
+        description="Equip yourself with the official 'Shining the Light' merchandise
+          collection."
+      />
 
       <div v-if="pending" class="flex justify-center items-center py-20">
         <Icon
@@ -97,7 +83,7 @@
           ></div>
 
           <h2
-            class="font-display text-3xl md:text-4xl text-white font-bold uppercase mb-8"
+            class="font-display text-xl md:text-3xl text-white font-bold uppercase mb-8"
           >
             How to Pre-order
           </h2>
@@ -159,10 +145,12 @@
               class="flex flex-col justify-center space-y-6 border-t md:border-t-0 md:border-l border-gray-800 pt-8 md:pt-0 md:pl-12"
             >
               <div>
-                <h3 class="font-display text-2xl text-white uppercase mb-2">
+                <h3
+                  class="font-display text-xl md:text-2xl text-white uppercase mb-4"
+                >
                   Confirm Your Order
                 </h3>
-                <p class="text-gray-400 text-sm mb-6">
+                <p class="text-gray-400 text-sm mb-3">
                   After making your transfer, you must fill out the pre-order
                   confirmation form and upload your proof of payment to secure
                   your items.
@@ -173,7 +161,7 @@
                 target="_blank"
                 class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-orange-500 to-yellow-500 text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-orange-500/20 transition-all hover:-translate-y-1"
               >
-                Open Confirmation Form
+                Open
                 <Icon
                   name="heroicons:arrow-top-right-on-square-20-solid"
                   class="w-5 h-5"
@@ -184,7 +172,7 @@
         </div>
       </section>
 
-      <section class="mt-16 relative">
+      <section class="mt-14 relative">
         <div
           class="bg-gray-900/50 backdrop-blur-xl rounded-2xl p-8 md:p-12 border-l-4 border-orange-500 shadow-2xl overflow-hidden relative"
         >
@@ -193,7 +181,7 @@
           </div>
           <blockquote class="relative z-10 max-w-3xl">
             <p
-              class="font-display text-3xl md:text-4xl text-white font-bold leading-tight mb-6 uppercase"
+              class="font-display text-2xl md:text-3xl text-white font-bold leading-tight mb-6 uppercase"
             >
               "The light shines in the darkness, and the darkness has not
               overcome it."

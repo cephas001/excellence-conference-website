@@ -3,26 +3,12 @@
     class="min-h-screen bg-gray-950 text-gray-200 font-sans selection:bg-orange-500 selection:text-black pt-30 pb-20"
   >
     <main class="px-6 md:px-8 max-w-3xl mx-auto">
-      <header class="mb-14 relative">
-        <div
-          class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
-        ></div>
-        <h1
-          class="font-display font-bold text-5xl md:text-7xl tracking-tighter text-white leading-none mb-4 uppercase"
-        >
-          Conference
-          <span
-            class="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-yellow-400"
-            >Schedule</span
-          >
-        </h1>
-        <p
-          class="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed font-poppins"
-        >
-          Shining the Light on the future of leadership, and spirituality. Join
-          us for 6 days of intensive growth and high-impact sessions.
-        </p>
-      </header>
+      <AppPageHeader
+        plainText="Conference"
+        styledText="Schedule"
+        description=" Shining the Light on the future of leadership, and spirituality. Join
+          us for 6 days of intensive growth and high-impact sessions."
+      />
 
       <div v-if="agendaLoading" class="flex justify-center items-center py-20">
         <Icon
@@ -108,7 +94,7 @@
 
           <div
             v-if="!activeDocument || activeDocument.items.length === 0"
-            class="text-center py-20 text-gray-500 font-light border border-dashed border-gray-800 rounded-2xl bg-gray-900/30"
+            class="text-center py-20 text-gray-500 font-light border border-dashed border-gray-800 rounded-2xl bg-gray-900/30 px-4"
           >
             No programs scheduled for this specific session yet.
           </div>

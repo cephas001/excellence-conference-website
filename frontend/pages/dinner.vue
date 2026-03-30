@@ -2,14 +2,7 @@
   <div
     class="relative min-h-screen bg-gray-950 text-gray-200 font-sans antialiased selection:bg-orange-500/30 overflow-hidden pt-30 pb-24"
   >
-    <div class="fixed inset-0 pointer-events-none z-0">
-      <div
-        class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px]"
-      ></div>
-      <div
-        class="absolute bottom-[-5%] left-[-5%] w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px]"
-      ></div>
-    </div>
+    <DinnerBackdrop />
 
     <div class="max-w-7xl mx-auto px-6 relative z-10">
       <div v-if="pending" class="flex justify-center items-center py-20">
@@ -44,12 +37,12 @@
             class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
           ></div>
           <span
-            class="text-white font-sans font-bold text-xs tracking-[0.3em] uppercase mb-2 block"
+            class="text-white font-sans font-bold text-xs tracking-[0.3em] uppercase mb-3 block"
           >
             Workers Dinner
           </span>
           <h1
-            class="font-display font-bold text-5xl md:text-7xl tracking-tighter text-white leading-none mb-4 uppercase"
+            class="font-display font-bold text-4xl md:text-6xl tracking-tighter text-white leading-none mb-4 uppercase"
           >
             The
             <span
@@ -60,68 +53,23 @@
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-          <div
-            class="bg-gray-900 border border-gray-800 p-8 flex flex-col justify-between rounded-2xl hover:border-orange-500/30 transition-colors group"
-          >
-            <Icon
-              name="heroicons:calendar-days"
-              class="text-orange-500 w-10 h-10 mb-8 opacity-70 group-hover:opacity-100 transition-opacity"
-            />
-            <div>
-              <p
-                class="text-xs tracking-widest text-gray-500 font-bold uppercase mb-1"
-              >
-                Date
-              </p>
-              <h3
-                class="text-2xl md:text-3xl font-display font-bold text-white uppercase"
-              >
-                {{ eventSettings?.dinner?.date || "TBD" }}
-              </h3>
-            </div>
-          </div>
+          <DinnerCard
+            icon="heroicons:calendar-days"
+            label="Date"
+            :mainText="eventSettings?.dinner?.date || 'TBD'"
+          />
 
-          <div
-            class="bg-gray-900 border border-gray-800 p-8 flex flex-col justify-between rounded-2xl hover:border-orange-500/30 transition-colors group"
-          >
-            <Icon
-              name="heroicons:clock"
-              class="text-orange-500 w-10 h-10 mb-8 opacity-70 group-hover:opacity-100 transition-opacity"
-            />
-            <div>
-              <p
-                class="text-xs tracking-widest text-gray-500 font-bold uppercase mb-1"
-              >
-                Time
-              </p>
-              <h3
-                class="text-2xl md:text-3xl font-display font-bold text-white uppercase"
-              >
-                {{ eventSettings?.dinner?.time || "TBD" }}
-              </h3>
-            </div>
-          </div>
+          <DinnerCard
+            icon="heroicons:clock"
+            label="Time"
+            :mainText="eventSettings?.dinner?.time || 'TBD'"
+          />
 
-          <div
-            class="bg-gray-900 border border-gray-800 p-8 flex flex-col justify-between rounded-2xl hover:border-orange-500/30 transition-colors group"
-          >
-            <Icon
-              name="heroicons:map-pin"
-              class="text-orange-500 w-10 h-10 mb-8 opacity-70 group-hover:opacity-100 transition-opacity"
-            />
-            <div>
-              <p
-                class="text-xs tracking-widest text-gray-500 font-bold uppercase mb-1"
-              >
-                Venue
-              </p>
-              <h3
-                class="text-xl md:text-2xl font-display font-bold text-white uppercase leading-tight"
-              >
-                {{ eventSettings?.dinner?.venueName || "TBD" }}
-              </h3>
-            </div>
-          </div>
+          <DinnerCard
+            icon="heroicons:map-pin"
+            label="Venue"
+            :mainText="eventSettings?.dinner?.venueName || 'TBD'"
+          />
         </div>
 
         <section
@@ -137,7 +85,7 @@
             ></div>
 
             <h2
-              class="font-display text-3xl md:text-4xl text-white font-bold uppercase mb-8"
+              class="font-display text-xl md:text-3xl text-white font-bold uppercase mb-4"
             >
               Reserve Your Seat
             </h2>
@@ -145,8 +93,8 @@
             <div class="grid md:grid-cols-2 gap-12">
               <div class="space-y-6">
                 <p class="text-gray-400">
-                  Please make a transfer for your dinner reservation to the
-                  account below, and keep your receipt/proof of payment.
+                  Please make a transfer to the account below, and keep your
+                  receipt/proof of payment.
                 </p>
 
                 <div
@@ -195,10 +143,12 @@
                 class="flex flex-col justify-center space-y-6 border-t md:border-t-0 md:border-l border-gray-800 pt-8 md:pt-0 md:pl-12"
               >
                 <div>
-                  <h3 class="font-display text-2xl text-white uppercase mb-2">
+                  <h3
+                    class="font-display text-xl md:text-2xl text-white uppercase mb-4"
+                  >
                     Confirm Your Registration
                   </h3>
-                  <p class="text-gray-400 text-sm mb-6">
+                  <p class="text-gray-400 text-sm mb-3">
                     After making your transfer, you must fill out the
                     confirmation form and upload your proof of payment to secure
                     your seat.
@@ -207,9 +157,9 @@
                 <a
                   href="https://forms.gle/K49ckmQmDTz1KKtc8"
                   target="_blank"
-                  class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-orange-500/20 transition-all hover:-translate-y-1"
+                  class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-orange-500 to-yellow-500 text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-orange-500/20 transition-all hover:-translate-y-1"
                 >
-                  Open Confirmation Form
+                  Open
                   <Icon
                     name="heroicons:arrow-top-right-on-square-20-solid"
                     class="w-5 h-5"
@@ -232,11 +182,11 @@
 
             <div class="relative z-10 max-w-2xl">
               <h2
-                class="font-display text-3xl md:text-4xl text-white font-bold leading-tight mb-4 uppercase"
+                class="font-display text-2xl md:text-3xl text-white font-bold leading-tight mb-4 uppercase"
               >
-                Memories of Grace
+                Memories of Love
               </h2>
-              <p class="text-gray-400 text-lg">
+              <p class="text-gray-400 text-md md:text-lg">
                 Revisit the moments of laughter, and divine fellowship from our
                 previous gatherings.
               </p>
@@ -246,7 +196,7 @@
               <a
                 href="#"
                 target="_blank"
-                class="inline-flex items-center gap-3 border border-gray-700 bg-gray-950 text-white px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:border-orange-500 hover:text-orange-500 transition-all duration-300"
+                class="inline-flex items-center gap-3 border border-gray-700 bg-gray-950 text-white px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:border-orange-500 hover:text-orange-500 transition-all duration-300 text-sm md:text-md"
               >
                 View Past Dinners
                 <Icon

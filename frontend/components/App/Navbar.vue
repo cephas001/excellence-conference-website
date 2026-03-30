@@ -1,11 +1,7 @@
 <template>
   <header
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b"
-    :class="
-      isScrolled
-        ? 'bg-gray-950/80 backdrop-blur-xl border-gray-800 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
-        : 'bg-transparent border-transparent py-6'
-    "
+    :class="computeClass"
   >
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
       <NuxtLink
@@ -206,6 +202,7 @@ watch(
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20;
+  isMobileMenuOpen.value = false;
 };
 
 const toggleMobileMenu = () => {
@@ -220,6 +217,16 @@ const goToContactPage = () => {
   closeMobileMenu();
   navigateTo("/contact");
 };
+
+const computeClass = computed(() => {
+  if (isScrolled.value) {
+    return "bg-gray-950/80 backdrop-blur-xl border-gray-800 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]";
+  } else if (isMobileMenuOpen.value) {
+    return "bg-gray-950/95 backdrop-blur-3xl py-6";
+  } else {
+    return "bg-transparent border-transparent py-6";
+  }
+});
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
