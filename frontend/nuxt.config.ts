@@ -10,4 +10,9 @@ export default defineNuxtConfig({
       apiBaseUrl: "http://localhost:5000/api",
     },
   },
+  app: {
+    head: {
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+    },
+  },
 });
