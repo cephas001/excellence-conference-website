@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gray-950 text-gray-200 font-sans selection:bg-orange-500 selection:text-black pt-30 pb-20"
+    class="min-h-screen bg-theme-base text-gray-200 font-sans selection:bg-theme-primary selection:text-black pt-30 pb-20"
   >
     <main class="px-6 md:px-8 max-w-3xl mx-auto">
       <AppPageHeader
@@ -13,13 +13,13 @@
       <div v-if="agendaLoading" class="flex justify-center items-center py-20">
         <Icon
           name="heroicons:arrow-path"
-          class="w-10 h-10 text-orange-500 animate-spin"
+          class="w-10 h-10 text-theme-primary animate-spin"
         />
       </div>
 
       <div
         v-else-if="agendaError"
-        class="text-center py-20 bg-gray-900 border border-red-900/50 rounded-xl"
+        class="text-center py-20 bg-theme-surface border border-red-900/50 rounded-xl"
       >
         <Icon
           name="heroicons:exclamation-triangle"
@@ -28,7 +28,7 @@
         <p class="text-gray-400 mb-4">Unable to load the schedule.</p>
         <button
           @click="refreshAgenda"
-          class="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
+          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
         >
           Try Again
         </button>
@@ -46,8 +46,8 @@
               class="px-6 py-3 font-display text-xl tracking-tight flex flex-col items-start min-w-25 transition-all duration-300 rounded-sm"
               :class="
                 selectedDate === group.date
-                  ? 'bg-linear-to-br from-orange-500 to-yellow-500 text-black shadow-lg shadow-orange-500/20'
-                  : 'bg-gray-900 hover:bg-gray-800 text-gray-300'
+                  ? 'bg-linear-to-br from-theme-primary to-theme-secondary text-black shadow-lg shadow-theme-primary/20'
+                  : 'bg-theme-surface hover:bg-theme-border text-gray-300'
               "
             >
               <span
@@ -63,12 +63,12 @@
 
         <div class="mb-14" v-if="availableSessions.length > 0">
           <h3
-            class="text-orange-500 text-xs font-bold uppercase tracking-[0.2em] mb-3 ml-1"
+            class="text-theme-primary text-xs font-bold uppercase tracking-[0.2em] mb-3 ml-1"
           >
             Filter by session
           </h3>
           <div
-            class="flex border border-gray-800 rounded-md font-poppins p-1 bg-gray-950/50"
+            class="flex border border-theme-border rounded-md font-poppins p-1 bg-theme-base/50"
           >
             <button
               v-for="session in availableSessions"
@@ -77,8 +77,8 @@
               class="flex-1 py-3 px-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-sm transition-colors truncate"
               :class="
                 selectedSessionId === session.id
-                  ? 'bg-gray-800 text-white shadow-sm'
-                  : 'text-gray-500 hover:text-gray-300 hover:bg-gray-900/50'
+                  ? 'bg-theme-border text-white shadow-sm'
+                  : 'text-gray-500 hover:text-gray-300 hover:bg-theme-surface/50'
               "
             >
               {{ formatSublabel(session.sublabel) }}
@@ -88,13 +88,13 @@
 
         <section class="relative min-h-75 mt-6">
           <div
-            class="absolute left-21.25 md:left-26 top-2 bottom-0 w-px bg-gray-800"
+            class="absolute left-21.25 md:left-26 top-2 bottom-0 w-px bg-theme-border"
             v-if="activeDocument && activeDocument.items.length > 0"
           ></div>
 
           <div
             v-if="!activeDocument || activeDocument.items.length === 0"
-            class="text-center py-20 text-gray-500 font-light border border-dashed border-gray-800 rounded-2xl bg-gray-900/30 px-4"
+            class="text-center py-20 text-gray-500 font-light border border-dashed border-theme-border rounded-2xl bg-theme-surface/30 px-4"
           >
             No programs scheduled for this specific session yet.
           </div>
@@ -109,7 +109,7 @@
                 class="w-22.25 md:w-26 pr-4 shrink-0 flex justify-end relative z-10"
               >
                 <div
-                  class="bg-[#111827] border border-gray-700/50 text-gray-200 text-[10px] md:text-xs font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg whitespace-nowrap"
+                  class="bg-theme-surface border border-gray-700/50 text-gray-200 text-[10px] md:text-xs font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg whitespace-nowrap"
                 >
                   {{ item.time }}
                 </div>
@@ -125,7 +125,7 @@
                   </span>
                   <span
                     v-if="item.tag"
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest border bg-gray-800 border-gray-700 text-gray-300"
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest border bg-theme-border border-gray-700 text-gray-300"
                   >
                     {{ item.tag }}
                   </span>
@@ -146,11 +146,11 @@
                 <div
                   v-if="item.type === 'detailed' && item.speaker"
                   @click="openModal(item)"
-                  class="mt-4 w-full sm:max-w-sm flex items-center justify-between bg-gray-900/80 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 p-2 pr-4 rounded-2xl cursor-pointer transition-all duration-300 group/card shadow-sm"
+                  class="mt-4 w-full sm:max-w-sm flex items-center justify-between bg-theme-surface/80 hover:bg-theme-border border border-theme-border hover:border-gray-600 p-2 pr-4 rounded-2xl cursor-pointer transition-all duration-300 group/card shadow-sm"
                 >
                   <div class="flex items-center gap-3 min-w-0">
                     <div
-                      class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-gray-950 shrink-0 border border-gray-700/50 flex items-center justify-center"
+                      class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-theme-base shrink-0 border border-gray-700/50 flex items-center justify-center"
                     >
                       <img
                         v-if="item.speaker.image"
@@ -177,7 +177,7 @@
                   </div>
                   <Icon
                     name="heroicons:chevron-right"
-                    class="w-4 h-4 md:w-5 md:h-5 text-gray-500 group-hover/card:text-orange-500 shrink-0 transition-colors"
+                    class="w-4 h-4 md:w-5 md:h-5 text-gray-500 group-hover/card:text-theme-primary shrink-0 transition-colors"
                   />
                 </div>
               </div>

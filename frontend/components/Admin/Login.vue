@@ -1,24 +1,24 @@
 <template>
   <div
-    class="fixed inset-0 z-[100] bg-gray-950 flex items-center justify-center p-4"
+    class="fixed inset-0 z-[100] bg-theme-base flex items-center justify-center p-4"
   >
     <div
-      class="w-full max-w-md p-[1px] bg-gradient-to-br from-orange-500/30 to-transparent rounded-2xl"
+      class="w-full max-w-md p-px bg-linear-to-br from-theme-primary/30 to-transparent rounded-2xl"
     >
       <div
-        class="bg-gray-900 rounded-[calc(1rem-1px)] p-8 md:p-10 shadow-2xl relative overflow-hidden"
+        class="bg-theme-surface rounded-[calc(1rem-1px)] p-8 md:p-10 shadow-2xl relative overflow-hidden"
       >
         <div
-          class="absolute -top-24 -right-24 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"
+          class="absolute -top-24 -right-24 w-48 h-48 bg-theme-primary/10 rounded-full blur-3xl pointer-events-none"
         ></div>
 
         <div class="text-center mb-10 relative z-10">
           <div
-            class="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+            class="w-16 h-16 bg-theme-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
           >
             <Icon
               name="heroicons:shield-check-solid"
-              class="text-orange-500 w-10 h-10"
+              class="text-theme-primary w-10 h-10"
             />
           </div>
           <h2
@@ -39,7 +39,7 @@
               v-model="form.email"
               type="email"
               required
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-600"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-theme-primary transition-all placeholder:text-gray-600"
               placeholder="admin@excellence.org"
             />
           </div>
@@ -53,8 +53,8 @@
               v-model="form.password"
               type="password"
               required
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-600"
-              placeholder="••••••••"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-theme-primary transition-all placeholder:text-gray-600"
+              placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
             />
           </div>
 
@@ -68,7 +68,7 @@
           <button
             type="submit"
             :disabled="isLoading"
-            class="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 py-4 rounded-xl text-black font-bold text-base uppercase tracking-widest shadow-[0_15px_30px_rgba(249,115,22,0.2)] transition-all"
+            class="w-full bg-theme-primary hover:bg-orange-600 disabled:opacity-50 py-4 rounded-xl text-black font-bold text-base uppercase tracking-widest shadow-[0_15px_30px_rgba(249,115,22,0.2)] transition-all"
           >
             {{ isLoading ? "Authenticating..." : "Sign In" }}
           </button>
@@ -76,7 +76,7 @@
           <div class="text-center mt-6">
             <NuxtLink
               to="/"
-              class="text-sm text-gray-500 hover:text-orange-500 transition-colors flex items-center justify-center gap-2"
+              class="text-sm text-gray-500 hover:text-theme-primary transition-colors flex items-center justify-center gap-2"
             >
               <Icon name="heroicons:arrow-left" class="w-4 h-4" /> Back to
               Website

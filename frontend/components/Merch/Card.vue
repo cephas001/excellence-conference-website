@@ -1,10 +1,10 @@
 <template>
   <div
-    class="group flex flex-col h-full bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer"
+    class="group flex flex-col h-full bg-theme-surface border border-theme-border rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer"
     @click="$emit('select')"
   >
     <div
-      class="relative aspect-square bg-gray-950 overflow-hidden border-b border-white/5 flex items-center justify-center touch-pan-y"
+      class="relative aspect-square bg-theme-base overflow-hidden border-b border-white/5 flex items-center justify-center touch-pan-y"
       @touchstart="handleTouchStart"
       @touchend="handleTouchEnd"
     >
@@ -22,7 +22,7 @@
       />
 
       <div
-        class="absolute inset-0 bg-linear-to-t from-gray-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        class="absolute inset-0 bg-linear-to-t from-theme-surface/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
       ></div>
 
       <div
@@ -31,13 +31,13 @@
       >
         <button
           @click.stop="prevImage"
-          class="p-1.5 rounded-full bg-black/50 text-white hover:bg-orange-500 transition-colors backdrop-blur-sm"
+          class="p-1.5 rounded-full bg-black/50 text-white hover:bg-theme-primary transition-colors backdrop-blur-sm"
         >
           <Icon name="heroicons:chevron-left" class="w-5 h-5" />
         </button>
         <button
           @click.stop="nextImage"
-          class="p-1.5 rounded-full bg-black/50 text-white hover:bg-orange-500 transition-colors backdrop-blur-sm"
+          class="p-1.5 rounded-full bg-black/50 text-white hover:bg-theme-primary transition-colors backdrop-blur-sm"
         >
           <Icon name="heroicons:chevron-right" class="w-5 h-5" />
         </button>
@@ -51,7 +51,7 @@
           v-for="(_, idx) in item.images"
           :key="idx"
           class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
-          :class="activeIndex === idx ? 'bg-orange-500 w-3' : 'bg-white/40'"
+          :class="activeIndex === idx ? 'bg-theme-primary w-3' : 'bg-white/40'"
         ></div>
       </div>
     </div>
@@ -59,7 +59,7 @@
     <div class="p-5 flex flex-col grow">
       <div class="mb-3">
         <h3
-          class="font-display text-lg font-bold tracking-tight text-white mb-1.5 group-hover:text-orange-500 transition-colors uppercase line-clamp-1"
+          class="font-display text-lg font-bold tracking-tight text-white mb-1.5 group-hover:text-theme-primary transition-colors uppercase line-clamp-1"
         >
           {{ item.name }}
         </h3>
@@ -72,9 +72,9 @@
       </div>
 
       <div
-        class="mt-auto pt-4 flex flex-col gap-4 border-t border-gray-800 group-hover:border-orange-500/20 transition-colors"
+        class="mt-auto pt-4 flex flex-col gap-4 border-t border-theme-border group-hover:border-theme-primary/20 transition-colors"
       >
-        <span class="font-sans font-bold text-xl text-orange-400">
+        <span class="font-sans font-bold text-xl text-theme-primary">
           {{ item.price }}
         </span>
       </div>

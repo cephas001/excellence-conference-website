@@ -13,10 +13,10 @@
       @click.self="close"
     >
       <div
-        class="bg-gray-900 border border-gray-800 rounded-sm max-w-md w-full overflow-hidden shadow-2xl relative"
+        class="bg-theme-surface border border-theme-border rounded-sm max-w-md w-full overflow-hidden shadow-2xl relative"
       >
         <div
-          class="absolute -top-24 -right-24 w-48 h-48 bg-orange-500/10 blur-3xl rounded-full pointer-events-none"
+          class="absolute -top-24 -right-24 w-48 h-48 bg-theme-primary/10 blur-3xl rounded-full pointer-events-none"
         ></div>
 
         <div class="p-6 md:p-8 relative z-10">
@@ -29,7 +29,7 @@
 
           <div class="text-center pt-4">
             <div
-              class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-2 border-orange-500 p-1 shrink-0"
+              class="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-2 border-theme-primary p-1 shrink-0"
             >
               <img
                 v-if="speaker?.image"
@@ -51,14 +51,14 @@
               {{ speaker?.name }}
             </h3>
             <p
-              class="text-orange-500 text-sm font-semibold tracking-wider uppercase mb-6"
+              class="text-theme-primary text-sm font-semibold tracking-wider uppercase mb-6"
             >
               {{ speaker?.role }}
             </p>
 
             <div
               v-if="speaker?.topic"
-              class="text-left bg-gray-950 p-4 rounded-sm border border-gray-800 mb-6"
+              class="text-left bg-theme-base p-4 rounded-sm border border-theme-border mb-6"
             >
               <p
                 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1"
@@ -71,7 +71,7 @@
             </div>
 
             <div
-              class="text-left border-t border-gray-800 pt-6 max-h-48 overflow-y-auto pr-2 custom-scrollbar"
+              class="text-left border-t border-theme-border pt-6 max-h-48 overflow-y-auto pr-2 custom-scrollbar"
             >
               <p
                 class="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap"

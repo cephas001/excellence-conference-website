@@ -12,7 +12,7 @@
     </header>
 
     <section
-      class="bg-gray-900 border border-gray-800 rounded-2xl p-6 sm:p-8 mb-8"
+      class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8 mb-8"
     >
       <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">
         Payment & Order Config
@@ -29,7 +29,7 @@
           <input
             v-model="merchSettings.accountBank"
             type="text"
-            class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+            class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
           />
         </div>
         <div>
@@ -40,7 +40,7 @@
           <input
             v-model="merchSettings.accountNumber"
             type="text"
-            class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+            class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
           />
         </div>
         <div>
@@ -51,7 +51,7 @@
           <input
             v-model="merchSettings.accountName"
             type="text"
-            class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+            class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
           />
         </div>
         <div>
@@ -62,7 +62,7 @@
           <input
             v-model="merchSettings.googleFormLink"
             type="url"
-            class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+            class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
           />
         </div>
         <div class="sm:col-span-2 pt-2">
@@ -81,10 +81,10 @@
         <div
           v-for="item in merchItems"
           :key="item.id"
-          class="flex flex-col sm:flex-row items-center gap-4 bg-gray-900 border border-gray-800 rounded-2xl p-4"
+          class="flex flex-col sm:flex-row items-center gap-4 bg-theme-surface border border-theme-border rounded-2xl p-4"
         >
           <div
-            class="w-20 h-20 bg-gray-950 rounded-lg border border-gray-800 shrink-0 overflow-hidden"
+            class="w-20 h-20 bg-theme-base rounded-lg border border-theme-border shrink-0 overflow-hidden"
           >
             <img
               v-if="item.image"
@@ -94,7 +94,7 @@
           </div>
           <div class="flex-grow text-center sm:text-left">
             <h3 class="font-bold text-white uppercase">{{ item.name }}</h3>
-            <p class="text-orange-500 font-bold text-sm">{{ item.price }}</p>
+            <p class="text-theme-primary font-bold text-sm">{{ item.price }}</p>
           </div>
           <div class="flex gap-2">
             <button
@@ -115,7 +115,7 @@
 
       <aside class="xl:col-span-4">
         <div
-          class="sticky top-10 rounded-2xl bg-gray-900 p-6 border border-gray-800 shadow-2xl"
+          class="sticky top-10 rounded-2xl bg-theme-surface p-6 border border-theme-border shadow-2xl"
         >
           <h3
             class="font-display text-xl font-bold text-white mb-6 uppercase tracking-wide"
@@ -132,20 +132,20 @@
                 v-model="merchForm.name"
                 type="text"
                 required
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
               />
             </div>
             <div>
               <label
                 class="text-[10px] font-bold uppercase tracking-widest text-gray-500"
-                >Price (₦)</label
+                >Price (â‚¦)</label
               >
               <input
                 v-model="merchForm.price"
                 type="text"
                 required
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
-                placeholder="e.g. ₦15,000"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+                placeholder="e.g. â‚¦15,000"
               />
             </div>
             <div>
@@ -156,7 +156,7 @@
               <input
                 v-model="merchForm.image"
                 type="text"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
               />
             </div>
             <div>
@@ -167,13 +167,13 @@
               <textarea
                 v-model="merchForm.description"
                 rows="2"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1 resize-none"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1 resize-none"
               ></textarea>
             </div>
             <div class="pt-2 flex gap-3">
               <button
                 type="submit"
-                class="flex-1 bg-orange-500 text-black py-3 rounded-xl font-bold uppercase tracking-widest text-xs"
+                class="flex-1 bg-theme-primary text-black py-3 rounded-xl font-bold uppercase tracking-widest text-xs"
               >
                 Save
               </button>

@@ -7,7 +7,7 @@
   >
     <div
       v-if="loading"
-      class="fixed inset-0 bg-gray-950 z-100 flex items-center justify-center transition-colors duration-300"
+      class="fixed inset-0 bg-theme-base z-100 flex items-center justify-center transition-colors duration-300"
     >
       <img
         src="/img/logo.png"

@@ -21,8 +21,8 @@
           class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
           :class="
             isActive('/')
-              ? 'text-orange-500'
-              : 'text-gray-300 hover:text-orange-500'
+              ? 'text-theme-primary'
+              : 'text-gray-300 hover:text-theme-primary'
           "
           >Home</NuxtLink
         >
@@ -32,8 +32,8 @@
           class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
           :class="
             isActive('/agenda')
-              ? 'text-orange-500'
-              : 'text-gray-300 hover:text-orange-500'
+              ? 'text-theme-primary'
+              : 'text-gray-300 hover:text-theme-primary'
           "
           >Schedule</NuxtLink
         >
@@ -43,8 +43,8 @@
           class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
           :class="
             isActive('/merch')
-              ? 'text-orange-500'
-              : 'text-gray-300 hover:text-orange-500'
+              ? 'text-theme-primary'
+              : 'text-gray-300 hover:text-theme-primary'
           "
           >Merch</NuxtLink
         >
@@ -54,8 +54,8 @@
           class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
           :class="
             isActive('/about')
-              ? 'text-orange-500'
-              : 'text-gray-300 hover:text-orange-500'
+              ? 'text-theme-primary'
+              : 'text-gray-300 hover:text-theme-primary'
           "
           >About</NuxtLink
         >
@@ -65,8 +65,8 @@
           class="font-sans font-semibold text-sm tracking-widest uppercase transition-colors"
           :class="
             isActive('/dinner')
-              ? 'text-orange-500'
-              : 'text-gray-300 hover:text-orange-500'
+              ? 'text-theme-primary'
+              : 'text-gray-300 hover:text-theme-primary'
           "
           >Dinner</NuxtLink
         >
@@ -75,7 +75,7 @@
       <div class="hidden md:flex items-center gap-4">
         <button
           @click="goToContactPage"
-          class="bg-linear-to-r from-orange-500 to-yellow-500 text-black px-6 py-2.5 rounded-sm font-sans font-bold uppercase tracking-widest text-xs hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all"
+          class="bg-linear-to-r from-theme-primary to-theme-secondary text-black px-6 py-2.5 rounded-sm font-sans font-bold uppercase tracking-widest text-xs hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all"
         >
           Contact Us
         </button>
@@ -102,7 +102,7 @@
     >
       <div
         v-if="isMobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-gray-950/95 backdrop-blur-3xl border-b border-gray-800 px-6 pb-6 pt-4 flex flex-col gap-6 md:hidden shadow-2xl"
+        class="absolute top-full left-0 right-0 bg-theme-base/95 backdrop-blur-3xl border-b border-theme-border px-6 pb-6 pt-5 flex flex-col gap-6 md:hidden shadow-2xl"
       >
         <nav class="flex flex-col gap-4">
           <NuxtLink
@@ -111,8 +111,8 @@
             class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/')
-                ? 'text-orange-500'
-                : 'text-gray-200 hover:text-orange-500'
+                ? 'text-theme-primary'
+                : 'text-gray-200 hover:text-theme-primary'
             "
             >Home</NuxtLink
           >
@@ -123,8 +123,8 @@
             class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/agenda')
-                ? 'text-orange-500'
-                : 'text-gray-200 hover:text-orange-500'
+                ? 'text-theme-primary'
+                : 'text-gray-200 hover:text-theme-primary'
             "
             >Schedule</NuxtLink
           >
@@ -135,8 +135,8 @@
             class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/merch')
-                ? 'text-orange-500'
-                : 'text-gray-200 hover:text-orange-500'
+                ? 'text-theme-primary'
+                : 'text-gray-200 hover:text-theme-primary'
             "
             >Merch</NuxtLink
           >
@@ -147,8 +147,8 @@
             class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/about')
-                ? 'text-orange-500'
-                : 'text-gray-200 hover:text-orange-500'
+                ? 'text-theme-primary'
+                : 'text-gray-200 hover:text-theme-primary'
             "
             >About</NuxtLink
           >
@@ -159,16 +159,16 @@
             class="font-display text-xl font-bold uppercase transition-colors"
             :class="
               isActive('/dinner')
-                ? 'text-orange-500'
-                : 'text-gray-200 hover:text-orange-500'
+                ? 'text-theme-primary'
+                : 'text-gray-200 hover:text-theme-primary'
             "
             >Workers Dinner</NuxtLink
           >
         </nav>
 
-        <div class="pt-6 border-t border-gray-800">
+        <div class="pt-6 border-t border-theme-border">
           <button
-            class="w-full bg-linear-to-r from-orange-500 to-yellow-500 text-black px-6 py-4 rounded-sm font-sans font-bold uppercase tracking-widest text-sm shadow-lg"
+            class="w-full bg-linear-to-r from-theme-primary to-theme-secondary text-black px-6 py-4 rounded-sm font-sans font-bold uppercase tracking-widest text-sm shadow-lg"
             @click="goToContactPage"
           >
             Contact Us
@@ -220,9 +220,9 @@ const goToContactPage = () => {
 
 const computeClass = computed(() => {
   if (isScrolled.value) {
-    return "bg-gray-950/80 backdrop-blur-xl border-gray-800 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]";
+    return "bg-theme-base/80 backdrop-blur-xl border-theme-border py-4 shadow-[0_10px_30px_rgba(0,0,0,0.5)]";
   } else if (isMobileMenuOpen.value) {
-    return "bg-gray-950/95 backdrop-blur-3xl py-6";
+    return "bg-theme-base/95 backdrop-blur-3xl py-6 border-theme-border";
   } else {
     return "bg-transparent border-transparent py-6";
   }

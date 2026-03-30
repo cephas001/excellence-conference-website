@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gray-950 text-gray-200 font-sans antialiased selection:bg-orange-500/30 pt-20"
+    class="min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 pt-20"
   >
     <AdminLogin
       v-if="!isAuthenticated"
@@ -9,7 +9,7 @@
       :error="loginError"
     />
 
-    <div v-else class="flex h-screen overflow-hidden bg-gray-950">
+    <div v-else class="flex h-screen overflow-hidden bg-theme-base">
       <AdminSidebar
         :active-panel="activePanel"
         @navigate="activePanel = $event"
@@ -18,9 +18,11 @@
 
       <main class="flex-1 overflow-y-auto p-6 md:p-10 relative">
         <header
-          class="lg:hidden flex justify-between items-center mb-8 pb-4 border-b border-gray-800"
+          class="lg:hidden flex justify-between items-center mb-8 pb-4 border-b border-theme-border"
         >
-          <h1 class="text-xl font-display font-bold text-orange-500 uppercase">
+          <h1
+            class="text-xl font-display font-bold text-theme-primary uppercase"
+          >
             Majestic Admin
           </h1>
           <button @click="handleLogout" class="text-red-400">

@@ -1,14 +1,14 @@
 <template>
   <header class="mb-14 relative p-1">
     <div
-      class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
+      class="absolute -top-10 -left-10 w-64 h-64 bg-theme-primary/10 blur-[100px] pointer-events-none"
     ></div>
     <h1
       class="font-display font-bold text-4xl md:text-6xl tracking-tighter text-white leading-none mb-4 uppercase"
     >
       {{ plainText }}
       <span
-        class="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-yellow-400"
+        class="text-transparent bg-clip-text bg-linear-to-r from-theme-primary to-theme-secondary"
         >{{ styledText }}</span
       >
     </h1>

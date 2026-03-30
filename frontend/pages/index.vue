@@ -2,7 +2,7 @@
   <LargeLoader :loading="loading" />
 
   <div
-    class="relative min-h-screen bg-gray-950 text-gray-200 font-sans selection:bg-orange-500 selection:text-black"
+    class="relative min-h-screen bg-theme-base text-gray-200 font-sans selection:bg-theme-primary selection:text-black"
     v-if="!loading"
   >
     <section
@@ -11,7 +11,7 @@
       <div class="absolute inset-0 z-0">
         <SlideShow :slides="slides" :currentSlide="currentSlide" />
         <div
-          class="absolute inset-0 bg-linear-to-b from-gray-950 via-gray-950/80 to-gray-950"
+          class="absolute inset-0 bg-linear-to-b from-theme-base via-theme-base/80 to-theme-base"
         ></div>
       </div>
 
@@ -19,12 +19,12 @@
         <div class="grid lg:grid-cols-12 gap-8 items-center">
           <div class="lg:col-span-8 mt-10 lg:mt-0">
             <p
-              class="text-orange-500 font-display text-sm md:text-base tracking-[0.15em] mb-4 uppercase font-semibold"
+              class="text-theme-primary font-display text-sm md:text-base tracking-[0.15em] mb-4 uppercase font-semibold"
             >
               McPherson University | May 19–24, 2026
             </p>
             <h1
-              class="text-5xl md:text-6xl lg:text-7xl font-display leading-[1.1] font-bold tracking-tight text-transparent bg-clip-text bg-linear-to-br from-orange-500 via-orange-400 to-yellow-400 mb-8 uppercase"
+              class="text-5xl md:text-6xl lg:text-7xl font-display leading-[1.1] font-bold tracking-tight text-transparent bg-clip-text bg-linear-to-br from-theme-primary via-theme-primary to-theme-secondary mb-8 uppercase"
             >
               SHINING THE<br />LIGHT
             </h1>
@@ -34,13 +34,13 @@
             <div class="flex flex-col sm:flex-row gap-4 mt-8">
               <NuxtLink
                 to="/agenda"
-                class="bg-linear-to-r from-orange-500 to-yellow-500 text-black px-8 py-3.5 rounded-sm font-sans font-semibold text-sm md:text-base tracking-wide uppercase hover:shadow-md hover:shadow-orange-500/20 transition-all text-center"
+                class="bg-linear-to-r from-theme-primary to-theme-secondary text-black px-8 py-3.5 rounded-sm font-sans font-semibold text-sm md:text-base tracking-wide uppercase hover:shadow-md hover:shadow-theme-primary/20 transition-all text-center"
               >
                 View Schedule
               </NuxtLink>
               <NuxtLink
                 to="/merch"
-                class="border border-gray-700 text-gray-200 px-8 py-3.5 rounded-sm font-sans font-semibold text-sm md:text-base tracking-wide uppercase hover:bg-gray-800 transition-colors text-center"
+                class="border border-gray-700 text-gray-200 px-8 py-3.5 rounded-sm font-sans font-semibold text-sm md:text-base tracking-wide uppercase hover:bg-theme-border transition-colors text-center"
               >
                 Conference Merch
               </NuxtLink>
@@ -49,16 +49,16 @@
         </div>
       </div>
       <div
-        class="absolute -right-20 -top-20 w-37.5 h-37.5 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none"
+        class="absolute -right-20 -top-20 w-37.5 h-37.5 bg-theme-primary/10 rounded-full blur-[120px] pointer-events-none"
       ></div>
     </section>
 
-    <section class="bg-gray-900 py-16 border-y border-gray-800">
+    <section class="bg-theme-surface py-16 border-y border-theme-border">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16">
-          <div class="flex flex-col border-l-2 border-orange-500/30 pl-6">
+          <div class="flex flex-col border-l-2 border-theme-primary/30 pl-6">
             <span
-              class="text-4xl md:text-5xl font-display font-bold text-yellow-400 leading-none"
+              class="text-4xl md:text-5xl font-display font-bold text-theme-secondary leading-none"
               >6</span
             >
             <span
@@ -66,9 +66,9 @@
               >Days of Power</span
             >
           </div>
-          <div class="flex flex-col border-l-2 border-orange-500/30 pl-6">
+          <div class="flex flex-col border-l-2 border-theme-primary/30 pl-6">
             <span
-              class="text-4xl md:text-5xl font-display font-bold text-yellow-400 leading-none"
+              class="text-4xl md:text-5xl font-display font-bold text-theme-secondary leading-none"
               >10+</span
             >
             <span
@@ -76,9 +76,9 @@
               >Ministers</span
             >
           </div>
-          <div class="flex flex-col border-l-2 border-orange-500/30 pl-6">
+          <div class="flex flex-col border-l-2 border-theme-primary/30 pl-6">
             <span
-              class="text-4xl md:text-5xl font-display font-bold text-yellow-400 leading-none"
+              class="text-4xl md:text-5xl font-display font-bold text-theme-secondary leading-none"
               >1</span
             >
             <span
@@ -94,15 +94,15 @@
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="relative">
           <div
-            class="absolute -inset-4 bg-orange-500/5 -z-10 translate-x-4 translate-y-4"
+            class="absolute -inset-4 bg-theme-primary/5 -z-10 translate-x-4 translate-y-4"
           ></div>
           <AppImage
             src="/img/homepage_second_section.jpg"
             :alt="'Worship'"
-            imgClass="transition-all duration-700 w-full aspect-4/5 object-cover border border-gray-800"
+            imgClass="transition-all duration-700 w-full aspect-4/5 object-cover border border-theme-border"
           />
           <div
-            class="absolute bottom-0 right-0 bg-orange-500 p-6 translate-x-8 translate-y-8 hidden lg:block"
+            class="absolute bottom-0 right-0 bg-theme-primary p-6 translate-x-8 translate-y-8 hidden lg:block"
           >
             <Icon
               name="heroicons:light-bulb-solid"
@@ -114,7 +114,8 @@
           <h2
             class="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight leading-tight mb-6 uppercase"
           >
-            A CATALYST FOR <span class="text-orange-500">TRANSFORMATION</span>
+            A CATALYST FOR
+            <span class="text-theme-primary">TRANSFORMATION</span>
           </h2>
           <p
             class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 font-light font-poppins"
@@ -128,7 +129,7 @@
             <div class="flex gap-4 items-start">
               <Icon
                 name="heroicons:fire"
-                class="text-yellow-400 w-6 h-6 md:w-8 md:h-8 shrink-0 mt-1"
+                class="text-theme-secondary w-6 h-6 md:w-8 md:h-8 shrink-0 mt-1"
               />
               <div>
                 <h4
@@ -145,7 +146,7 @@
             <div class="flex gap-4 items-start">
               <Icon
                 name="heroicons:academic-cap"
-                class="text-yellow-400 w-6 h-6 md:w-8 md:h-8 shrink-0 mt-1"
+                class="text-theme-secondary w-6 h-6 md:w-8 md:h-8 shrink-0 mt-1"
               />
               <div>
                 <h4
@@ -164,12 +165,14 @@
       </div>
     </section>
 
-    <section class="py-20 md:py-24 bg-gray-900 border-t border-gray-800">
+    <section
+      class="py-20 md:py-24 bg-theme-surface border-t border-theme-border"
+    >
       <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
           <div>
             <span
-              class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
+              class="text-theme-primary font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >
               The Voices
             </span>
@@ -179,12 +182,14 @@
               Meet Our Ministers
             </h2>
           </div>
-          <div class="h-px grow bg-gray-800 mx-12 hidden md:block mb-4"></div>
+          <div
+            class="h-px grow bg-theme-border mx-12 hidden md:block mb-4"
+          ></div>
         </div>
 
         <div
           v-if="!speakers || speakers.length === 0"
-          class="flex flex-col items-center justify-center py-16 px-6 border border-dashed border-gray-800 rounded-2xl bg-gray-950/50 text-center"
+          class="flex flex-col items-center justify-center py-16 px-6 border border-dashed border-theme-border rounded-2xl bg-theme-base/50 text-center"
         >
           <h3 class="text-sm italic font-display text-white uppercase">
             To be Revealed
@@ -193,16 +198,16 @@
 
         <div
           v-else
-          class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 border border-gray-800"
+          class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 border border-theme-border"
         >
           <div
             v-for="speaker in speakers"
             :key="speaker.id"
-            class="group relative overflow-hidden aspect-3/4 border-r border-b border-gray-800 last:border-r-0 cursor-pointer"
+            class="group relative overflow-hidden aspect-3/4 border-r border-b border-theme-border last:border-r-0 cursor-pointer"
             @click="openModal(speaker)"
           >
             <div
-              class="absolute inset-0 bg-gray-950 transition-transform duration-500 group-hover:scale-105"
+              class="absolute inset-0 bg-theme-base transition-transform duration-500 group-hover:scale-105"
             >
               <AppImage
                 :src="speaker.image"
@@ -212,17 +217,17 @@
             </div>
 
             <div
-              class="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950/40 to-transparent"
+              class="absolute inset-0 bg-linear-to-t from-theme-base via-theme-base/40 to-transparent"
             ></div>
 
             <div class="relative h-full p-6 md:p-8 flex flex-col justify-end">
               <span
-                class="text-yellow-400 font-sans font-semibold text-xs mb-1 tracking-widest uppercase"
+                class="text-theme-secondary font-sans font-semibold text-xs mb-1 tracking-widest uppercase"
               >
                 {{ speaker.role }}
               </span>
               <h3
-                class="text-xl md:text-2xl font-display font-bold uppercase mb-2 group-hover:text-orange-500 transition-colors"
+                class="text-xl md:text-2xl font-display font-bold uppercase mb-2 group-hover:text-theme-primary transition-colors"
               >
                 {{ speaker.name }}
               </h3>
@@ -235,7 +240,7 @@
                 >
                 <Icon
                   name="heroicons:arrow-right"
-                  class="w-4 h-4 text-orange-500"
+                  class="w-4 h-4 text-theme-primary"
                 />
               </div>
             </div>
@@ -244,12 +249,12 @@
       </div>
     </section>
 
-    <section class="py-20 md:py-24 bg-black border-t border-gray-800">
+    <section class="py-20 md:py-24 bg-black border-t border-theme-border">
       <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
           <div>
             <span
-              class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
+              class="text-theme-primary font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >
               Be Inspired
             </span>
@@ -259,18 +264,20 @@
               Testimonies
             </h2>
           </div>
-          <div class="h-px grow bg-gray-800 mx-12 hidden md:block mb-4"></div>
+          <div
+            class="h-px grow bg-theme-border mx-12 hidden md:block mb-4"
+          ></div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
           <div
             v-for="testimony in testimonies"
             :key="testimony.id"
-            class="p-8 border border-gray-800 bg-gray-900/30 hover:bg-gray-900/80 transition-colors relative group"
+            class="p-8 border border-theme-border bg-theme-surface/30 hover:bg-theme-surface/80 transition-colors relative group"
           >
             <Icon
               name="heroicons:chat-bubble-bottom-center-text"
-              class="w-8 h-8 text-orange-500/40 mb-6 group-hover:text-orange-500 transition-colors"
+              class="w-8 h-8 text-theme-primary/40 mb-6 group-hover:text-theme-primary transition-colors"
             />
             <p
               class="text-gray-300 text-sm md:text-base font-light leading-relaxed mb-4 min-h-20"
@@ -278,7 +285,7 @@
               "{{ testimony.testimony }}"
             </p>
             <div
-              class="border-t border-gray-800 pt-5 flex items-center justify-between"
+              class="border-t border-theme-border pt-5 flex items-center justify-between"
             >
               <div>
                 <h4
@@ -287,7 +294,7 @@
                   {{ testimony.name }}
                 </h4>
                 <span
-                  class="text-orange-500 text-[10px] md:text-xs tracking-widest uppercase"
+                  class="text-theme-primary text-[10px] md:text-xs tracking-widest uppercase"
                   >{{ testimony.location }}</span
                 >
               </div>
@@ -297,11 +304,11 @@
       </div>
     </section>
 
-    <section class="py-20 md:py-24 bg-gray-950 border-t border-gray-800">
+    <section class="py-20 md:py-24 bg-theme-base border-t border-theme-border">
       <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
         <div>
           <span
-            class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
+            class="text-theme-primary font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >Location</span
           >
           <h2
@@ -311,7 +318,7 @@
           </h2>
 
           <div
-            class="border border-gray-800 bg-gray-900 p-8 relative overflow-hidden group rounded-sm"
+            class="border border-theme-border bg-theme-surface p-8 relative overflow-hidden group rounded-sm"
           >
             <div
               class="absolute -right-8 -top-8 text-gray-800 group-hover:text-gray-700 transition-colors"
@@ -332,9 +339,9 @@
           </div>
         </div>
 
-        <div class="pt-15 border-t border-gray-800 md:border-0 md:pt-0">
+        <div class="pt-15 border-t border-theme-border md:border-0 md:pt-0">
           <span
-            class="text-orange-500 font-sans font-semibold text-xs tracking-[0.2em] uppercase"
+            class="text-theme-primary font-sans font-semibold text-xs tracking-[0.2em] uppercase"
             >Details</span
           >
           <h2
@@ -343,7 +350,7 @@
             FAQ
           </h2>
 
-          <div class="border-t border-gray-800">
+          <div class="border-t border-theme-border">
             <HomeFaq v-for="faq in faqs" :key="faq.id" :faq="faq" />
           </div>
         </div>

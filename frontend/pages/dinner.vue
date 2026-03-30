@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen bg-gray-950 text-gray-200 font-sans antialiased selection:bg-orange-500/30 overflow-hidden pt-30 pb-24"
+    class="relative min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
   >
     <DinnerBackdrop />
 
@@ -8,13 +8,13 @@
       <div v-if="pending" class="flex justify-center items-center py-20">
         <Icon
           name="heroicons:arrow-path"
-          class="w-10 h-10 text-orange-500 animate-spin"
+          class="w-10 h-10 text-theme-primary animate-spin"
         />
       </div>
 
       <div
         v-else-if="error"
-        class="text-center py-20 bg-gray-900 border border-red-900/50 rounded-xl"
+        class="text-center py-20 bg-theme-surface border border-red-900/50 rounded-xl"
       >
         <Icon
           name="heroicons:exclamation-triangle"
@@ -34,7 +34,7 @@
       <div v-else>
         <header class="mb-14 relative">
           <div
-            class="absolute -top-10 -left-10 w-64 h-64 bg-orange-500/10 blur-[100px] pointer-events-none"
+            class="absolute -top-10 -left-10 w-64 h-64 bg-theme-primary/10 blur-[100px] pointer-events-none"
           ></div>
           <span
             class="text-white font-sans font-bold text-xs tracking-[0.3em] uppercase mb-3 block"
@@ -46,7 +46,7 @@
           >
             The
             <span
-              class="text-transparent bg-clip-text bg-linear-to-r from-orange-500 to-yellow-400"
+              class="text-transparent bg-clip-text bg-linear-to-r from-theme-primary to-theme-secondary"
               >Coronation</span
             >
           </h1>
@@ -78,10 +78,10 @@
           v-if="merchSettings"
         >
           <div
-            class="bg-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 relative overflow-hidden"
+            class="bg-theme-surface border border-theme-border rounded-2xl p-8 md:p-12 relative overflow-hidden"
           >
             <div
-              class="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 blur-3xl rounded-full pointer-events-none"
+              class="absolute top-0 right-0 w-64 h-64 bg-theme-primary/5 blur-3xl rounded-full pointer-events-none"
             ></div>
 
             <h2
@@ -98,7 +98,7 @@
                 </p>
 
                 <div
-                  class="bg-gray-950 p-6 rounded-xl border border-gray-800 space-y-4"
+                  class="bg-theme-base p-6 rounded-xl border border-theme-border space-y-4"
                 >
                   <div>
                     <span
@@ -113,7 +113,8 @@
                       >Account Number</span
                     >
                     <div class="flex items-center gap-3">
-                      <span class="text-orange-400 font-bold text-2xl font-mono"
+                      <span
+                        class="text-theme-primary font-bold text-2xl font-mono"
                         >7037865052</span
                       >
                       <button
@@ -140,7 +141,7 @@
               </div>
 
               <div
-                class="flex flex-col justify-center space-y-6 border-t md:border-t-0 md:border-l border-gray-800 pt-8 md:pt-0 md:pl-12"
+                class="flex flex-col justify-center space-y-6 border-t md:border-t-0 md:border-l border-theme-border pt-8 md:pt-0 md:pl-12"
               >
                 <div>
                   <h3
@@ -157,7 +158,7 @@
                 <a
                   href="https://forms.gle/K49ckmQmDTz1KKtc8"
                   target="_blank"
-                  class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-orange-500 to-yellow-500 text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-orange-500/20 transition-all hover:-translate-y-1"
+                  class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-theme-primary to-theme-secondary text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-theme-primary/20 transition-all hover:-translate-y-1"
                 >
                   Open
                   <Icon
@@ -172,7 +173,7 @@
 
         <section class="mt-16 relative">
           <div
-            class="bg-gray-900/50 backdrop-blur-xl rounded-2xl p-8 md:p-12 border-l-4 border-orange-500 shadow-2xl overflow-hidden relative text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8"
+            class="bg-theme-surface/50 backdrop-blur-xl rounded-2xl p-8 md:p-12 border-l-4 border-theme-primary shadow-2xl overflow-hidden relative text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8"
           >
             <div
               class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none"
@@ -196,7 +197,7 @@
               <a
                 href="#"
                 target="_blank"
-                class="inline-flex items-center gap-3 border border-gray-700 bg-gray-950 text-white px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:border-orange-500 hover:text-orange-500 transition-all duration-300 text-sm md:text-md"
+                class="inline-flex items-center gap-3 border border-gray-700 bg-theme-base text-white px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:border-theme-primary hover:text-theme-primary transition-all duration-300 text-sm md:text-md"
               >
                 View Past Dinners
                 <Icon

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen bg-gray-950 text-gray-200 font-sans antialiased selection:bg-orange-500/30 overflow-hidden pt-30 pb-24"
+    class="relative min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
   >
     <ContactBackdrop />
 
@@ -8,13 +8,13 @@
       <div v-if="pending" class="flex justify-center items-center py-20">
         <Icon
           name="heroicons:arrow-path"
-          class="w-10 h-10 text-orange-500 animate-spin"
+          class="w-10 h-10 text-theme-primary animate-spin"
         />
       </div>
 
       <div
         v-else-if="error"
-        class="text-center py-20 bg-gray-900 border border-red-900/50 rounded-xl"
+        class="text-center py-20 bg-theme-surface border border-red-900/50 rounded-xl"
       >
         <Icon
           name="heroicons:exclamation-triangle"
@@ -25,7 +25,7 @@
         </p>
         <button
           @click="refresh"
-          class="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
+          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
         >
           Try Again
         </button>

@@ -15,7 +15,7 @@
       <section class="xl:col-span-8 space-y-4">
         <div
           v-if="speakers.length === 0"
-          class="border-2 border-dashed border-gray-800 rounded-2xl p-12 flex flex-col items-center justify-center text-gray-500 bg-gray-900/50"
+          class="border-2 border-dashed border-theme-border rounded-2xl p-12 flex flex-col items-center justify-center text-gray-500 bg-theme-surface/50"
         >
           <Icon name="heroicons:user-plus" class="w-12 h-12 mb-4 opacity-50" />
           <p class="font-medium tracking-wide">
@@ -27,17 +27,17 @@
           v-else
           v-for="speaker in speakers"
           :key="speaker.id"
-          class="group relative overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 p-6 transition-all hover:border-gray-700 hover:shadow-xl"
+          class="group relative overflow-hidden rounded-2xl bg-theme-surface border border-theme-border p-6 transition-all hover:border-gray-700 hover:shadow-xl"
         >
           <div
-            class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+            class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-theme-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
           ></div>
           <div
             class="flex flex-col sm:flex-row items-start justify-between gap-6"
           >
             <div class="flex gap-5 items-start">
               <div
-                class="h-20 w-20 sm:h-24 sm:w-24 rounded-xl overflow-hidden shadow-lg border border-gray-700 shrink-0 bg-gray-950"
+                class="h-20 w-20 sm:h-24 sm:w-24 rounded-xl overflow-hidden shadow-lg border border-gray-700 shrink-0 bg-theme-base"
               >
                 <img
                   v-if="speaker.image"
@@ -58,7 +58,7 @@
                   {{ speaker.name }}
                 </h3>
                 <p
-                  class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-3"
+                  class="text-theme-primary text-xs font-bold tracking-widest uppercase mb-3"
                 >
                   {{ speaker.role || "No Role Specified" }}
                 </p>
@@ -93,14 +93,14 @@
 
       <aside class="xl:col-span-4">
         <div
-          class="sticky top-10 rounded-2xl bg-gray-900 p-6 sm:p-8 border border-gray-800 shadow-2xl"
+          class="sticky top-10 rounded-2xl bg-theme-surface p-6 sm:p-8 border border-theme-border shadow-2xl"
         >
           <h3
             class="font-display text-xl font-bold text-white mb-6 flex items-center gap-2 uppercase tracking-wide"
           >
             <Icon
               name="heroicons:pencil-square"
-              class="text-orange-500 w-6 h-6"
+              class="text-theme-primary w-6 h-6"
             />
             {{ speakerForm.id ? "Edit Speaker" : "Add New Speaker" }}
           </h3>
@@ -114,7 +114,7 @@
                 v-model="speakerForm.name"
                 type="text"
                 required
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-orange-500/50 transition-all text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-theme-primary/50 transition-all text-sm"
                 placeholder="e.g. Dr. Jane Doe"
               />
             </div>
@@ -127,7 +127,7 @@
               <input
                 v-model="speakerForm.role"
                 type="text"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-orange-500/50 transition-all text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-theme-primary/50 transition-all text-sm"
                 placeholder="Keynote Speaker"
               />
             </div>
@@ -140,7 +140,7 @@
               <input
                 v-model="speakerForm.topic"
                 type="text"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-orange-500/50 transition-all text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-theme-primary/50 transition-all text-sm"
                 placeholder="Enter session title"
               />
             </div>
@@ -153,7 +153,7 @@
               <input
                 v-model="speakerForm.image"
                 type="text"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-orange-500/50 transition-all text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-theme-primary/50 transition-all text-sm"
                 placeholder="/img/speaker.jpg"
               />
             </div>
@@ -166,14 +166,14 @@
               <textarea
                 v-model="speakerForm.bio"
                 rows="3"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-orange-500/50 transition-all text-sm resize-none"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-theme-primary/50 transition-all text-sm resize-none"
               ></textarea>
             </div>
 
             <div class="pt-4 flex flex-col sm:flex-row gap-3">
               <button
                 type="submit"
-                class="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 py-3 rounded-xl text-black font-bold uppercase tracking-widest text-xs shadow-lg transition-all"
+                class="flex-1 bg-gradient-to-r from-theme-primary to-theme-secondary py-3 rounded-xl text-black font-bold uppercase tracking-widest text-xs shadow-lg transition-all"
               >
                 Save Profile
               </button>

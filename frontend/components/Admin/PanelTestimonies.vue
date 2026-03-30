@@ -15,7 +15,7 @@
       <section class="xl:col-span-8 space-y-4">
         <div
           v-if="testimonies.length === 0"
-          class="border-2 border-dashed border-gray-800 rounded-2xl p-12 flex flex-col items-center justify-center text-gray-500 bg-gray-900/50"
+          class="border-2 border-dashed border-theme-border rounded-2xl p-12 flex flex-col items-center justify-center text-gray-500 bg-theme-surface/50"
         >
           <Icon
             name="heroicons:chat-bubble-bottom-center-text"
@@ -30,7 +30,7 @@
           v-else
           v-for="testimony in testimonies"
           :key="testimony.id"
-          class="group relative overflow-hidden rounded-2xl bg-gray-900 border border-gray-800 p-6 transition-all hover:border-gray-700"
+          class="group relative overflow-hidden rounded-2xl bg-theme-surface border border-theme-border p-6 transition-all hover:border-gray-700"
         >
           <div
             class="flex flex-col sm:flex-row items-start justify-between gap-6"
@@ -42,7 +42,7 @@
                 {{ testimony.name }}
               </h3>
               <p
-                class="text-orange-500 text-xs font-bold tracking-widest uppercase mb-3"
+                class="text-theme-primary text-xs font-bold tracking-widest uppercase mb-3"
               >
                 {{ testimony.location }}
               </p>
@@ -72,14 +72,14 @@
 
       <aside class="xl:col-span-4">
         <div
-          class="sticky top-10 rounded-2xl bg-gray-900 p-6 sm:p-8 border border-gray-800 shadow-2xl"
+          class="sticky top-10 rounded-2xl bg-theme-surface p-6 sm:p-8 border border-theme-border shadow-2xl"
         >
           <h3
             class="font-display text-xl font-bold text-white mb-6 flex items-center gap-2 uppercase tracking-wide"
           >
             <Icon
               name="heroicons:pencil-square"
-              class="text-orange-500 w-6 h-6"
+              class="text-theme-primary w-6 h-6"
             />
             {{ testimonyForm.id ? "Edit Testimony" : "Add Testimony" }}
           </h3>
@@ -93,7 +93,7 @@
                 v-model="testimonyForm.name"
                 type="text"
                 required
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm"
               />
             </div>
             <div class="space-y-1.5">
@@ -104,7 +104,7 @@
               <input
                 v-model="testimonyForm.location"
                 type="text"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm"
                 placeholder="e.g. 2025 Attendee"
               />
             </div>
@@ -117,13 +117,13 @@
                 v-model="testimonyForm.testimony"
                 required
                 rows="4"
-                class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm resize-none"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm resize-none"
               ></textarea>
             </div>
             <div class="pt-4 flex gap-3">
               <button
                 type="submit"
-                class="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 py-3 rounded-xl text-black font-bold uppercase tracking-widest text-xs shadow-lg transition-all"
+                class="flex-1 bg-gradient-to-r from-theme-primary to-theme-secondary py-3 rounded-xl text-black font-bold uppercase tracking-widest text-xs shadow-lg transition-all"
               >
                 Save
               </button>

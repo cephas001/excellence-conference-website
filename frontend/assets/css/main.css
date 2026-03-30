@@ -5,8 +5,6 @@
 
 html,
 body {
-    background-color: #030712;
-    color-scheme: dark;
     font-family: "Poppins", sans-serif, system-ui, sans-serif !important;
 }
 
@@ -14,4 +12,25 @@ body {
     --font-poppins: "Poppins", sans-serif;
     --font-display: "Montserrat", sans-serif;
     --font-sans: "Inter", sans-serif;
+
+    --color-theme-primary: #f97316;
+    /* Tailwind's orange-500 */
+    --color-theme-secondary: #eab308;
+    /* Tailwind's yellow-500 */
+
+    --color-theme-base: #030712;
+    /* Tailwind's gray-950 */
+    --color-theme-surface: #111827;
+    /* Tailwind's gray-900 */
+    --color-theme-border: #1f2937;
+    /* Tailwind's gray-800 */
+}
+
+@layer base {
+
+    html,
+    body {
+        background-color: var(--color-theme-base);
+        color-scheme: dark;
+    }
 }

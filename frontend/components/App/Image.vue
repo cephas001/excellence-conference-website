@@ -1,8 +1,8 @@
 <template>
-  <div class="relative overflow-hidden bg-gray-950" :class="wrapperClass">
+  <div class="relative overflow-hidden bg-theme-base" :class="wrapperClass">
     <div
       v-if="!isLoaded && !hasError"
-      class="absolute inset-0 bg-gray-900 animate-pulse flex items-center justify-center z-10"
+      class="absolute inset-0 bg-theme-surface animate-pulse flex items-center justify-center z-10"
     >
       <Icon name="heroicons:photo" class="w-8 h-8 text-gray-800" />
     </div>

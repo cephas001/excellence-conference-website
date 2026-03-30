@@ -13,12 +13,12 @@
 
     <div class="space-y-8">
       <section
-        class="bg-gray-900 border border-gray-800 rounded-2xl p-6 sm:p-8"
+        class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8"
       >
         <h3
           class="font-display text-xl font-bold text-white mb-4 uppercase flex items-center gap-2"
         >
-          <Icon name="heroicons:map-pin" class="w-6 h-6 text-orange-500" /> Main
+          <Icon name="heroicons:map-pin" class="w-6 h-6 text-theme-primary" /> Main
           Venue
         </h3>
         <form @submit.prevent="submitVenue" class="grid sm:grid-cols-2 gap-4">
@@ -29,7 +29,7 @@
             <input
               v-model="venue.name"
               type="text"
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
             />
           </div>
           <div>
@@ -39,7 +39,7 @@
             <input
               v-model="venue.mapLink"
               type="url"
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
             />
           </div>
           <div class="sm:col-span-2">
@@ -49,7 +49,7 @@
             <input
               v-model="venue.address"
               type="text"
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
             />
           </div>
           <div class="sm:col-span-2 pt-2">
@@ -64,12 +64,12 @@
       </section>
 
       <section
-        class="bg-gray-900 border border-gray-800 rounded-2xl p-6 sm:p-8"
+        class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8"
       >
         <h3
           class="font-display text-xl font-bold text-white mb-4 uppercase flex items-center gap-2"
         >
-          <Icon name="heroicons:sparkles" class="w-6 h-6 text-orange-500" />
+          <Icon name="heroicons:sparkles" class="w-6 h-6 text-theme-primary" />
           Workers Dinner
         </h3>
         <form @submit.prevent="submitDinner" class="grid sm:grid-cols-2 gap-4">
@@ -80,7 +80,7 @@
             <input
               v-model="dinner.venueName"
               type="text"
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
             />
           </div>
           <div>
@@ -90,7 +90,7 @@
             <input
               v-model="dinner.dateTime"
               type="text"
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
             />
           </div>
           <div class="sm:col-span-2 pt-2">
@@ -105,12 +105,12 @@
       </section>
 
       <section
-        class="bg-gray-900 border border-gray-800 rounded-2xl p-6 sm:p-8"
+        class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8"
       >
         <h3
           class="font-display text-xl font-bold text-white mb-4 uppercase flex items-center gap-2"
         >
-          <Icon name="heroicons:megaphone" class="w-6 h-6 text-orange-500" />
+          <Icon name="heroicons:megaphone" class="w-6 h-6 text-theme-primary" />
           Global Announcement Banner
         </h3>
         <form @submit.prevent="submitAnnouncement" class="space-y-4">
@@ -121,14 +121,14 @@
             <input
               v-model="announcement"
               type="text"
-              class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
               placeholder="e.g. Registration closes tomorrow!"
             />
           </div>
           <div class="pt-2">
             <button
               type="submit"
-              class="bg-orange-500 text-black px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest"
+              class="bg-theme-primary text-black px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest"
             >
               Update Banner
             </button>

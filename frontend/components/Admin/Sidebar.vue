@@ -1,10 +1,10 @@
 <template>
   <aside
-    class="hidden lg:flex flex-col w-72 border-r border-gray-800 bg-gray-900 overflow-y-auto shadow-2xl z-20"
+    class="hidden lg:flex flex-col w-72 border-r border-theme-border bg-theme-surface overflow-y-auto shadow-2xl z-20"
   >
     <div class="p-8 pb-6">
       <h1
-        class="text-2xl font-display font-bold tracking-tighter text-orange-500 uppercase"
+        class="text-2xl font-display font-bold tracking-tighter text-theme-primary uppercase"
       >
         Majestic Admin
       </h1>
@@ -23,7 +23,7 @@
         class="flex items-center gap-3 px-6 py-3.5 transition-all duration-300 w-full text-left"
         :class="
           activePanel === nav.id
-            ? 'text-orange-500 bg-orange-500/10 rounded-r-full font-semibold border-l-4 border-orange-500'
+            ? 'text-theme-primary bg-theme-primary/10 rounded-r-full font-semibold border-l-4 border-theme-primary'
             : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 rounded-r-full border-l-4 border-transparent'
         "
       >
@@ -32,12 +32,12 @@
       </button>
     </nav>
 
-    <div class="p-6 border-t border-gray-800 mt-auto">
+    <div class="p-6 border-t border-theme-border mt-auto">
       <div
-        class="flex items-center gap-3 mb-6 bg-gray-950 p-3 rounded-xl border border-gray-800"
+        class="flex items-center gap-3 mb-6 bg-theme-base p-3 rounded-xl border border-theme-border"
       >
         <div
-          class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 font-bold"
+          class="w-10 h-10 rounded-full bg-theme-primary/20 flex items-center justify-center text-theme-primary font-bold"
         >
           A
         </div>
