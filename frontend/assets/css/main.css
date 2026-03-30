@@ -5,7 +5,8 @@
 
 html,
 body {
-    background-color: #f8fafc;
+    background-color: #030712;
+    color-scheme: dark;
     font-family: "Poppins", sans-serif, system-ui, sans-serif !important;
 }
 
