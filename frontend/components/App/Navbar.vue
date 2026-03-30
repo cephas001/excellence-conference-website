@@ -102,7 +102,7 @@
     >
       <div
         v-if="isMobileMenuOpen"
-        class="absolute top-full left-0 right-0 bg-gray-950/95 backdrop-blur-3xl border-b border-gray-800 p-6 flex flex-col gap-6 md:hidden shadow-2xl"
+        class="absolute top-full left-0 right-0 bg-gray-950/95 backdrop-blur-3xl border-b border-gray-800 px-6 pb-6 pt-4 flex flex-col gap-6 md:hidden shadow-2xl"
       >
         <nav class="flex flex-col gap-4">
           <NuxtLink
