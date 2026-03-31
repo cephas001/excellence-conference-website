@@ -6,7 +6,7 @@
     v-if="!loading"
   >
     <section
-      class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-10"
+      class="relative min-h-screen flex items-center overflow-hidden px-6 lg:px-12 pt-7"
     >
       <div class="absolute inset-0 z-0">
         <SlideShow :slides="slides" :currentSlide="currentSlide" />
