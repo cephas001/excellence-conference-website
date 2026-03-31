@@ -97,47 +97,7 @@
                   receipt/proof of payment.
                 </p>
 
-                <div
-                  class="bg-theme-base p-6 rounded-xl border border-theme-border space-y-4"
-                >
-                  <div>
-                    <span
-                      class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
-                      >Bank Name</span
-                    >
-                    <span class="text-white font-medium text-lg">Opay</span>
-                  </div>
-                  <div>
-                    <span
-                      class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
-                      >Account Number</span
-                    >
-                    <div class="flex items-center gap-3">
-                      <span
-                        class="text-theme-primary font-bold text-2xl font-mono"
-                        >7037865052</span
-                      >
-                      <button
-                        class="text-gray-500 hover:text-white transition-colors"
-                        title="Copy Account Number"
-                      >
-                        <Icon
-                          name="heroicons:clipboard-document"
-                          class="w-5 h-5"
-                        />
-                      </button>
-                    </div>
-                  </div>
-                  <div>
-                    <span
-                      class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
-                      >Account Name</span
-                    >
-                    <span class="text-gray-300 font-medium"
-                      >Helen Folarin Toluwalashe</span
-                    >
-                  </div>
-                </div>
+                <AccountDetailsCard :accountDetails="dinnerAccountDetails" />
               </div>
 
               <div
@@ -232,6 +192,12 @@ const {
   error: merchError,
   refresh: refreshMerch,
 } = await api.getMerchSettings();
+
+const dinnerAccountDetails = ref({
+  accountBank: "Opay",
+  accountNumber: "7037865052",
+  accountName: "Helen Folarin Toluwalashe",
+});
 
 // --- Unified State Management ---
 const pending = computed(() => settingsLoading.value || merchLoading.value);

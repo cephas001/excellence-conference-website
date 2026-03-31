@@ -96,49 +96,7 @@
                 payment.
               </p>
 
-              <div
-                class="bg-theme-base p-6 rounded-xl border border-theme-border space-y-4"
-              >
-                <div>
-                  <span
-                    class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
-                    >Bank Name</span
-                  >
-                  <span class="text-white font-medium text-lg">{{
-                    merchSettings.accountBank
-                  }}</span>
-                </div>
-                <div>
-                  <span
-                    class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
-                    >Account Number</span
-                  >
-                  <div class="flex items-center gap-3">
-                    <span
-                      class="text-theme-primary font-bold text-2xl font-mono"
-                      >{{ merchSettings.accountNumber }}</span
-                    >
-                    <button
-                      class="text-gray-500 hover:text-white transition-colors"
-                      title="Copy Account Number"
-                    >
-                      <Icon
-                        name="heroicons:clipboard-document"
-                        class="w-5 h-5"
-                      />
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <span
-                    class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
-                    >Account Name</span
-                  >
-                  <span class="text-gray-300 font-medium">{{
-                    merchSettings.accountName
-                  }}</span>
-                </div>
-              </div>
+              <AccountDetailsCard :accountDetails="merchSettings" />
             </div>
 
             <div
@@ -159,7 +117,7 @@
               <a
                 :href="merchSettings.googleFormLink"
                 target="_blank"
-                class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-theme-primary to-theme-secondary text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-theme-primary/20 transition-all hover:-translate-y-1"
+                class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-theme-primary to-theme-secondary text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-theme-primary/20 transition-all hover:-translate-y-1 text-sm md:text-md"
               >
                 Open
                 <Icon
