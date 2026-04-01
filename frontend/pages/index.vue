@@ -360,6 +360,54 @@
         </div>
       </div>
     </section>
+
+    <section
+      class="py-20 md:py-24 bg-theme-surface border-t border-theme-border relative overflow-hidden"
+      v-if="$pwa?.showInstallPrompt"
+    >
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-theme-primary/10 rounded-full blur-[100px] pointer-events-none"
+      ></div>
+
+      <div
+        class="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center"
+      >
+        <div
+          class="w-16 h-16 rounded-full bg-theme-base border border-theme-primary/30 flex items-center justify-center mb-8 shadow-[0_0_15px_rgba(249,115,22,0.15)]"
+        >
+          <Icon
+            name="heroicons:device-phone-mobile"
+            class="w-8 h-8 text-theme-primary"
+          />
+        </div>
+
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-display font-bold uppercase mb-4 text-theme-text tracking-tight"
+        >
+          Take
+          <span
+            class="text-transparent bg-clip-text bg-linear-to-r from-theme-primary to-theme-secondary"
+            >EC'26</span
+          >
+          With You
+        </h2>
+
+        <p
+          class="text-theme-text-muted text-base md:text-lg mb-10 max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          Install the official Excellence Conference app on your home screen for
+          instant access to the schedule, and seamless offline support.
+        </p>
+
+        <button
+          @click="$pwa.install()"
+          class="bg-linear-to-r from-theme-primary to-theme-secondary text-black px-10 py-4 rounded-sm font-sans font-bold text-sm tracking-widest uppercase hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:-translate-y-1 transition-all flex items-center gap-3"
+        >
+          <Icon name="heroicons:arrow-down-tray" class="w-5 h-5" />
+          Install App Now
+        </button>
+      </div>
+    </section>
   </div>
 
   <SpeakerModal
@@ -373,6 +421,8 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const api = useConferenceData();
+
+const { $pwa } = useNuxtApp();
 
 // --- Modal State ---
 const isModalOpen = ref(false);

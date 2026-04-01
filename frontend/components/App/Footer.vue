@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="bg-black py-16 px-6 border-t border-theme-surface relative overflow-hidden"
+    class="bg-theme-base py-16 px-6 border-t border-theme-border relative overflow-hidden transition-colors duration-300"
   >
     <div
       class="absolute bottom-0 left-1/2 -translate-x-1/2 w-150 h-75 bg-theme-primary/5 rounded-full blur-[100px] pointer-events-none"
@@ -14,7 +14,9 @@
           >
             EC'<span class="text-theme-primary">26</span>
           </h2>
-          <p class="text-theme-text-muted text-sm leading-relaxed max-w-sm mb-6">
+          <p
+            class="text-theme-text-muted text-sm leading-relaxed max-w-sm mb-6"
+          >
             Shining the Light. A premier gathering at McPherson University
             Chapel of Praise.
           </p>
@@ -81,14 +83,16 @@
             <li class="flex items-start gap-3 text-theme-text-muted text-sm">
               <Icon
                 name="heroicons:map-pin"
-                class="w-5 h-5 text-gray-600 shrink-0"
+                class="w-5 h-5 text-theme-primary shrink-0"
               />
               <span>McPherson University,<br />Seriki-Sotayo, Ogun State.</span>
             </li>
-            <li class="flex items-center gap-3 text-theme-text-muted text-sm mt-2">
+            <li
+              class="flex items-center gap-3 text-theme-text-muted text-sm mt-2"
+            >
               <Icon
                 name="heroicons:envelope"
-                class="w-5 h-5 text-gray-600 shrink-0"
+                class="w-5 h-5 text-theme-primary shrink-0"
               />
               <span
                 >{{
@@ -102,16 +106,18 @@
       </div>
 
       <div
-        class="pt-8 border-t border-theme-surface flex flex-col md:flex-row items-center justify-between gap-4"
+        class="pt-8 border-t border-theme-border flex flex-col md:flex-row items-center justify-between gap-4"
       >
-        <p class="text-gray-600 text-xs font-medium tracking-wider uppercase">
-          Â© 2026 McPherson University Chapel. All rights reserved.
+        <p
+          class="text-theme-text-muted text-xs font-medium tracking-wider uppercase"
+        >
+          © 2026 McPherson University Chapel. All rights reserved.
         </p>
-        <div class="flex gap-6 text-xs font-medium text-gray-600">
-          <a href="#" class="hover:text-theme-text-muted transition-colors"
+        <div class="flex gap-6 text-xs font-medium text-theme-text-muted">
+          <a href="#" class="hover:text-theme-primary transition-colors"
             >Privacy Policy</a
           >
-          <a href="#" class="hover:text-theme-text-muted transition-colors"
+          <a href="#" class="hover:text-theme-primary transition-colors"
             >Terms of Service</a
           >
         </div>
