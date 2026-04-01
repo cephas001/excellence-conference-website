@@ -2,7 +2,7 @@
   <LargeLoader :loading="loading" />
 
   <div
-    class="relative min-h-screen bg-theme-base text-gray-200 font-sans selection:bg-theme-primary selection:text-black"
+    class="relative min-h-screen bg-theme-base text-theme-text font-sans selection:bg-theme-primary selection:text-black"
     v-if="!loading"
   >
     <section
@@ -40,7 +40,7 @@
               </NuxtLink>
               <NuxtLink
                 to="/merch"
-                class="border border-gray-700 text-gray-200 px-8 py-3.5 rounded-sm font-sans font-semibold text-sm md:text-base tracking-wide uppercase hover:bg-theme-border transition-colors text-center"
+                class="border border-gray-700 text-theme-text px-8 py-3.5 rounded-sm font-sans font-semibold text-sm md:text-base tracking-wide uppercase hover:bg-theme-border transition-colors text-center"
               >
                 Conference Merch
               </NuxtLink>
@@ -62,7 +62,7 @@
               >6</span
             >
             <span
-              class="text-gray-400 font-sans text-xs md:text-sm tracking-widest uppercase mt-2"
+              class="text-theme-text-muted font-sans text-xs md:text-sm tracking-widest uppercase mt-2"
               >Days of Power</span
             >
           </div>
@@ -72,7 +72,7 @@
               >10+</span
             >
             <span
-              class="text-gray-400 font-sans text-xs md:text-sm tracking-widest uppercase mt-2"
+              class="text-theme-text-muted font-sans text-xs md:text-sm tracking-widest uppercase mt-2"
               >Ministers</span
             >
           </div>
@@ -82,7 +82,7 @@
               >1</span
             >
             <span
-              class="text-gray-400 font-sans text-xs md:text-sm tracking-widest uppercase mt-2"
+              class="text-theme-text-muted font-sans text-xs md:text-sm tracking-widest uppercase mt-2"
               >Encounter</span
             >
           </div>
@@ -99,7 +99,7 @@
           <AppImage
             src="/img/homepage_second_section.jpg"
             :alt="'Worship'"
-            imgClass="transition-all duration-700 w-full aspect-4/5 object-cover border border-theme-border"
+            imgClass="transition-all duration-700 w-full aspect-4/5 object-cover border border-theme-border dark:brightness-[0.85] dark:contrast-[1.1] dark:opacity-95"
           />
           <div
             class="absolute bottom-0 right-0 bg-theme-primary p-6 translate-x-8 translate-y-8 hidden lg:block"
@@ -118,7 +118,7 @@
             <span class="text-theme-primary">TRANSFORMATION</span>
           </h2>
           <p
-            class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 font-light font-poppins"
+            class="text-theme-text-muted text-base md:text-lg leading-relaxed mb-8 font-light font-poppins"
           >
             In an era of shifting paradigms, Excellence 2026 serves as the
             definitive beacon. "Shining the Light" isn't just a theme; it's a
@@ -137,7 +137,9 @@
                 >
                   Spiritual Revival
                 </h4>
-                <p class="text-gray-400 text-sm md:text-base mt-1 font-poppins">
+                <p
+                  class="text-theme-text-muted text-sm md:text-base mt-1 font-poppins"
+                >
                   Deep encounters through prophetic ministrations and intense
                   worship sessions.
                 </p>
@@ -154,7 +156,9 @@
                 >
                   Academic Excellence
                 </h4>
-                <p class="text-gray-400 text-sm md:text-base mt-1 font-poppins">
+                <p
+                  class="text-theme-text-muted text-sm md:text-base mt-1 font-poppins"
+                >
                   Practical wisdom to dominate in your specific field of study
                   and future career.
                 </p>
@@ -191,7 +195,7 @@
           v-if="!speakers || speakers.length === 0"
           class="flex flex-col items-center justify-center py-16 px-6 border border-dashed border-theme-border rounded-2xl bg-theme-base/50 text-center"
         >
-          <h3 class="text-sm italic font-display text-white uppercase">
+          <h3 class="text-sm italic font-display text-theme-text uppercase">
             To be Revealed
           </h3>
         </div>
@@ -235,7 +239,7 @@
                 class="mt-4 border-t border-gray-700 pt-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
               >
                 <span
-                  class="text-xs text-gray-300 font-semibold tracking-widest uppercase"
+                  class="text-xs text-theme-text-muted font-semibold tracking-widest uppercase"
                   >More Info</span
                 >
                 <Icon
@@ -249,7 +253,7 @@
       </div>
     </section>
 
-    <section class="py-20 md:py-24 bg-black border-t border-theme-border">
+    <section class="py-20 md:py-24 bg-theme-base border-t border-theme-border">
       <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between mb-12 gap-6">
           <div>
@@ -280,7 +284,7 @@
               class="w-8 h-8 text-theme-primary/40 mb-6 group-hover:text-theme-primary transition-colors"
             />
             <p
-              class="text-gray-300 text-sm md:text-base font-light leading-relaxed mb-4 min-h-20"
+              class="text-theme-text-muted text-sm md:text-base font-light leading-relaxed mb-4 min-h-20"
             >
               "{{ testimony.testimony }}"
             </p>
@@ -289,7 +293,7 @@
             >
               <div>
                 <h4
-                  class="font-sans font-semibold tracking-wider text-sm md:text-base text-gray-100 uppercase"
+                  class="font-sans font-semibold tracking-wider text-sm md:text-base text-theme-text uppercase"
                 >
                   {{ testimony.name }}
                 </h4>
@@ -321,17 +325,17 @@
             class="border border-theme-border bg-theme-surface p-8 relative overflow-hidden group rounded-sm"
           >
             <div
-              class="absolute -right-8 -top-8 text-gray-800 group-hover:text-gray-700 transition-colors"
+              class="absolute -right-8 -top-8 text-theme-text-muted/30 group-hover:text-theme-text-muted/50 transition-colors"
             >
               <Icon name="heroicons:map" class="w-40 h-40 opacity-20" />
             </div>
             <div class="relative z-10" v-if="eventSettings?.venue">
               <h3
-                class="font-display font-bold text-xl md:text-3xl text-white mb-2"
+                class="font-display font-bold text-xl md:text-3xl text-theme-text mb-2"
               >
                 {{ eventSettings.venue.venueName }}
               </h3>
-              <p class="text-gray-400 text-base md:text-lg mb-6">
+              <p class="text-theme-text-muted text-base md:text-lg mb-6">
                 {{ eventSettings.venue.address }}
               </p>
               <LocationButton v-if="eventSettings.venue.mapLink" />

@@ -2,11 +2,11 @@
   <div class="animate-fade-in max-w-4xl">
     <header class="mb-10">
       <h2
-        class="font-display text-4xl font-bold text-white tracking-tight mb-2 uppercase"
+        class="font-display text-4xl font-bold text-theme-text tracking-tight mb-2 uppercase"
       >
         Event Settings
       </h2>
-      <p class="text-gray-400">
+      <p class="text-theme-text-muted">
         Configure global conference details, locations, and announcements.
       </p>
     </header>
@@ -16,46 +16,46 @@
         class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8"
       >
         <h3
-          class="font-display text-xl font-bold text-white mb-4 uppercase flex items-center gap-2"
+          class="font-display text-xl font-bold text-theme-text mb-4 uppercase flex items-center gap-2"
         >
           <Icon name="heroicons:map-pin" class="w-6 h-6 text-theme-primary" /> Main
           Venue
         </h3>
         <form @submit.prevent="submitVenue" class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label class="text-[10px] font-bold uppercase text-gray-500"
+            <label class="text-[10px] font-bold uppercase text-theme-text-muted"
               >Venue Name</label
             >
             <input
               v-model="venue.name"
               type="text"
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm mt-1"
             />
           </div>
           <div>
-            <label class="text-[10px] font-bold uppercase text-gray-500"
+            <label class="text-[10px] font-bold uppercase text-theme-text-muted"
               >Google Maps Link</label
             >
             <input
               v-model="venue.mapLink"
               type="url"
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm mt-1"
             />
           </div>
           <div class="sm:col-span-2">
-            <label class="text-[10px] font-bold uppercase text-gray-500"
+            <label class="text-[10px] font-bold uppercase text-theme-text-muted"
               >Full Address</label
             >
             <input
               v-model="venue.address"
               type="text"
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm mt-1"
             />
           </div>
           <div class="sm:col-span-2 pt-2">
             <button
               type="submit"
-              class="bg-gray-800 text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest border border-gray-700"
+              class="bg-gray-800 text-theme-text px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest border border-gray-700"
             >
               Save Venue
             </button>
@@ -67,36 +67,36 @@
         class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8"
       >
         <h3
-          class="font-display text-xl font-bold text-white mb-4 uppercase flex items-center gap-2"
+          class="font-display text-xl font-bold text-theme-text mb-4 uppercase flex items-center gap-2"
         >
           <Icon name="heroicons:sparkles" class="w-6 h-6 text-theme-primary" />
           Workers Dinner
         </h3>
         <form @submit.prevent="submitDinner" class="grid sm:grid-cols-2 gap-4">
           <div>
-            <label class="text-[10px] font-bold uppercase text-gray-500"
+            <label class="text-[10px] font-bold uppercase text-theme-text-muted"
               >Location / Room</label
             >
             <input
               v-model="dinner.venueName"
               type="text"
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm mt-1"
             />
           </div>
           <div>
-            <label class="text-[10px] font-bold uppercase text-gray-500"
+            <label class="text-[10px] font-bold uppercase text-theme-text-muted"
               >Date & Time</label
             >
             <input
               v-model="dinner.dateTime"
               type="text"
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm mt-1"
             />
           </div>
           <div class="sm:col-span-2 pt-2">
             <button
               type="submit"
-              class="bg-gray-800 text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest border border-gray-700"
+              class="bg-gray-800 text-theme-text px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-widest border border-gray-700"
             >
               Save Dinner Details
             </button>
@@ -108,20 +108,20 @@
         class="bg-theme-surface border border-theme-border rounded-2xl p-6 sm:p-8"
       >
         <h3
-          class="font-display text-xl font-bold text-white mb-4 uppercase flex items-center gap-2"
+          class="font-display text-xl font-bold text-theme-text mb-4 uppercase flex items-center gap-2"
         >
           <Icon name="heroicons:megaphone" class="w-6 h-6 text-theme-primary" />
           Global Announcement Banner
         </h3>
         <form @submit.prevent="submitAnnouncement" class="space-y-4">
           <div>
-            <label class="text-[10px] font-bold uppercase text-gray-500"
+            <label class="text-[10px] font-bold uppercase text-theme-text-muted"
               >Banner Text (Leave blank to hide)</label
             >
             <input
               v-model="announcement"
               type="text"
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm mt-1"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm mt-1"
               placeholder="e.g. Registration closes tomorrow!"
             />
           </div>

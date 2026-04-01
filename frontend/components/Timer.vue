@@ -11,7 +11,7 @@
           >{{ value }}</span
         >
         <span
-          class="text-[10px] md:text-xs text-gray-400 uppercase tracking-widest mt-1"
+          class="text-[10px] md:text-xs text-theme-text-muted uppercase tracking-widest mt-1"
           >{{ unit }}</span
         >
       </div>

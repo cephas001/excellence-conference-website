@@ -4,7 +4,7 @@
       class="absolute -top-10 -left-10 w-64 h-64 bg-theme-primary/10 blur-[100px] pointer-events-none"
     ></div>
     <h1
-      class="font-display font-bold text-4xl md:text-6xl tracking-tighter text-white leading-none mb-4 uppercase"
+      class="font-display font-bold text-4xl md:text-6xl tracking-tighter text-theme-text leading-none mb-4 uppercase"
     >
       {{ plainText }}
       <span
@@ -13,7 +13,7 @@
       >
     </h1>
     <p
-      class="text-gray-400 text-base md:text-lg max-w-2xl leading-relaxed font-poppins"
+      class="text-theme-text-muted text-base md:text-lg max-w-2xl leading-relaxed font-poppins"
     >
       {{ description }}
     </p>

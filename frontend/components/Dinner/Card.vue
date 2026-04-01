@@ -7,11 +7,11 @@
       class="text-theme-primary w-10 h-10 mb-8 opacity-70 group-hover:opacity-100 transition-opacity"
     />
     <div>
-      <p class="text-xs tracking-widest text-gray-500 font-bold uppercase mb-1">
+      <p class="text-xs tracking-widest text-theme-text-muted font-bold uppercase mb-1">
         {{ label }}
       </p>
       <h3
-        class="text-xl md:text-2xl font-display font-bold text-white uppercase tracking-wider"
+        class="text-xl md:text-2xl font-display font-bold text-theme-text uppercase tracking-wider"
       >
         {{ mainText }}
       </h3>

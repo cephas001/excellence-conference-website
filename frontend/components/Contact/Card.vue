@@ -14,11 +14,11 @@
 
     <div class="grow flex flex-col relative z-10">
       <h3
-        class="text-white font-display font-bold text-xl md:text-2xl mb-3 uppercase tracking-wide"
+        class="text-theme-text font-display font-bold text-xl md:text-2xl mb-3 uppercase tracking-wide"
       >
         {{ title }}
       </h3>
-      <p class="text-gray-500 mb-8 text-sm font-light leading-relaxed">
+      <p class="text-theme-text-muted mb-8 text-sm font-light leading-relaxed">
         {{ subtitle }}
       </p>
 

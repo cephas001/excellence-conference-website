@@ -22,38 +22,38 @@
             />
           </div>
           <h2
-            class="font-display text-3xl font-extrabold text-white mb-2 uppercase tracking-wide"
+            class="font-display text-3xl font-extrabold text-theme-text mb-2 uppercase tracking-wide"
           >
             Admin Access
           </h2>
-          <p class="text-gray-400 text-sm">Excellence Conference Backend</p>
+          <p class="text-theme-text-muted text-sm">Excellence Conference Backend</p>
         </div>
 
         <form @submit.prevent="submitLogin" class="space-y-6 relative z-10">
           <div class="space-y-1.5">
             <label
-              class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1"
+              class="text-xs font-bold uppercase tracking-widest text-theme-text-muted ml-1"
               >Email Address</label
             >
             <input
               v-model="form.email"
               type="email"
               required
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-theme-primary transition-all placeholder:text-gray-600"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3.5 text-theme-text focus:ring-2 focus:ring-theme-primary transition-all placeholder:text-gray-600"
               placeholder="admin@excellence.org"
             />
           </div>
 
           <div class="space-y-1.5">
             <label
-              class="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1"
+              class="text-xs font-bold uppercase tracking-widest text-theme-text-muted ml-1"
               >Password</label
             >
             <input
               v-model="form.password"
               type="password"
               required
-              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-theme-primary transition-all placeholder:text-gray-600"
+              class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3.5 text-theme-text focus:ring-2 focus:ring-theme-primary transition-all placeholder:text-gray-600"
               placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
             />
           </div>
@@ -76,7 +76,7 @@
           <div class="text-center mt-6">
             <NuxtLink
               to="/"
-              class="text-sm text-gray-500 hover:text-theme-primary transition-colors flex items-center justify-center gap-2"
+              class="text-sm text-theme-text-muted hover:text-theme-primary transition-colors flex items-center justify-center gap-2"
             >
               <Icon name="heroicons:arrow-left" class="w-4 h-4" /> Back to
               Website

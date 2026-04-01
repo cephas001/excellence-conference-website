@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
+    class="relative min-h-screen bg-theme-base text-theme-text font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
   >
     <div class="fixed inset-0 pointer-events-none z-0">
       <div
@@ -34,12 +34,12 @@
           name="heroicons:exclamation-triangle"
           class="w-12 h-12 text-red-500 mx-auto mb-4"
         />
-        <p class="text-gray-400 mb-4">
+        <p class="text-theme-text-muted mb-4">
           Unable to load merchandise items at this time.
         </p>
         <button
           @click="loadMerch"
-          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
+          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-theme-text rounded-md transition-colors font-semibold"
         >
           Try Again
         </button>
@@ -53,7 +53,7 @@
           name="heroicons:shopping-bag"
           class="w-12 h-12 text-gray-600 mx-auto mb-4"
         />
-        <p class="text-gray-500 font-medium tracking-wide">
+        <p class="text-theme-text-muted font-medium tracking-wide">
           Merchandise items will be posted soon. Check back later.
         </p>
       </div>
@@ -83,14 +83,14 @@
           ></div>
 
           <h2
-            class="font-display text-xl md:text-3xl text-white font-bold uppercase mb-8"
+            class="font-display text-xl md:text-3xl text-theme-text font-bold uppercase mb-8"
           >
             How to Pre-order
           </h2>
 
           <div class="grid md:grid-cols-2 gap-12">
             <div class="space-y-6">
-              <p class="text-gray-400">
+              <p class="text-theme-text-muted">
                 Please make a transfer for the total amount of your desired
                 items to the account below, and keep your receipt/proof of
                 payment.
@@ -104,11 +104,11 @@
             >
               <div>
                 <h3
-                  class="font-display text-xl md:text-2xl text-white uppercase mb-4"
+                  class="font-display text-xl md:text-2xl text-theme-text uppercase mb-4"
                 >
                   Confirm Your Order
                 </h3>
-                <p class="text-gray-400 text-sm mb-3">
+                <p class="text-theme-text-muted text-sm mb-3">
                   After making your transfer, you must fill out the pre-order
                   confirmation form and upload your proof of payment to secure
                   your items.
@@ -139,7 +139,7 @@
           </div>
           <blockquote class="relative z-10 max-w-3xl">
             <p
-              class="font-display text-2xl md:text-3xl text-white font-bold leading-tight mb-6 uppercase"
+              class="font-display text-2xl md:text-3xl text-theme-text font-bold leading-tight mb-6 uppercase"
             >
               "The light shines in the darkness, and the darkness has not
               overcome it."

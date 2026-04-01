@@ -4,16 +4,16 @@
   >
     <div>
       <span
-        class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
+        class="text-xs text-theme-text-muted font-bold uppercase tracking-widest block mb-1"
         >Bank Name</span
       >
-      <span class="text-white font-medium text-lg">{{
+      <span class="text-theme-text font-medium text-lg">{{
         accountDetails.accountBank
       }}</span>
     </div>
     <div>
       <span
-        class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
+        class="text-xs text-theme-text-muted font-bold uppercase tracking-widest block mb-1"
         >Account Number</span
       >
       <div class="flex items-center gap-3">
@@ -22,8 +22,8 @@
         }}</span>
         <button
           @click="copyAccountNumber"
-          class="text-gray-500 transition-colors"
-          :class="isCopied ? 'text-theme-primary' : 'hover:text-white'"
+          class="text-theme-text-muted transition-colors"
+          :class="isCopied ? 'text-theme-primary' : 'hover:text-theme-text'"
           title="Copy Account Number"
         >
           <Icon
@@ -40,10 +40,10 @@
     </div>
     <div>
       <span
-        class="text-xs text-gray-500 font-bold uppercase tracking-widest block mb-1"
+        class="text-xs text-theme-text-muted font-bold uppercase tracking-widest block mb-1"
         >Account Name</span
       >
-      <span class="text-gray-300 font-medium">{{
+      <span class="text-theme-text-muted font-medium">{{
         accountDetails.accountName
       }}</span>
     </div>

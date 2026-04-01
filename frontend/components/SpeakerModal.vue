@@ -22,7 +22,7 @@
         <div class="p-6 md:p-8 relative z-10">
           <button
             @click="close"
-            class="absolute top-4 right-4 p-2 text-gray-500 hover:text-white hover:bg-gray-800 rounded-sm transition-colors"
+            class="absolute top-4 right-4 p-2 text-theme-text-muted hover:text-theme-text hover:bg-gray-800 rounded-sm transition-colors"
           >
             <Icon name="heroicons:x-mark" class="w-6 h-6" />
           </button>
@@ -46,7 +46,7 @@
             </div>
 
             <h3
-              class="font-display font-bold text-3xl text-white mb-1 uppercase"
+              class="font-display font-bold text-3xl text-theme-text mb-1 uppercase"
             >
               {{ speaker?.name }}
             </h3>
@@ -61,11 +61,11 @@
               class="text-left bg-theme-base p-4 rounded-sm border border-theme-border mb-6"
             >
               <p
-                class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1"
+                class="text-[10px] font-bold text-theme-text-muted uppercase tracking-widest mb-1"
               >
                 Speaking On
               </p>
-              <p class="text-gray-200 font-semibold text-sm">
+              <p class="text-theme-text font-semibold text-sm">
                 {{ speaker.topic }}
               </p>
             </div>
@@ -74,7 +74,7 @@
               class="text-left border-t border-theme-border pt-6 max-h-48 overflow-y-auto pr-2 custom-scrollbar"
             >
               <p
-                class="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap"
+                class="text-theme-text-muted text-sm leading-relaxed whitespace-pre-wrap"
               >
                 {{ speaker?.bio || "Detailed biography coming soon." }}
               </p>

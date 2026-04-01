@@ -6,11 +6,11 @@
     >
       <div>
         <h4
-          class="font-display font-bold text-white uppercase text-sm tracking-wide"
+          class="font-display font-bold text-theme-text uppercase text-sm tracking-wide"
         >
           Install EC '26
         </h4>
-        <p class="text-xs text-gray-400 font-sans mt-1">
+        <p class="text-xs text-theme-text-muted font-sans mt-1">
           Add to home screen for offline access.
         </p>
       </div>
@@ -18,7 +18,7 @@
       <div class="flex items-center gap-3">
         <button
           @click="dismissBanner"
-          class="text-gray-400 hover:text-white transition-colors text-xs uppercase font-semibold tracking-wider"
+          class="text-theme-text-muted hover:text-theme-text transition-colors text-xs uppercase font-semibold tracking-wider"
         >
           Later
         </button>

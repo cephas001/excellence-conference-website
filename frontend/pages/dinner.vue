@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
+    class="relative min-h-screen bg-theme-base text-theme-text font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
   >
     <DinnerBackdrop />
 
@@ -20,12 +20,12 @@
           name="heroicons:exclamation-triangle"
           class="w-12 h-12 text-red-500 mx-auto mb-4"
         />
-        <p class="text-gray-400 mb-4">
+        <p class="text-theme-text-muted mb-4">
           Unable to load dinner details at this time.
         </p>
         <button
           @click="loadData"
-          class="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
+          class="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-theme-text rounded-md transition-colors font-semibold"
         >
           Try Again
         </button>
@@ -37,12 +37,12 @@
             class="absolute -top-10 -left-10 w-64 h-64 bg-theme-primary/10 blur-[100px] pointer-events-none"
           ></div>
           <span
-            class="text-white font-sans font-bold text-xs tracking-[0.3em] uppercase mb-3 block"
+            class="text-theme-text font-sans font-bold text-xs tracking-[0.3em] uppercase mb-3 block"
           >
             Workers Dinner
           </span>
           <h1
-            class="font-display font-bold text-4xl md:text-6xl tracking-tighter text-white leading-none mb-4 uppercase"
+            class="font-display font-bold text-4xl md:text-6xl tracking-tighter text-theme-text leading-none mb-4 uppercase"
           >
             The
             <span
@@ -85,14 +85,14 @@
             ></div>
 
             <h2
-              class="font-display text-xl md:text-3xl text-white font-bold uppercase mb-4"
+              class="font-display text-xl md:text-3xl text-theme-text font-bold uppercase mb-4"
             >
               Reserve Your Seat
             </h2>
 
             <div class="grid md:grid-cols-2 gap-12">
               <div class="space-y-6">
-                <p class="text-gray-400">
+                <p class="text-theme-text-muted">
                   Please make a transfer to the account below, and keep your
                   receipt/proof of payment.
                 </p>
@@ -105,11 +105,11 @@
               >
                 <div>
                   <h3
-                    class="font-display text-xl md:text-2xl text-white uppercase mb-4"
+                    class="font-display text-xl md:text-2xl text-theme-text uppercase mb-4"
                   >
                     Confirm Your Registration
                   </h3>
-                  <p class="text-gray-400 text-sm mb-3">
+                  <p class="text-theme-text-muted text-sm mb-3">
                     After making your transfer, you must fill out the
                     confirmation form and upload your proof of payment to secure
                     your seat.
@@ -118,7 +118,7 @@
                 <a
                   href="https://forms.gle/K49ckmQmDTz1KKtc8"
                   target="_blank"
-                  class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-theme-primary to-theme-secondary text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-theme-primary/20 transition-all hover:-translate-y-1"
+                  class="inline-flex items-center justify-center gap-3 bg-linear-to-r from-theme-primary to-theme-secondary text-black px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-theme-primary/20 transition-all hover:-translate-y-1 text-sm md:text-md"
                 >
                   Open
                   <Icon
@@ -143,11 +143,11 @@
 
             <div class="relative z-10 max-w-2xl">
               <h2
-                class="font-display text-2xl md:text-3xl text-white font-bold leading-tight mb-4 uppercase"
+                class="font-display text-xl md:text-2xl text-theme-text font-bold leading-tight mb-4 uppercase"
               >
                 Memories of Love
               </h2>
-              <p class="text-gray-400 text-md md:text-lg">
+              <p class="text-theme-text-muted text-md md:text-lg">
                 Revisit the moments of laughter, and divine fellowship from our
                 previous gatherings.
               </p>
@@ -157,7 +157,7 @@
               <a
                 href="#"
                 target="_blank"
-                class="inline-flex items-center gap-3 border border-gray-700 bg-theme-base text-white px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:border-theme-primary hover:text-theme-primary transition-all duration-300 text-sm md:text-md"
+                class="inline-flex items-center gap-3 border border-gray-700 bg-theme-base text-theme-text px-8 py-4 rounded-lg font-sans font-bold uppercase tracking-widest hover:border-theme-primary hover:text-theme-primary transition-all duration-300 text-sm md:text-md"
               >
                 View Past Dinners
                 <Icon

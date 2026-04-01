@@ -8,10 +8,8 @@
         to="/"
         class="relative z-50 flex items-center group transition-transform duration-300 hover:scale-[1.02] active:scale-95"
       >
-        <img
-          src="/img/logo.png"
-          alt="Excellence Conference Logo"
-          class="h-8 md:h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(249,115,22,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all duration-300"
+        <SvgLogo
+          class="h-8 md:h-10 w-auto drop-shadow-[0_0_15px_rgba(249,115,22,0.1)] group-hover:drop-shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all duration-300"
         />
       </NuxtLink>
 
@@ -22,7 +20,7 @@
           :class="
             isActive('/')
               ? 'text-theme-primary'
-              : 'text-gray-300 hover:text-theme-primary'
+              : 'text-theme-text-muted hover:text-theme-primary'
           "
           >Home</NuxtLink
         >
@@ -33,7 +31,7 @@
           :class="
             isActive('/agenda')
               ? 'text-theme-primary'
-              : 'text-gray-300 hover:text-theme-primary'
+              : 'text-theme-text-muted hover:text-theme-primary'
           "
           >Schedule</NuxtLink
         >
@@ -44,7 +42,7 @@
           :class="
             isActive('/merch')
               ? 'text-theme-primary'
-              : 'text-gray-300 hover:text-theme-primary'
+              : 'text-theme-text-muted hover:text-theme-primary'
           "
           >Merch</NuxtLink
         >
@@ -55,7 +53,7 @@
           :class="
             isActive('/about')
               ? 'text-theme-primary'
-              : 'text-gray-300 hover:text-theme-primary'
+              : 'text-theme-text-muted hover:text-theme-primary'
           "
           >About</NuxtLink
         >
@@ -66,7 +64,7 @@
           :class="
             isActive('/dinner')
               ? 'text-theme-primary'
-              : 'text-gray-300 hover:text-theme-primary'
+              : 'text-theme-text-muted hover:text-theme-primary'
           "
           >Dinner</NuxtLink
         >
@@ -79,11 +77,12 @@
         >
           Contact Us
         </button>
+        <ThemeToggle />
       </div>
 
       <button
         @click="toggleMobileMenu"
-        class="md:hidden relative z-50 p-2 text-gray-300 hover:text-white focus:outline-none"
+        class="md:hidden relative z-50 p-2 text-theme-text hover:text-theme-primary transition-colors duration-300 focus:outline-none"
       >
         <Icon
           :name="isMobileMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'"
@@ -112,7 +111,7 @@
             :class="
               isActive('/')
                 ? 'text-theme-primary'
-                : 'text-gray-200 hover:text-theme-primary'
+                : 'text-theme-text hover:text-theme-primary'
             "
             >Home</NuxtLink
           >
@@ -124,7 +123,7 @@
             :class="
               isActive('/agenda')
                 ? 'text-theme-primary'
-                : 'text-gray-200 hover:text-theme-primary'
+                : 'text-theme-text hover:text-theme-primary'
             "
             >Schedule</NuxtLink
           >
@@ -136,7 +135,7 @@
             :class="
               isActive('/merch')
                 ? 'text-theme-primary'
-                : 'text-gray-200 hover:text-theme-primary'
+                : 'text-theme-text hover:text-theme-primary'
             "
             >Merch</NuxtLink
           >
@@ -148,7 +147,7 @@
             :class="
               isActive('/about')
                 ? 'text-theme-primary'
-                : 'text-gray-200 hover:text-theme-primary'
+                : 'text-theme-text hover:text-theme-primary'
             "
             >About</NuxtLink
           >
@@ -160,19 +159,22 @@
             :class="
               isActive('/dinner')
                 ? 'text-theme-primary'
-                : 'text-gray-200 hover:text-theme-primary'
+                : 'text-theme-text hover:text-theme-primary'
             "
             >Workers Dinner</NuxtLink
           >
         </nav>
 
-        <div class="pt-6 border-t border-theme-border">
+        <div class="flex gap-4 pt-6 border-t border-theme-border items-center">
           <button
             class="w-full bg-linear-to-r from-theme-primary to-theme-secondary text-black px-6 py-4 rounded-sm font-sans font-bold uppercase tracking-widest text-sm shadow-lg"
             @click="goToContactPage"
           >
             Contact Us
           </button>
+          <div>
+            <ThemeToggle @colorModeChanged="isMobileMenuOpen = false" />
+          </div>
         </div>
       </div>
     </Transition>
@@ -224,7 +226,7 @@ const computeClass = computed(() => {
   } else if (isMobileMenuOpen.value) {
     return "bg-theme-base/95 backdrop-blur-3xl py-6 border-theme-border";
   } else {
-    return "bg-transparent border-transparent py-6";
+    return "bg-transparent border-navbar-border py-6";
   }
 });
 

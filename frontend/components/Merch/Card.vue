@@ -31,13 +31,13 @@
       >
         <button
           @click.stop="prevImage"
-          class="p-1.5 rounded-full bg-black/50 text-white hover:bg-theme-primary transition-colors backdrop-blur-sm"
+          class="p-1.5 rounded-full bg-black/50 text-theme-text hover:bg-theme-primary transition-colors backdrop-blur-sm"
         >
           <Icon name="heroicons:chevron-left" class="w-5 h-5" />
         </button>
         <button
           @click.stop="nextImage"
-          class="p-1.5 rounded-full bg-black/50 text-white hover:bg-theme-primary transition-colors backdrop-blur-sm"
+          class="p-1.5 rounded-full bg-black/50 text-theme-text hover:bg-theme-primary transition-colors backdrop-blur-sm"
         >
           <Icon name="heroicons:chevron-right" class="w-5 h-5" />
         </button>
@@ -59,13 +59,13 @@
     <div class="p-5 flex flex-col grow">
       <div class="mb-3">
         <h3
-          class="font-display text-lg font-bold tracking-tight text-white mb-1.5 group-hover:text-theme-primary transition-colors uppercase line-clamp-1"
+          class="font-display text-lg font-bold tracking-tight text-theme-text mb-1.5 group-hover:text-theme-primary transition-colors uppercase line-clamp-1"
         >
           {{ item.name }}
         </h3>
         <p
           v-if="item.description"
-          class="text-md text-gray-400 leading-relaxed line-clamp-2"
+          class="text-md text-theme-text-muted leading-relaxed line-clamp-2"
         >
           {{ item.description }}
         </p>

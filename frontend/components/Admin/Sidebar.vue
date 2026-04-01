@@ -9,7 +9,7 @@
         Majestic Admin
       </h1>
       <p
-        class="text-[10px] text-gray-500 font-bold tracking-[0.2em] mt-1 uppercase"
+        class="text-[10px] text-theme-text-muted font-bold tracking-[0.2em] mt-1 uppercase"
       >
         Conference Manager
       </p>
@@ -24,7 +24,7 @@
         :class="
           activePanel === nav.id
             ? 'text-theme-primary bg-theme-primary/10 rounded-r-full font-semibold border-l-4 border-theme-primary'
-            : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800 rounded-r-full border-l-4 border-transparent'
+            : 'text-theme-text-muted hover:text-theme-text hover:bg-gray-800 rounded-r-full border-l-4 border-transparent'
         "
       >
         <Icon :name="nav.icon" class="w-5 h-5 shrink-0" />
@@ -42,8 +42,8 @@
           A
         </div>
         <div class="overflow-hidden">
-          <p class="text-sm font-semibold text-white truncate">Admin User</p>
-          <p class="text-xs text-gray-500">Conference Lead</p>
+          <p class="text-sm font-semibold text-theme-text truncate">Admin User</p>
+          <p class="text-xs text-theme-text-muted">Conference Lead</p>
         </div>
       </div>
       <button

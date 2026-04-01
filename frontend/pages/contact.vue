@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
+    class="relative min-h-screen bg-theme-base text-theme-text font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
   >
     <ContactBackdrop />
 
@@ -20,12 +20,12 @@
           name="heroicons:exclamation-triangle"
           class="w-12 h-12 text-red-500 mx-auto mb-4"
         />
-        <p class="text-gray-400 mb-4">
+        <p class="text-theme-text-muted mb-4">
           Unable to load contact details at this time.
         </p>
         <button
           @click="refresh"
-          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
+          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-theme-text rounded-md transition-colors font-semibold"
         >
           Try Again
         </button>

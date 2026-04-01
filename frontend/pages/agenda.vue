@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-theme-base text-gray-200 font-sans selection:bg-theme-primary selection:text-black pt-30 pb-20"
+    class="min-h-screen bg-theme-base text-theme-text font-sans selection:bg-theme-primary selection:text-black pt-30 pb-20"
   >
     <main class="px-6 md:px-8 max-w-3xl mx-auto">
       <AppPageHeader
@@ -25,10 +25,10 @@
           name="heroicons:exclamation-triangle"
           class="w-12 h-12 text-red-500 mx-auto mb-4"
         />
-        <p class="text-gray-400 mb-4">Unable to load the schedule.</p>
+        <p class="text-theme-text-muted mb-4">Unable to load the schedule.</p>
         <button
           @click="refreshAgenda"
-          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-white rounded-md transition-colors font-semibold"
+          class="px-6 py-2 bg-theme-border hover:bg-gray-700 text-theme-text rounded-md transition-colors font-semibold"
         >
           Try Again
         </button>
@@ -47,7 +47,7 @@
               :class="
                 selectedDate === group.date
                   ? 'bg-linear-to-br from-theme-primary to-theme-secondary text-black shadow-lg shadow-theme-primary/20'
-                  : 'bg-theme-surface hover:bg-theme-border text-gray-300'
+                  : 'bg-theme-surface hover:bg-theme-border text-theme-text-muted'
               "
             >
               <span
@@ -77,8 +77,8 @@
               class="flex-1 py-3 px-4 text-[10px] sm:text-xs font-bold uppercase tracking-widest rounded-sm transition-colors truncate"
               :class="
                 selectedSessionId === session.id
-                  ? 'bg-theme-border text-white shadow-sm'
-                  : 'text-gray-500 hover:text-gray-300 hover:bg-theme-surface/50'
+                  ? 'bg-theme-border text-theme-text shadow-sm'
+                  : 'text-theme-text-muted hover:text-theme-text-muted hover:bg-theme-surface/50'
               "
             >
               {{ formatSublabel(session.sublabel) }}
@@ -94,7 +94,7 @@
 
           <div
             v-if="!activeDocument || activeDocument.items.length === 0"
-            class="text-center py-20 text-gray-500 font-light border border-dashed border-theme-border rounded-2xl bg-theme-surface/30 px-4"
+            class="text-center py-20 text-theme-text-muted font-light border border-dashed border-theme-border rounded-2xl bg-theme-surface/30 px-4"
           >
             No programs scheduled for this specific session yet.
           </div>
@@ -109,7 +109,7 @@
                 class="w-22.25 md:w-26 pr-4 shrink-0 flex justify-end relative z-10"
               >
                 <div
-                  class="bg-theme-surface border border-gray-700/50 text-gray-200 text-[10px] md:text-xs font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg whitespace-nowrap"
+                  class="bg-theme-surface border border-gray-700/50 text-theme-text text-[10px] md:text-xs font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg whitespace-nowrap"
                 >
                   {{ item.time }}
                 </div>
@@ -125,20 +125,20 @@
                   </span>
                   <span
                     v-if="item.tag"
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest border bg-theme-border border-gray-700 text-gray-300"
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest border bg-theme-border border-gray-700 text-theme-text-muted"
                   >
                     {{ item.tag }}
                   </span>
                 </div>
 
                 <h3
-                  class="text-lg md:text-2xl font-display font-bold text-white mb-1.5 leading-tight"
+                  class="text-lg md:text-2xl font-display font-bold text-theme-text mb-1.5 leading-tight"
                 >
                   {{ item.title }}
                 </h3>
                 <p
                   v-if="item.description"
-                  class="text-xs md:text-sm text-gray-400 leading-relaxed"
+                  class="text-xs md:text-sm text-theme-text-muted leading-relaxed"
                 >
                   {{ item.description }}
                 </p>
@@ -166,18 +166,20 @@
                     </div>
                     <div class="min-w-0 pr-2">
                       <h4
-                        class="text-white font-bold text-xs md:text-sm truncate"
+                        class="text-theme-text font-bold text-xs md:text-sm truncate"
                       >
                         {{ item.speaker.name }}
                       </h4>
-                      <p class="text-gray-400 text-[10px] md:text-xs truncate">
+                      <p
+                        class="text-theme-text-muted text-[10px] md:text-xs truncate"
+                      >
                         {{ item.speaker.role }}
                       </p>
                     </div>
                   </div>
                   <Icon
                     name="heroicons:chevron-right"
-                    class="w-4 h-4 md:w-5 md:h-5 text-gray-500 group-hover/card:text-theme-primary shrink-0 transition-colors"
+                    class="w-4 h-4 md:w-5 md:h-5 text-theme-text-muted group-hover/card:text-theme-primary shrink-0 transition-colors"
                   />
                 </div>
               </div>

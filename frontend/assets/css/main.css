@@ -8,29 +8,71 @@ body {
     font-family: "Poppins", sans-serif, system-ui, sans-serif !important;
 }
 
+/* 1. Define the Light Mode (Default) Colors */
+:root {
+    /* We use slightly darker oranges/yellows here so they don't get lost on a white background */
+    --brand-primary: #ea580c;
+    --brand-secondary: #ca8a04;
+
+    --brand-base: #ffffff;
+    /* White background */
+    --brand-surface: #f3f4f6;
+    /* Light gray (gray-100) */
+    --brand-border: #e5e7eb;
+    /* Light gray border (gray-200) */
+    --brand-text: #000000;
+    --brand-text-muted: #374151;
+
+    --navbar-border: #e5e7eb;
+}
+
+/* 2. Define the Dark Mode Colors */
+.dark {
+    /* Your original Fire & Light theme */
+    --brand-primary: #f97316;
+    --brand-secondary: #eab308;
+
+    --brand-base: #030712;
+    --brand-surface: #111827;
+    --brand-border: #1f2937;
+    --brand-text: #f9fafb;
+    /* White/Light gray text */
+    --brand-text-muted: #9ca3af;
+    /* Muted light gray text */
+
+    --navbar-border: transparent;
+}
+
+/* 3. Feed the dynamic variables into Tailwind v4 */
 @theme {
     --font-poppins: "Poppins", sans-serif;
     --font-display: "Montserrat", sans-serif;
     --font-sans: "Inter", sans-serif;
 
-    --color-theme-primary: #f97316;
-    /* Tailwind's orange-500 */
-    --color-theme-secondary: #eab308;
-    /* Tailwind's yellow-500 */
+    --color-theme-primary: var(--brand-primary);
+    --color-theme-secondary: var(--brand-secondary);
+    --color-theme-base: var(--brand-base);
+    --color-theme-surface: var(--brand-surface);
+    --color-theme-border: var(--brand-border);
 
-    --color-theme-base: #030712;
-    /* Tailwind's gray-950 */
-    --color-theme-surface: #111827;
-    /* Tailwind's gray-900 */
-    --color-theme-border: #1f2937;
-    /* Tailwind's gray-800 */
+    /* Adding text colors so your typography flips automatically */
+    --color-theme-text: var(--brand-text);
+    --color-theme-text-muted: var(--brand-text-muted);
+
+    --color-navbar-border: var(--navbar-border);
 }
 
+/* 4. Force the base background and text to transition smoothly */
 @layer base {
 
     html,
     body {
-        background-color: var(--color-theme-base);
+        background-color: var(--brand-base);
+        color: var(--brand-text);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark {
         color-scheme: dark;
     }
 }

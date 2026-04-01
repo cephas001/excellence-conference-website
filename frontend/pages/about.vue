@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative min-h-screen bg-theme-base text-gray-200 font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
+    class="relative min-h-screen bg-theme-base text-theme-text font-sans antialiased selection:bg-theme-primary/30 overflow-hidden pt-30 pb-24"
   >
     <div class="fixed inset-0 pointer-events-none z-0">
       <div
@@ -28,7 +28,7 @@
               class="text-theme-primary w-10 h-10 mb-6 opacity-80"
             />
             <blockquote
-              class="text-2xl md:text-3xl font-display font-bold text-white leading-tight italic uppercase"
+              class="text-2xl md:text-3xl font-display font-bold text-theme-text leading-tight italic uppercase"
             >
               "The light shines in the darkness, and the darkness has not
               overcome it."
@@ -45,12 +45,12 @@
 
         <div class="space-y-8">
           <h2
-            class="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-tight"
+            class="text-3xl md:text-4xl font-display font-bold text-theme-text uppercase tracking-tight"
           >
             Shining the Light
           </h2>
           <div
-            class="space-y-6 text-base md:text-lg text-gray-400 leading-relaxed font-light"
+            class="space-y-6 text-base md:text-lg text-theme-text-muted leading-relaxed font-light"
           >
             <p>
               At Excellence 2026, we believe that true brilliance is born when
@@ -87,11 +87,13 @@
                 >Our Roots</span
               >
               <h2
-                class="text-2xl md:text-4xl font-display font-bold text-white uppercase mb-6"
+                class="text-2xl md:text-4xl font-display font-bold text-theme-text uppercase mb-6"
               >
                 The Sanctuary
               </h2>
-              <p class="text-gray-400 text-md md:text-lg mb-8 leading-relaxed">
+              <p
+                class="text-theme-text-muted text-md md:text-lg mb-8 leading-relaxed"
+              >
                 Join us at the Chapel of Praise, a cathedral of intellectual and
                 spiritual fervor located within the serene campus of McPherson
                 University.
@@ -102,11 +104,11 @@
                 <div>
                   <LocationButton />
                   <h4
-                    class="font-bold text-white text-lg mb-1 uppercase tracking-wide"
+                    class="font-bold text-theme-text text-lg mb-1 uppercase tracking-wide"
                   >
                     Chapel of Praise
                   </h4>
-                  <p class="text-sm text-gray-500 leading-relaxed">
+                  <p class="text-sm text-theme-text-muted leading-relaxed">
                     McPherson University, Seriki-Sotayo, Ogun State, Nigeria
                   </p>
                 </div>
@@ -120,9 +122,6 @@
                 alt="Chapel of Praise Atmosphere"
                 imgClass="w-full h-full object-cover  transition-all duration-700 scale-105 group-hover:scale-100"
               />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-theme-base via-transparent to-transparent opacity-60"
-              ></div>
             </div>
           </div>
         </div>
@@ -135,11 +134,11 @@
             >The Steering Council</span
           >
           <h2
-            class="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tighter mb-4"
+            class="text-4xl md:text-5xl font-display font-bold text-theme-text uppercase tracking-tighter mb-4"
           >
             Leadership
           </h2>
-          <p class="text-gray-400 max-w-xl mx-auto">
+          <p class="text-theme-text-muted max-w-xl mx-auto">
             Guided by visionaries who embody the fusion of academic prowess and
             spiritual depth.
           </p>
@@ -156,12 +155,9 @@
                 alt="Peter Okodugha"
                 imgClass="w-full h-full object-cover transition-all duration-500 z-10 object-top"
               />
-              <div
-                class="absolute inset-0 bg-theme-base/50 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none"
-              ></div>
             </div>
             <h3
-              class="font-display font-bold text-2xl text-white mb-1 uppercase group-hover:text-theme-primary transition-colors"
+              class="font-display font-bold text-2xl text-theme-text mb-1 uppercase group-hover:text-theme-primary transition-colors"
             >
               Peter Okodugha
             </h3>
@@ -181,12 +177,9 @@
                 alt="Rev. Ibiwunmi Alo"
                 imgClass="w-full h-full object-cover transition-all duration-500 z-10"
               />
-              <div
-                class="absolute inset-0 bg-theme-base/50 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none"
-              ></div>
             </div>
             <h3
-              class="font-display font-bold text-2xl text-white mb-1 uppercase group-hover:text-theme-primary transition-colors"
+              class="font-display font-bold text-2xl text-theme-text mb-1 uppercase group-hover:text-theme-primary transition-colors"
             >
               Rev. Ibiwunmi Alo
             </h3>
@@ -205,15 +198,15 @@
             >
               <Icon
                 name="heroicons:user-group"
-                class="text-gray-500 text-2xl group-hover:text-theme-primary transition-colors"
+                class="text-theme-text-muted text-2xl group-hover:text-theme-primary transition-colors"
               />
             </div>
             <h3
-              class="font-display font-bold text-xl text-white mb-2 uppercase text-center group-hover:text-theme-primary transition-colors"
+              class="font-display font-bold text-xl text-theme-text mb-2 uppercase text-center group-hover:text-theme-primary transition-colors"
             >
               Executive Committee
             </h3>
-            <p class="text-gray-500 text-sm text-center">
+            <p class="text-theme-text-muted text-sm text-center">
               Comprising vision-driven leaders across various faculties and
               spiritual departments.
             </p>
@@ -233,12 +226,12 @@
             >Save The Date</span
           >
           <h2
-            class="text-3xl md:text-4xl font-display font-black text-white mb-8 uppercase leading-tight"
+            class="text-3xl md:text-4xl font-display font-black text-theme-text mb-8 uppercase leading-tight"
           >
             MAY 19TH, 2026
           </h2>
           <p
-            class="text-gray-400 text-md md:text-lg font-light mb-10 max-w-2xl mx-auto"
+            class="text-theme-text-muted text-md md:text-lg font-light mb-10 max-w-2xl mx-auto"
           >
             Experience the Radiance. Witness the Shift. Prepare your heart.
           </p>

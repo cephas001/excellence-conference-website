@@ -2,11 +2,11 @@
   <div class="animate-fade-in">
     <header class="mb-10">
       <h2
-        class="font-display text-4xl font-bold text-white tracking-tight mb-2 uppercase"
+        class="font-display text-4xl font-bold text-theme-text tracking-tight mb-2 uppercase"
       >
         Testimonies
       </h2>
-      <p class="text-gray-400">
+      <p class="text-theme-text-muted">
         Manage attendee testimonies shown on the home page.
       </p>
     </header>
@@ -15,7 +15,7 @@
       <section class="xl:col-span-8 space-y-4">
         <div
           v-if="testimonies.length === 0"
-          class="border-2 border-dashed border-theme-border rounded-2xl p-12 flex flex-col items-center justify-center text-gray-500 bg-theme-surface/50"
+          class="border-2 border-dashed border-theme-border rounded-2xl p-12 flex flex-col items-center justify-center text-theme-text-muted bg-theme-surface/50"
         >
           <Icon
             name="heroicons:chat-bubble-bottom-center-text"
@@ -37,7 +37,7 @@
           >
             <div>
               <h3
-                class="font-display text-xl font-bold text-white mb-1 uppercase"
+                class="font-display text-xl font-bold text-theme-text mb-1 uppercase"
               >
                 {{ testimony.name }}
               </h3>
@@ -47,7 +47,7 @@
                 {{ testimony.location }}
               </p>
               <p
-                class="text-gray-400 text-sm italic border-l-2 border-gray-700 pl-3"
+                class="text-theme-text-muted text-sm italic border-l-2 border-gray-700 pl-3"
               >
                 "{{ testimony.testimony }}"
               </p>
@@ -55,7 +55,7 @@
             <div class="flex sm:flex-col gap-2 shrink-0">
               <button
                 @click="editTestimony(testimony)"
-                class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 text-xs font-semibold uppercase border border-gray-700"
+                class="px-4 py-2 rounded-lg bg-gray-800 text-theme-text-muted text-xs font-semibold uppercase border border-gray-700"
               >
                 Edit
               </button>
@@ -75,7 +75,7 @@
           class="sticky top-10 rounded-2xl bg-theme-surface p-6 sm:p-8 border border-theme-border shadow-2xl"
         >
           <h3
-            class="font-display text-xl font-bold text-white mb-6 flex items-center gap-2 uppercase tracking-wide"
+            class="font-display text-xl font-bold text-theme-text mb-6 flex items-center gap-2 uppercase tracking-wide"
           >
             <Icon
               name="heroicons:pencil-square"
@@ -86,38 +86,38 @@
           <form @submit.prevent="handleSubmit" class="space-y-4">
             <div class="space-y-1.5">
               <label
-                class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1"
+                class="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted ml-1"
                 >Name *</label
               >
               <input
                 v-model="testimonyForm.name"
                 type="text"
                 required
-                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm"
               />
             </div>
             <div class="space-y-1.5">
               <label
-                class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1"
+                class="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted ml-1"
                 >Year / Location</label
               >
               <input
                 v-model="testimonyForm.location"
                 type="text"
-                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm"
                 placeholder="e.g. 2025 Attendee"
               />
             </div>
             <div class="space-y-1.5">
               <label
-                class="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1"
+                class="text-[10px] font-bold uppercase tracking-widest text-theme-text-muted ml-1"
                 >Quote *</label
               >
               <textarea
                 v-model="testimonyForm.testimony"
                 required
                 rows="4"
-                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-white text-sm resize-none"
+                class="w-full bg-theme-base border border-theme-border rounded-xl px-4 py-3 text-theme-text text-sm resize-none"
               ></textarea>
             </div>
             <div class="pt-4 flex gap-3">
@@ -131,7 +131,7 @@
                 v-if="testimonyForm.id"
                 @click="resetForm"
                 type="button"
-                class="px-6 bg-gray-800 py-3 rounded-xl text-white font-bold uppercase tracking-widest text-xs border border-gray-700"
+                class="px-6 bg-gray-800 py-3 rounded-xl text-theme-text font-bold uppercase tracking-widest text-xs border border-gray-700"
               >
                 Cancel
               </button>
