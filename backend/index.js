@@ -5,11 +5,16 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
+// Split the comma-separated string into an array, or default to an empty array if missing
+const envOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",")
+  : [];
+
 app.use(
   cors({
-    origin: ["http://localhost:3000", process.env.FRONTEND_URL].filter(Boolean), // This safely removes undefined values if FRONTEND_URL is missing
+    origin: ["http://localhost:3000", ...envOrigins].filter(Boolean), // Combines localhost with your parsed URLs safely
   }),
-); // Allows frontend to make requests to this API
+); // Allows frontends to make requests to this API
 app.use(express.json()); // Parses incoming JSON payloads
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
 
