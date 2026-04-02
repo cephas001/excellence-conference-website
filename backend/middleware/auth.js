@@ -47,6 +47,8 @@ const requireDynamicTypeAccess = (req, res, next) => {
   // Super Admins bypass the type check
   if (user.role === "super_admin") return next();
 
+  console.log(user);
+
   // Regular Admins must have a type that matches the route
   if (
     user.role === "admin" &&

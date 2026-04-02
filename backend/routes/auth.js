@@ -19,7 +19,7 @@ router.post("/register", verifyToken, requireSuperAdmin, async (req, res) => {
     });
 
     // Inside your /register route...
-    await auth.setCustomUserClaims(userRecord.uid, { role: role });
+    await auth.setCustomUserClaims(userRecord.uid, { role: role, type: type });
 
     // 2. Save the extra metadata in Firestore ('reviewers' collection)
     // We use the Firebase Auth UID (userRecord.uid) as the document ID.
