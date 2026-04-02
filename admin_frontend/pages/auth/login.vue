@@ -7,7 +7,7 @@
     >
       <div class="text-center mb-8">
         <h2 class="text-2xl font-bold text-black">Excellence Conference</h2>
-        <p class="text-md text-gray-700 mt-2">Review Portal</p>
+        <p class="text-md text-gray-700 mt-2">Admin Portal</p>
       </div>
 
       <form @submit.prevent="handleLogin" class="space-y-6">
@@ -39,7 +39,7 @@
               type="email"
               required
               class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 focus:border-black outline-none rounded-lg sm:text-sm transition-colors bg-white text-black"
-              placeholder="reviewer@example.com"
+              placeholder="admin@example.com"
             />
           </div>
         </div>
