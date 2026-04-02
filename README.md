@@ -39,7 +39,7 @@ To run the full ecosystem on your local machine, you will need to run the backen
 Clone the repository and install dependencies for all three workspaces:
 
 ```bash
-git clone [https://github.com/cephas001/excellence-conference-website.git](https://github.com/cephas001/excellence-conference-website.git)
+git clone https://github.com/cephas001/excellence-conference-website.git
 cd excellence-conference-website
 
 # Install Backend dependencies
