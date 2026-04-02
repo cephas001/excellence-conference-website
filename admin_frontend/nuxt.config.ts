@@ -20,4 +20,10 @@ export default defineNuxtConfig({
       firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
     },
   },
+
+  app: {
+    head: {
+      link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+    },
+  },
 });
