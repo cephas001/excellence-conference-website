@@ -12,7 +12,7 @@ const envOrigins = process.env.FRONTEND_URL
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", ...envOrigins].filter(Boolean), // Combines localhost with your parsed URLs safely
+    origin: ["http://localhost:3000", ...envOrigins].filter(Boolean),
   }),
 ); // Allows frontends to make requests to this API
 app.use(express.json()); // Parses incoming JSON payloads
