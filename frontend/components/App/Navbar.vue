@@ -84,10 +84,28 @@
         @click="toggleMobileMenu"
         class="md:hidden relative z-50 p-2 text-theme-text hover:text-theme-primary transition-colors duration-300 focus:outline-none"
       >
-        <Icon
-          :name="isMobileMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
           class="w-7 h-7 transition-transform duration-300"
-        />
+          :class="{ 'rotate-90 scale-95': isMobileMenuOpen }"
+        >
+          <path
+            v-if="isMobileMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+          <path
+            v-else
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
       </button>
     </div>
 
