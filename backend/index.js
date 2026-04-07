@@ -4,17 +4,36 @@ require("dotenv").config();
 
 const app = express();
 
-// Middleware
-// Split the comma-separated string into an array, or default to an empty array if missing
+// 1. Clean the environment variables: remove spaces and trailing slashes
 const envOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",")
+  ? process.env.FRONTEND_URL.split(",").map((url) =>
+      url.trim().replace(/\/$/, ""),
+    )
   : [];
+
+const allowedOrigins = ["http://localhost:3000", ...envOrigins];
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", ...envOrigins].filter(Boolean),
+    // 2. Use a function to dynamically check the origin
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl, or Nuxt SSR!)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    // 3. Ensure credentials are allowed if you are using cookies/sessions
+    credentials: true,
+    // 4. Force the browser to cache the preflight response for 10 minutes so it stops asking
+    maxAge: 600,
   }),
-); // Allows frontends to make requests to this API
+);
+
 app.use(express.json()); // Parses incoming JSON payloads
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies
 
