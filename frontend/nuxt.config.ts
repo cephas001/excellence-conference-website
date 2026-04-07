@@ -68,7 +68,7 @@ export default defineNuxtConfig({
   routeRules: {
     // Tell Nuxt to proxy all requests from /api to your backend
     "/api/**": {
-      proxy: "https://excellence-conference-website-api.onrender.com/api/**",
+      proxy: "https://ec-review-system-backend.onrender.com/api/**",
     },
   },
 });
