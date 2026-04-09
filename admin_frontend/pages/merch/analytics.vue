@@ -163,18 +163,35 @@
         <h3
           class="text-sm font-bold text-gray-600 uppercase tracking-wider mb-6"
         >
-          T-Shirt Colors
+          T-Shirt Colors & Sizes
         </h3>
-        <ul class="space-y-2">
+        <ul class="space-y-4">
           <li
-            v-for="(count, color) in colorCounts"
+            v-for="(data, color) in colorAndSizeBreakdown"
             :key="color"
-            class="flex justify-between items-center border-b border-gray-50 pb-2 last:border-0"
+            class="flex flex-col border-b border-gray-50 pb-4 last:border-0 last:pb-0"
           >
-            <span class="text-sm font-medium text-black capitalize">{{
-              color
-            }}</span>
-            <span class="text-sm font-bold text-gray-900">{{ count }}</span>
+            <div class="flex justify-between items-center w-full mb-2">
+              <span class="text-sm font-bold text-black capitalize">{{
+                color
+              }}</span>
+              <span class="text-sm font-black text-gray-900">{{
+                data.total
+              }}</span>
+            </div>
+
+            <div
+              v-if="Object.keys(data.sizes).length > 0"
+              class="flex flex-wrap gap-1.5"
+            >
+              <span
+                v-for="(sCount, size) in data.sizes"
+                :key="size"
+                class="inline-flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md"
+              >
+                {{ size }}: <span class="text-black ml-1">{{ sCount }}</span>
+              </span>
+            </div>
           </li>
         </ul>
       </div>
@@ -406,6 +423,51 @@ const countDynamicAttribute = (keyword) => {
 const colorCounts = computed(() => countDynamicAttribute("color"));
 const sizeCounts = computed(() => countDynamicAttribute("size"));
 const levelCounts = computed(() => countDynamicAttribute("level"));
+
+// NEW: Advanced nested parser for Colors + Sizes
+// NEW: Advanced nested parser for Colors + Sizes (with Missing Size detection)
+const colorAndSizeBreakdown = computed(() => {
+  const breakdown = {};
+
+  filteredData.value.forEach((app) => {
+    let color = findValue(app, "color");
+    let size = findValue(app, "size");
+
+    if (color !== null && color !== undefined) {
+      color = color.toString().trim().toLowerCase();
+
+      if (color && color !== "—") {
+        // Initialize the color bucket
+        if (!breakdown[color]) {
+          breakdown[color] = { total: 0, sizes: {} };
+        }
+
+        // 1. ALWAYS increment the total count for this color
+        breakdown[color].total++;
+
+        // 2. Safely process the size, defaulting to 'unspecified' if missing
+        let validSize = "unspecified";
+
+        if (size !== null && size !== undefined) {
+          const cleanSize = size.toString().trim().toLowerCase();
+          if (cleanSize && cleanSize !== "—") {
+            validSize = cleanSize;
+          }
+        }
+
+        // 3. Increment the specific size (or the 'unspecified' bucket)
+        breakdown[color].sizes[validSize] =
+          (breakdown[color].sizes[validSize] || 0) + 1;
+      }
+    }
+  });
+
+  // Sort the colors from highest total orders to lowest
+  const sorted = Object.entries(breakdown).sort(
+    (a, b) => b[1].total - a[1].total,
+  );
+  return Object.fromEntries(sorted);
+});
 
 // 4. Export to CSV Function
 const exportToCSV = () => {
