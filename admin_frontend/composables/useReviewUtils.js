@@ -92,7 +92,6 @@ export const useReviewUtils = () => {
   const getActualReceiptValue = (row) => {
     if (!row) return null;
 
-    console.log(row);
     // Find all keys that contain 'receipt' (e.g., 'Receipt', 'Receipt 1')
     const receiptKeys = Object.keys(row).filter((k) =>
       k.toLowerCase().includes("receipt"),
