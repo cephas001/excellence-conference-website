@@ -115,6 +115,8 @@ const zoomLevel = ref(1);
 const isPdfFallback = ref(false);
 const isLoading = ref(true); // NEW: Track loading state
 
+console.log("ReceiptViewer initialized with URL:", props.receiptUrl);
+
 const zoomIn = () => {
   if (zoomLevel.value < 3) zoomLevel.value += 0.25;
 };

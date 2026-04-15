@@ -89,6 +89,24 @@ export const useReviewUtils = () => {
     return normalized ? `https://wa.me/${normalized}` : "#";
   };
 
+  const getActualReceiptValue = (row) => {
+    if (!row) return null;
+
+    console.log(row);
+    // Find all keys that contain 'receipt' (e.g., 'Receipt', 'Receipt 1')
+    const receiptKeys = Object.keys(row).filter((k) =>
+      k.toLowerCase().includes("receipt"),
+    );
+
+    // Return the first one that actually has a file link
+    for (const key of receiptKeys) {
+      if (row[key] && row[key].toString().trim() !== "") {
+        return row[key];
+      }
+    }
+    return null;
+  };
+
   return {
     formatName,
     getStatus,
@@ -98,5 +116,6 @@ export const useReviewUtils = () => {
     formatHeader,
     getWhatsAppLink,
     normalizeForWhatsApp,
+    getActualReceiptValue,
   };
 };

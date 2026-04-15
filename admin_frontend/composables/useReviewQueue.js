@@ -8,8 +8,13 @@ import { useAlertModal } from "~/composables/useAlertModal";
 export const useReviewQueue = (endpoint, options = {}) => {
   const config = useRuntimeConfig();
   const token = useCookie("ec_token");
-  const { formatName, getStatus, getReceiptKey, extractFileId } =
-    useReviewUtils();
+  const {
+    formatName,
+    getStatus,
+    getReceiptKey,
+    extractFileId,
+    getActualReceiptValue,
+  } = useReviewUtils();
   const { hiddenColumns = [] } = options; // Destructure the hidden columns, default to empty
   const { showAlert } = useAlertModal();
 
@@ -126,9 +131,7 @@ export const useReviewQueue = (endpoint, options = {}) => {
 
   const dataHeaders = computed(() => {
     if (applications.value.length === 0) return [];
-    const receiptKey = getReceiptKey(applications.value);
 
-    // Convert hidden columns to lowercase for safe matching
     const lowerHidden = hiddenColumns.map((col) => col.toLowerCase().trim());
 
     return Object.keys(applications.value[0]).filter((key) => {
@@ -139,8 +142,8 @@ export const useReviewQueue = (endpoint, options = {}) => {
         lowerKey !== "comment" &&
         lowerKey !== "comments" &&
         lowerKey !== "email status" &&
-        key !== receiptKey &&
-        !lowerHidden.includes(lowerKey) // <-- The magic line that hides columns!
+        !lowerKey.includes("receipt") && // <-- THIS hides all versions of the receipt column
+        !lowerHidden.includes(lowerKey)
       );
     });
   });
@@ -148,9 +151,12 @@ export const useReviewQueue = (endpoint, options = {}) => {
   // --- Computed URLs ---
   const generateReceiptUrl = (row) => {
     if (!row) return null;
-    const receiptKey = getReceiptKey(applications.value);
-    if (!receiptKey || !row[receiptKey]) return null;
-    const fileId = extractFileId(row[receiptKey]);
+
+    // Use the smart extractor instead of relying on a single key
+    const receiptValue = getActualReceiptValue(row);
+    if (!receiptValue) return null;
+
+    const fileId = extractFileId(receiptValue);
     return fileId
       ? `${config.public.apiBase}/applications/receipt/${fileId}`
       : null;
