@@ -256,10 +256,6 @@ router.patch(
                 values: [[mailStatusText]],
               },
             });
-
-            console.log(
-              `Background update: Row ${rowIndex} Email Status set to '${mailStatusText}'`,
-            );
           })
           .catch((err) =>
             console.error("Background email tracking failed:", err),

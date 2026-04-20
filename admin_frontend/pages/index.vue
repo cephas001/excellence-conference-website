@@ -157,4 +157,6 @@ import { useAuthStore } from "~/stores/auth";
 
 const auth = useAuthStore();
 const name = computed(() => auth.user?.name?.split(" ")[0] || "Administrator");
+
+console.log(useCookie("ec_token").value);
 </script>

@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const { admin } = require("../config/firebase");
 
 // 1. Basic Token Verification (Are they logged in?)
-// Example Middleware
 const verifyToken = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
@@ -30,7 +29,6 @@ const verifyToken = async (req, res, next) => {
 
 // 2. Strict Super Admin Check (For registering new users)
 const requireSuperAdmin = (req, res, next) => {
-  console.log(req.user);
   if (req.user && req.user.role === "super_admin") {
     return next();
   }
@@ -46,8 +44,6 @@ const requireDynamicTypeAccess = (req, res, next) => {
 
   // Super Admins bypass the type check
   if (user.role === "super_admin") return next();
-
-  console.log(user);
 
   // Regular Admins must have a type that matches the route
   if (
