@@ -9,9 +9,11 @@
           Real-time breakdown of merchandise orders
         </p>
       </div>
-      <div class="mt-4 sm:mt-0 flex flex-wrap items-start gap-4">
-        <div class="flex flex-col gap-2">
-          <div class="flex bg-gray-100 p-1 rounded-xl">
+      <div
+        class="mt-4 sm:mt-0 flex flex-col xl:flex-row items-start gap-4 w-full sm:w-auto"
+      >
+        <div class="flex flex-col gap-2 w-full sm:w-auto">
+          <div class="flex bg-gray-100 p-1 rounded-xl w-max">
             <button
               @click="filterMode = 'all'"
               :class="
@@ -40,17 +42,17 @@
             v-if="filterMode === 'all'"
             class="flex items-center gap-2 text-xs font-semibold text-gray-500 cursor-pointer ml-1 select-none hover:text-gray-800 transition-colors group"
           >
-            <div class="relative flex items-center justify-center w-4 h-4">
+            <div
+              class="relative flex items-center justify-center w-4 h-4 shrink-0"
+            >
               <input
                 type="checkbox"
                 v-model="excludeRejected"
                 class="peer sr-only"
               />
-
               <div
-                class="absolute inset-0 bg-white border border-gray-300 rounded peer-checked:border-black peer-focus-visible:ring-2 peer-focus-visible:ring-black peer-focus-visible:ring-offset-1 transition-colors"
+                class="absolute inset-0 bg-white border border-gray-300 rounded peer-checked:border-black peer-focus-visible:ring-2 peer-focus-visible:ring-black transition-colors"
               ></div>
-
               <svg
                 class="w-3 h-3 text-black opacity-0 peer-checked:opacity-100 transition-opacity z-10"
                 fill="none"
@@ -65,30 +67,85 @@
                 />
               </svg>
             </div>
-
             <span class="mt-[0.5px]">Exclude Rejected Applications</span>
           </label>
         </div>
 
-        <button
-          @click="exportToCSV"
-          class="flex items-center gap-2 bg-black hover:bg-black/90 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition-colors cursor-pointer"
+        <div
+          class="flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-3 w-full sm:w-auto"
         >
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <div
+            class="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-2 shadow-sm w-full sm:w-auto"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            />
-          </svg>
-          Export CSV
-        </button>
+            <div class="flex items-center gap-2">
+              <label
+                class="text-[10px] font-bold text-gray-400 uppercase tracking-wider"
+                >From</label
+              >
+              <input
+                type="date"
+                v-model="startDate"
+                class="bg-transparent text-sm font-semibold text-gray-900 outline-none cursor-pointer w-full sm:w-auto"
+              />
+            </div>
+            <div class="w-px h-5 bg-gray-200 hidden sm:block"></div>
+            <div class="flex items-center gap-2">
+              <label
+                class="text-[10px] font-bold text-gray-400 uppercase tracking-wider"
+                >To</label
+              >
+              <input
+                type="date"
+                v-model="endDate"
+                class="bg-transparent text-sm font-semibold text-gray-900 outline-none cursor-pointer w-full sm:w-auto"
+              />
+            </div>
+
+            <button
+              v-if="startDate || endDate"
+              @click="
+                startDate = '';
+                endDate = '';
+              "
+              class="ml-1 text-gray-400 hover:text-red-500 transition-colors shrink-0"
+              title="Clear Dates"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <button
+            @click="exportToCSV"
+            class="flex items-center justify-center gap-2 bg-black hover:bg-black/90 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm transition-colors cursor-pointer w-full sm:w-auto shrink-0"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            Export CSV
+          </button>
+        </div>
       </div>
     </div>
 
@@ -254,6 +311,8 @@ const { showAlert } = useAlertModal();
 
 const filterMode = ref("all");
 const excludeRejected = ref(false);
+const startDate = ref("");
+const endDate = ref("");
 
 // Utility to safely extract values regardless of slight column name changes
 const findValue = (row, keyword) => {
@@ -272,26 +331,57 @@ const validApplications = computed(() => {
   });
 });
 
+// Replace your existing filteredData computed property with this:
 const filteredData = computed(() => {
-  // Scenario A: Only showing Approved
+  let result = validApplications.value;
+
+  // 1. Existing Status Filters
   if (filterMode.value === "approved") {
-    return validApplications.value.filter((app) => {
+    result = result.filter((app) => {
       const status = findValue(app, "status");
       return status && status.toString().trim().toLowerCase() === "approved";
     });
-  }
-
-  // Scenario B: Showing "All", but checkbox is ticked to hide Rejected
-  if (filterMode.value === "all" && excludeRejected.value) {
-    return validApplications.value.filter((app) => {
+  } else if (filterMode.value === "all" && excludeRejected.value) {
+    result = result.filter((app) => {
       const status = findValue(app, "status");
-      // Keep it if the status is NOT 'rejected'
       return !(status && status.toString().trim().toLowerCase() === "rejected");
     });
   }
 
-  // Scenario C: Showing absolutely everything
-  return validApplications.value;
+  // 2. NEW Date Range Filter
+  if (startDate.value || endDate.value) {
+    // Set 'start' to exactly midnight of the chosen day (or far past if empty)
+    const start = startDate.value
+      ? new Date(`${startDate.value}T00:00:00`)
+      : new Date(0);
+
+    // Set 'end' to exactly 23:59:59 of the chosen day (or far future if empty)
+    const end = endDate.value
+      ? new Date(`${endDate.value}T23:59:59.999`)
+      : new Date(8640000000000000);
+
+    result = result.filter((app) => {
+      // Hunt for the timestamp column (Google Forms usually calls it "Timestamp")
+      const dateStr =
+        findValue(app, "timestamp") ||
+        findValue(app, "time") ||
+        findValue(app, "date");
+
+      // Safety check: if the row completely lacks a date column, keep it so data isn't accidentally hidden
+      if (!dateStr) return true;
+
+      const appDate = new Date(dateStr);
+
+      // Safety check: if the date format is completely unparseable, keep it
+      if (isNaN(appDate.getTime())) return true;
+
+      // Only return true if the application date falls within our strict boundary
+      return appDate >= start && appDate <= end;
+    });
+  }
+
+  console.log(result);
+  return result;
 });
 
 // 2. The Single-Pass Parser (Calculates Income, Items, and Packages simultaneously)
