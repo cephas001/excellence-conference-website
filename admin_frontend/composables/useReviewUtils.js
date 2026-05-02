@@ -19,6 +19,12 @@ export const useReviewUtils = () => {
       : "pending";
   };
 
+  const getCheckoutStatus = (row) => {
+    if (!row) return null;
+    const key = Object.keys(row).find((k) => k.toLowerCase() === "delivered");
+    return key ? row[key] : null;
+  };
+
   const getComment = (row) => {
     if (!row) return null;
     const commentKey = Object.keys(row).find((k) =>
@@ -116,5 +122,6 @@ export const useReviewUtils = () => {
     getWhatsAppLink,
     normalizeForWhatsApp,
     getActualReceiptValue,
+    getCheckoutStatus,
   };
 };

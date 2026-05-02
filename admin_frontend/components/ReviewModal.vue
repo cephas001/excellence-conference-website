@@ -8,8 +8,10 @@
       @click="$emit('close')"
     ></div>
 
+    <!-- Shrink the modal if there is no image panel to display -->
     <div
-      class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row"
+      class="relative bg-white rounded-2xl shadow-2xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row transition-all duration-300"
+      :class="mode === 'checkout' ? 'max-w-2xl' : 'max-w-4xl'"
     >
       <button
         @click="$emit('close')"
@@ -30,10 +32,14 @@
         </svg>
       </button>
 
+      <!-- Details Panel -->
       <div
-        class="flex-1 p-6 md:p-8 overflow-y-auto border-b md:border-b-0 md:border-r border-gray-100 flex flex-col"
+        class="flex-1 p-6 md:p-8 overflow-y-auto border-b md:border-b-0 border-gray-100 flex flex-col"
+        :class="mode === 'checkout' ? '' : 'md:border-r'"
       >
-        <h3 class="text-lg font-bold text-gray-900 mb-6">Review Details</h3>
+        <h3 class="text-lg font-bold text-gray-900 mb-6">
+          {{ mode === "checkout" ? "Order Details" : "Review Details" }}
+        </h3>
 
         <div class="space-y-4 flex-1">
           <div v-for="header in headers" :key="header">
@@ -78,7 +84,13 @@
           </div>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-gray-100">
+        <!-- ========================================== -->
+        <!-- Standard Review Action Buttons             -->
+        <!-- ========================================== -->
+        <div
+          v-if="mode !== 'checkout'"
+          class="mt-8 pt-6 border-t border-gray-100"
+        >
           <p
             class="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3 text-center"
           >
@@ -103,9 +115,45 @@
             </button>
           </div>
         </div>
+
+        <!-- ========================================== -->
+        <!-- Checkout Action Buttons (NEW)              -->
+        <!-- ========================================== -->
+        <div
+          v-if="mode === 'checkout' && isItemUndelivered(row)"
+          class="mt-8 pt-6 border-t border-gray-100"
+        >
+          <p
+            class="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-3 text-center"
+          >
+            Process Handover
+          </p>
+          <div class="flex gap-3">
+            <button
+              :disabled="updatingRow === row._rowIndex"
+              @click="$emit('update-status', 'Delivered')"
+              class="flex-1 bg-green-600 text-white py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:bg-green-700 disabled:opacity-50 transition-colors"
+            >
+              {{
+                updatingRow === row._rowIndex
+                  ? "Processing..."
+                  : "Mark Delivered"
+              }}
+            </button>
+            <button
+              :disabled="updatingRow === row._rowIndex"
+              @click="$emit('update-status', 'Issue Reported')"
+              class="flex-1 bg-red-50 text-red-600 border border-red-100 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:bg-red-100 disabled:opacity-50 transition-colors"
+            >
+              {{ updatingRow === row._rowIndex ? "Saving..." : "Report Issue" }}
+            </button>
+          </div>
+        </div>
       </div>
 
+      <!-- Receipt Viewer (Hidden in Checkout Mode) -->
       <div
+        v-if="mode !== 'checkout'"
         class="flex-1 bg-gray-50 p-4 md:p-6 flex flex-col items-center justify-center min-h-[60vh] md:min-h-150 relative"
       >
         <ReceiptViewer :receiptUrl="receiptUrl" />
@@ -116,18 +164,41 @@
 
 <script setup>
 import { useReviewUtils } from "~/composables/useReviewUtils";
-// Grab getStatus so we know which button to hide
-const { formatName, getComment, formatHeader, getWhatsAppLink, getStatus } =
-  useReviewUtils();
+
+// Grab getCheckoutStatus to handle the new checkout button logic
+const {
+  formatName,
+  getComment,
+  formatHeader,
+  getWhatsAppLink,
+  getStatus,
+  getCheckoutStatus,
+} = useReviewUtils();
 
 defineProps({
   isOpen: { type: Boolean, default: false },
   row: { type: Object, default: null },
   headers: { type: Array, default: () => [] },
   receiptUrl: { type: String, default: null },
-  updatingRow: { type: Number, default: null }, // Added to handle loading states
+  updatingRow: { type: Number, default: null },
+  mode: { type: String, default: "review" },
 });
 
-// We emit update-status to tell the parent page to make the API call
 defineEmits(["close", "update-status"]);
+
+// Helper function to check if we should show the checkout buttons
+const isItemUndelivered = (row) => {
+  if (!row) return false;
+  const deliveryStatus = getCheckoutStatus(row);
+
+  if (!deliveryStatus) return true; // Blank means undelivered
+
+  const normalizedStatus = deliveryStatus.toString().trim().toLowerCase();
+  // Return true ONLY if it is not explicitly marked as delivered
+  return (
+    normalizedStatus !== "delivered" &&
+    normalizedStatus !== "true" &&
+    normalizedStatus !== "yes"
+  );
+};
 </script>

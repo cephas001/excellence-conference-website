@@ -12,6 +12,7 @@
         Refresh
       </button>
       <button
+        v-if="showAnalytics"
         @click="goToAnalytics"
         class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-black/90 cursor-pointer transition-colors"
       >
@@ -30,6 +31,10 @@ const props = defineProps({
   },
   titleText: {
     type: String,
+  },
+  showAnalytics: {
+    type: Boolean,
+    default: true,
   },
 });
 

@@ -273,6 +273,125 @@ router.patch(
   },
 );
 
+// --- UPDATE CHECKOUT STATUS (Protected by Type) ---
+router.patch(
+  "/:type/checkout",
+  verifyToken,
+  requireDynamicTypeAccess,
+  async (req, res) => {
+    try {
+      const { type } = req.params;
+      const { rowIndex, delivered, comment, reviewerEmail } = req.body;
+
+      if (!rowIndex || !delivered) {
+        return res
+          .status(400)
+          .json({ error: "Missing rowIndex or delivered status." });
+      }
+
+      let spreadsheetId =
+        type === "dinner"
+          ? process.env.SHEET_ID_DINNER
+          : process.env.SHEET_ID_MERCH;
+
+      // 1. Fetch headers to dynamically find columns
+      const headerResponse = await sheets.spreadsheets.values.get({
+        spreadsheetId,
+        range: "'Form Responses 1'!1:1",
+      });
+
+      const headers = headerResponse.data.values
+        ? headerResponse.data.values[0]
+        : [];
+
+      let deliveredColIndex = headers.findIndex(
+        (h) => h.trim().toLowerCase() === "delivered",
+      );
+      let commentColIndex = headers.findIndex(
+        (h) =>
+          h.trim().toLowerCase() === "comments" ||
+          h.trim().toLowerCase() === "comment",
+      );
+
+      let reviewerColIndex = headers.findIndex(
+        (h) => h.trim().toLowerCase() === "reviewer",
+      );
+
+      let headersUpdated = false;
+
+      if (deliveredColIndex === -1) {
+        deliveredColIndex = headers.length;
+        headers.push("Delivered");
+        headersUpdated = true;
+      }
+      if (commentColIndex === -1) {
+        commentColIndex = headers.length;
+        headers.push("Comments");
+        headersUpdated = true;
+      }
+
+      if (reviewerColIndex === -1) {
+        reviewerColIndex = headers.length;
+        headers.push("REVIEWER");
+        headersUpdated = true;
+      }
+
+      // 2. Prepare the Initial Batch Update (Status & Comment)
+      const dataToUpdate = [];
+
+      dataToUpdate.push({
+        range: `'Form Responses 1'!${getColumnLetter(deliveredColIndex)}${rowIndex}`,
+        values: [[delivered]],
+      });
+
+      if (comment !== undefined && comment !== null) {
+        dataToUpdate.push({
+          range: `'Form Responses 1'!${getColumnLetter(commentColIndex)}${rowIndex}`,
+          values: [[comment]],
+        });
+      }
+
+      if (headersUpdated) {
+        dataToUpdate.push({
+          range: "'Form Responses 1'!1:1",
+          values: [[...headers]],
+        });
+      }
+
+      if (reviewerEmail) {
+        dataToUpdate.push({
+          range: `'Form Responses 1'!${getColumnLetter(reviewerColIndex)}${rowIndex}`,
+          values: [[reviewerEmail]],
+        });
+      }
+
+      // 3. Execute Initial Update
+      await sheets.spreadsheets.values.batchUpdate({
+        spreadsheetId,
+        requestBody: {
+          valueInputOption: "USER_ENTERED",
+          data: dataToUpdate,
+        },
+      });
+
+      // ==========================================
+      // 4. SEND RESPONSE TO FRONTEND IMMEDIATELY (Unblocks UI)
+      // ==========================================
+      res.status(200).json({
+        message: `Successfully updated row ${rowIndex} (Delivered: ${delivered})`,
+      });
+    } catch (error) {
+      console.error("Google Sheets update error:", error);
+      // Only send an error response if we haven't already sent a success response
+      if (!res.headersSent) {
+        res
+          .status(500)
+          .json({ error: "Failed to update status in Google Sheets." });
+      }
+    }
+  },
+);
+
 router.get("/receipt/:fileId", async (req, res) => {
   try {
     const { fileId } = req.params;

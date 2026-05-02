@@ -14,6 +14,7 @@ export const useReviewQueue = (endpoint, options = {}) => {
     getReceiptKey,
     extractFileId,
     getActualReceiptValue,
+    getCheckoutStatus,
   } = useReviewUtils();
   const { hiddenColumns = [] } = options; // Destructure the hidden columns, default to empty
   const { showAlert } = useAlertModal();
@@ -98,7 +99,75 @@ export const useReviewQueue = (endpoint, options = {}) => {
   });
 
   const approvedApplications = computed(() =>
-    filteredApplications.value.filter((app) => getStatus(app) === "approved"),
+    filteredApplications.value.filter((app) => {
+      return getStatus(app) === "approved";
+    }),
+  );
+
+  const undeliveredApplications = computed(() =>
+    approvedApplications.value.filter((app) => {
+      // 1. Delivery Check
+      const deliveryStatus = getCheckoutStatus(app);
+      let isUndelivered = true;
+
+      if (deliveryStatus) {
+        const normalizedStatus = deliveryStatus.toString().trim().toLowerCase();
+        if (
+          normalizedStatus === "delivered" ||
+          normalizedStatus === "true" ||
+          normalizedStatus === "yes" ||
+          normalizedStatus === "issue reported" // <-- ADD THIS LINE
+        ) {
+          isUndelivered = false; // It has been handled (either delivered or reported)
+        }
+      }
+
+      // 2. Batch Check
+      const batchKey = Object.keys(app).find((k) =>
+        k.toLowerCase().includes("batch"),
+      );
+      const batchValue = batchKey
+        ? (app[batchKey] || "").toString().trim().toLowerCase()
+        : "";
+
+      const isReadyForPickup =
+        !batchValue.includes("batch 2") && !batchValue.includes("pending");
+
+      return isUndelivered && isReadyForPickup;
+    }),
+  );
+
+  const deliveredApplications = computed(() =>
+    // Step 1: ONLY look at applications that are already Approved
+    approvedApplications.value.filter((app) => {
+      // Step 2: Get the current delivery status
+      const deliveryStatus = getCheckoutStatus(app);
+
+      // Step 3: If it's blank, null, or undefined, it is definitely NOT delivered
+      if (!deliveryStatus) return false;
+
+      // Step 4: Normalize the text to catch variations
+      const normalizedStatus = deliveryStatus.toString().trim().toLowerCase();
+
+      // Return true (keep in the delivered list) ONLY if it has been explicitly marked
+      return (
+        normalizedStatus === "delivered" ||
+        normalizedStatus === "true" ||
+        normalizedStatus === "yes"
+      );
+    }),
+  );
+
+  const reportedApplications = computed(() =>
+    approvedApplications.value.filter((app) => {
+      const deliveryStatus = getCheckoutStatus(app);
+      if (!deliveryStatus) return false;
+
+      const normalizedStatus = deliveryStatus.toString().trim().toLowerCase();
+
+      // Match the exact string emitted by your "Report Issue" button
+      return normalizedStatus === "issue reported";
+    }),
   );
 
   const rejectedApplications = computed(() =>
@@ -267,6 +336,81 @@ export const useReviewQueue = (endpoint, options = {}) => {
     }
   };
 
+  const updateCheckoutStatus = async (rowIndex, newStatus) => {
+    updatingRow.value = rowIndex;
+    imageLoadError.value = false;
+
+    const rowIndexInArray = applications.value.findIndex(
+      (app) => app._rowIndex === rowIndex,
+    );
+    if (rowIndexInArray === -1) {
+      updatingRow.value = null;
+      return;
+    }
+
+    const app = applications.value[rowIndexInArray];
+
+    // 1. Grab the reviewer's email from the Pinia store
+    const authStore = useAuthStore();
+    const reviewerEmail = authStore.user?.email || "Unknown Admin";
+
+    // 2. Add reviewerEmail to the base body payload
+    const body = {
+      rowIndex,
+      delivered: newStatus,
+      comment: reviewComment.value,
+      reviewerEmail,
+    };
+
+    try {
+      await $fetch(
+        `${config.public.apiBase}/applications/${endpoint}/checkout`,
+        {
+          method: "PATCH",
+          headers: { Authorization: `Bearer ${token.value}` },
+          body,
+        },
+      );
+
+      // Find the correct keys dynamically in case of slight variations in the sheet
+      let statusKey =
+        Object.keys(app).find((k) => k.toLowerCase() === "delivered") ||
+        "Delivered";
+      let commentKey =
+        Object.keys(app).find(
+          (k) =>
+            k.toLowerCase() === "comment" || k.toLowerCase() === "comments",
+        ) || "Comments";
+      let reviewerKey =
+        Object.keys(app).find((k) => k.toLowerCase() === "reviewer") ||
+        "REVIEWER";
+
+      // 3. Optimistically update the UI local state
+      applications.value[rowIndexInArray][statusKey] = newStatus;
+      applications.value[rowIndexInArray][commentKey] = reviewComment.value;
+      applications.value[rowIndexInArray][reviewerKey] = reviewerEmail;
+
+      reviewComment.value = "";
+
+      // 4. Handle the array shrink!
+      // Because undeliveredApplications filters out "Delivered" items instantly,
+      // the array shrinks. We DO NOT increment the index. We just make sure
+      // the index hasn't fallen off the end of the newly shrunken array.
+      if (currentIndex.value >= undeliveredApplications.value.length) {
+        currentIndex.value = Math.max(
+          0,
+          undeliveredApplications.value.length - 1,
+        );
+      }
+    } catch (err) {
+      if (err.response?._handledGlobally) return;
+
+      showAlert(err.data?.error || "Failed to update status.", "error");
+    } finally {
+      updatingRow.value = null;
+    }
+  };
+
   const resendEmail = async (row) => {
     resendingRows.value.push(row._rowIndex);
     const emailKey = Object.keys(row).find((k) =>
@@ -312,6 +456,31 @@ export const useReviewQueue = (endpoint, options = {}) => {
     }
   };
 
+  // --- Checkout-Specific Navigation & State ---
+  // Create a computed property specifically for the checkout queue
+  const currentCheckoutApp = computed(() => {
+    if (undeliveredApplications.value.length === 0) return null;
+    const safeIndex = Math.min(
+      currentIndex.value,
+      undeliveredApplications.value.length - 1,
+    );
+    return undeliveredApplications.value[safeIndex];
+  });
+
+  const nextCheckoutApp = () => {
+    if (currentIndex.value < undeliveredApplications.value.length - 1) {
+      currentIndex.value++;
+      reviewComment.value = "";
+    }
+  };
+
+  const prevCheckoutApp = () => {
+    if (currentIndex.value > 0) {
+      currentIndex.value--;
+      reviewComment.value = "";
+    }
+  };
+
   return {
     applications,
     filteredApplications,
@@ -340,5 +509,12 @@ export const useReviewQueue = (endpoint, options = {}) => {
     fetchApplications,
     updateStatus,
     resendEmail,
+    updateCheckoutStatus,
+    undeliveredApplications,
+    deliveredApplications,
+    currentCheckoutApp,
+    nextCheckoutApp,
+    prevCheckoutApp,
+    reportedApplications,
   };
 };
