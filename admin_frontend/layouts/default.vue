@@ -20,19 +20,7 @@
           @click="isSidebarOpen = false"
           class="ml-auto md:hidden text-black hover:text-gray-600"
         >
-          <svg
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+          <Icon name="heroicons:x-mark" class="h-6 w-6" />
         </button>
       </div>
 
@@ -42,55 +30,30 @@
           @click="isSidebarOpen = false"
           :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50  ${checkActiveRoute('/') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
         >
-          <svg
-            class="mr-3 h-5 w-5 opacity-75"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
+          <Icon name="heroicons:home" class="mr-3 h-5 w-5 opacity-75" />
           Dashboard
         </NuxtLink>
 
         <p
           class="my-2 px-3 py-2.5 text-sm rounded-lg flex items-center justify-between text-black font-semibold cursor-pointer hover:bg-gray-50 transition-all duration-200 group selection:bg-transparent"
-          @click="showReviewManagement = !showReviewManagement"
+          @click="showDinnerReviewManagement = !showDinnerReviewManagement"
         >
-          <span class="flex items-center"> Review Management </span>
-
+          <span class="flex items-center"> Dinner Review </span>
           <IconsRightCaret
             :class="[
               'h-4 w-4 transition-transform duration-200 text-gray-400 group-hover:text-black',
-              showReviewManagement ? 'rotate-90' : '',
+              showDinnerReviewManagement ? 'rotate-90' : '',
             ]"
           />
         </p>
 
-        <div v-show="showReviewManagement">
+        <div v-show="showDinnerReviewManagement">
           <NuxtLink
             to="/dinner"
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors  hover:bg-gray-50  hover:text-black ${checkActiveRoute('/dinner') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
-              class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5h18z"
-              />
-            </svg>
+            <Icon name="heroicons:cake" class="mr-3 h-5 w-5 opacity-75" />
             Workers Dinner
           </NuxtLink>
 
@@ -99,40 +62,45 @@
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/dinner/analytics') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
-              class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+            <Icon name="heroicons:chart-bar" class="mr-3 h-5 w-5 opacity-75" />
             Dinner Analytics
           </NuxtLink>
+          <NuxtLink
+            to="/dinner/manual-entry"
+            @click="isSidebarOpen = false"
+            :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/dinner/manual-entry') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
+          >
+            <Icon
+              name="heroicons:document-plus"
+              class="mr-3 h-5 w-5 opacity-75"
+            />
+            Manual Entry
+          </NuxtLink>
+        </div>
 
+        <p
+          class="my-2 px-3 py-2.5 text-sm rounded-lg flex items-center justify-between text-black font-semibold cursor-pointer hover:bg-gray-50 transition-all duration-200 group selection:bg-transparent"
+          @click="showMerchReviewManagement = !showMerchReviewManagement"
+        >
+          <span class="flex items-center"> Merch Review </span>
+          <IconsRightCaret
+            :class="[
+              'h-4 w-4 transition-transform duration-200 text-gray-400 group-hover:text-black',
+              showMerchReviewManagement ? 'rotate-90' : '',
+            ]"
+          />
+        </p>
+
+        <div v-show="showMerchReviewManagement">
           <NuxtLink
             to="/merch"
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/merch') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
+            <Icon
+              name="heroicons:shopping-bag"
               class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
-            </svg>
+            />
             EC Merch
           </NuxtLink>
 
@@ -141,19 +109,7 @@
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/merch/analytics') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
-              class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+            <Icon name="heroicons:chart-bar" class="mr-3 h-5 w-5 opacity-75" />
             Merch Analytics
           </NuxtLink>
 
@@ -162,20 +118,23 @@
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/merch/checkout') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
+            <Icon
+              name="heroicons:shopping-cart"
               class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              />
-            </svg>
-            Checkout
+            />
+            Merch Checkout
+          </NuxtLink>
+
+          <NuxtLink
+            to="/merch/manual-entry"
+            @click="isSidebarOpen = false"
+            :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/merch/manual-entry') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
+          >
+            <Icon
+              name="heroicons:document-plus"
+              class="mr-3 h-5 w-5 opacity-75"
+            />
+            Manual Entry
           </NuxtLink>
         </div>
 
@@ -184,7 +143,6 @@
           @click="showWebManagement = !showWebManagement"
         >
           <span class="flex items-center"> Website Management </span>
-
           <IconsRightCaret
             :class="[
               'h-4 w-4 transition-transform duration-200 text-gray-400 group-hover:text-black',
@@ -199,19 +157,7 @@
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors  hover:bg-gray-50  hover:text-black ${checkActiveRoute('/website') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
-              class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-              />
-            </svg>
+            <Icon name="heroicons:server" class="mr-3 h-5 w-5 opacity-75" />
             Website Content
           </NuxtLink>
 
@@ -220,19 +166,7 @@
             @click="isSidebarOpen = false"
             :class="`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors hover:text-black hover:bg-gray-50 ${checkActiveRoute('/website/analytics') ? 'bg-gray-100 text-black' : 'text-gray-600'}`"
           >
-            <svg
-              class="mr-3 h-5 w-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+            <Icon name="heroicons:chart-bar" class="mr-3 h-5 w-5 opacity-75" />
             Website Analytics
           </NuxtLink>
         </div>
@@ -281,19 +215,7 @@
             @click="isSidebarOpen = true"
             class="text-black hover:text-gray-900 rounded-md mr-3 cursor-pointer"
           >
-            <svg
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <Icon name="heroicons:bars-3" class="h-6 w-6" />
           </button>
           <h1 class="text-lg font-bold tracking-tight">EC Reviewer</h1>
         </div>
@@ -317,8 +239,9 @@ import { useRoute } from "#vue-router";
 const auth = useAuthStore();
 const route = useRoute();
 
-const showReviewManagement = ref(true);
-const showWebManagement = ref(true);
+const showDinnerReviewManagement = ref(false);
+const showMerchReviewManagement = ref(false);
+const showWebManagement = ref(false);
 
 // Track if the mobile sidebar is open
 const isSidebarOpen = ref(false);

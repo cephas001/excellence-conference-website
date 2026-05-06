@@ -392,6 +392,176 @@ router.patch(
   },
 );
 
+// --- MANUAL ENTRY (Protected by Type) ---
+router.post(
+  "/:type/manual",
+  verifyToken,
+  requireDynamicTypeAccess,
+  async (req, res) => {
+    try {
+      const { type } = req.params;
+      const payload = req.body;
+
+      let spreadsheetId =
+        type === "dinner"
+          ? process.env.SHEET_ID_DINNER
+          : process.env.SHEET_ID_MERCH;
+
+      const headerResponse = await sheets.spreadsheets.values.get({
+        spreadsheetId,
+        range: "'Form Responses 1'!1:1",
+      });
+
+      const headers = headerResponse.data.values
+        ? headerResponse.data.values[0]
+        : [];
+
+      let statusColIndex = headers.findIndex(
+        (h) => h.trim().toLowerCase() === "status",
+      );
+      let reviewerColIndex = headers.findIndex(
+        (h) => h.trim().toLowerCase() === "reviewer",
+      );
+      let emailStatusColIndex = headers.findIndex(
+        (h) => h.trim().toLowerCase() === "email status",
+      ); // <--- NEW
+
+      let headersUpdated = false;
+
+      if (statusColIndex === -1) {
+        statusColIndex = headers.length;
+        headers.push("Status");
+        headersUpdated = true;
+      }
+      if (reviewerColIndex === -1) {
+        reviewerColIndex = headers.length;
+        headers.push("REVIEWER");
+        headersUpdated = true;
+      }
+      // <--- NEW: Ensure Email Status column exists
+      if (emailStatusColIndex === -1) {
+        emailStatusColIndex = headers.length;
+        headers.push("Email Status");
+        headersUpdated = true;
+      }
+
+      if (headersUpdated) {
+        await sheets.spreadsheets.values.update({
+          spreadsheetId,
+          range: "'Form Responses 1'!1:1",
+          valueInputOption: "USER_ENTERED",
+          resource: { values: [[...headers]] },
+        });
+      }
+
+      const newRow = new Array(headers.length).fill("");
+
+      headers.forEach((header, index) => {
+        const cleanHeader = header.trim().toLowerCase();
+
+        // 1. Universal & Merch Fields
+        if (cleanHeader.includes("timestamp") || cleanHeader === "time")
+          newRow[index] = payload.timestamp || "";
+        else if (cleanHeader.includes("name"))
+          newRow[index] = payload.name || "";
+        else if (cleanHeader.includes("level"))
+          newRow[index] = payload.level || "";
+        else if (
+          cleanHeader.includes("whatsapp") ||
+          cleanHeader.includes("phone")
+        )
+          newRow[index] = payload.whatsapp || payload.phone || "";
+        else if (cleanHeader.includes("package") || cleanHeader === "order")
+          newRow[index] = payload.package || "";
+        else if (cleanHeader.includes("color"))
+          newRow[index] = payload.color || "";
+        else if (cleanHeader.includes("size"))
+          newRow[index] = payload.size || "";
+        // 2. Dinner Specific Fields
+        else if (
+          cleanHeader.includes("email") &&
+          !cleanHeader.includes("status")
+        )
+          newRow[index] = payload.email || "";
+        else if (cleanHeader.includes("table"))
+          newRow[index] = payload.tableChoice || payload.table || "";
+        else if (cleanHeader.includes("unit") || cleanHeader.includes("chapel"))
+          newRow[index] = payload.unit || "";
+        else if (cleanHeader.includes("unique"))
+          newRow[index] = payload.uniqueThing || "";
+        else if (
+          cleanHeader.includes("expectation") ||
+          cleanHeader.includes("coronation")
+        )
+          newRow[index] = payload.expectation || "";
+        // 3. Administrative Tracking
+        else if (cleanHeader === "status") newRow[index] = payload.status || "";
+        else if (cleanHeader === "reviewer")
+          newRow[index] = payload.reviewer || "";
+        // <--- NEW: Initialize Email Status as blank
+        else if (cleanHeader === "email status") newRow[index] = "";
+      });
+
+      // 4. Append the new row to the sheet
+      // We capture the response so we know EXACTLY what row number was just created
+      const appendResponse = await sheets.spreadsheets.values.append({
+        spreadsheetId,
+        range: "'Form Responses 1'!A:A",
+        valueInputOption: "USER_ENTERED",
+        insertDataOption: "INSERT_ROWS",
+        requestBody: {
+          values: [newRow],
+        },
+      });
+
+      // Extract the row number that Google Sheets just inserted
+      const updatedRange = appendResponse.data.updates.updatedRange; // e.g., "'Form Responses 1'!A85:M85"
+      const newlyInsertedRowIndex = updatedRange
+        .split(":")[0]
+        .replace(/\D/g, "");
+
+      // 5. Send Response to Frontend Immediately (Unblocks UI)
+      res.status(200).json({
+        message: `Successfully added manual entry for ${payload.name}`,
+      });
+
+      // ==========================================
+      // 6. BACKGROUND TASK: Send Email & Update Sheet
+      // ==========================================
+      if (type === "dinner" && payload.status === "Approved" && payload.email) {
+        sendTicketEmail(payload.email, payload.name, payload.tableChoice)
+          .then(async (emailSentSuccessfully) => {
+            const mailStatusText = emailSentSuccessfully ? "Sent" : "Failed";
+            const cellRange = `'Form Responses 1'!${getColumnLetter(emailStatusColIndex)}${newlyInsertedRowIndex}`;
+
+            // Make a secondary, quiet API call to update just the Email Status cell
+            await sheets.spreadsheets.values.update({
+              spreadsheetId,
+              range: cellRange,
+              valueInputOption: "USER_ENTERED",
+              resource: {
+                values: [[mailStatusText]],
+              },
+            });
+          })
+          .catch((err) =>
+            console.error(
+              "Background email tracking failed on manual entry:",
+              err,
+            ),
+          );
+      }
+    } catch (error) {
+      console.error("Manual entry error:", error);
+      if (!res.headersSent) {
+        res
+          .status(500)
+          .json({ error: "Failed to add manual entry to Google Sheets." });
+      }
+    }
+  },
+);
+
 router.get("/receipt/:fileId", async (req, res) => {
   try {
     const { fileId } = req.params;
