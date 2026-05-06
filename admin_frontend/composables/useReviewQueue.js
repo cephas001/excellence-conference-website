@@ -246,7 +246,28 @@ export const useReviewQueue = (endpoint, options = {}) => {
       const response = await $fetch(
         `${config.public.apiBase}/applications/${endpoint}`,
       );
-      applications.value = response.data;
+
+      // Filter out "Ghost Rows" (rows completely missing a Timestamp or Name)
+      const cleanedData = response.data.filter((row) => {
+        // Find if there is a valid Timestamp value
+        const hasTimestamp = Object.keys(row).some(
+          (k) =>
+            k.toLowerCase().includes("timestamp") &&
+            row[k]?.toString().trim() !== "",
+        );
+
+        // Find if there is a valid Name value
+        const hasName = Object.keys(row).some(
+          (k) =>
+            k.toLowerCase().includes("name") &&
+            row[k]?.toString().trim() !== "",
+        );
+
+        // Keep the row ONLY if it has at least a Name or a Timestamp
+        return hasTimestamp || hasName;
+      });
+
+      applications.value = cleanedData;
     } catch (err) {
       if (err.response?._handledGlobally) return;
 
