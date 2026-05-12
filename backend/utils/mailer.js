@@ -26,14 +26,14 @@ const sendTicketEmail = async (recipientEmail, applicantName, tableChoice) => {
     // ==========================================
     const base64Ticket = await generateTicketImage(
       baseImagePath,
-      applicantName,
+      applicantName.trim(),
     );
 
     // ==========================================
     // 2. HTML Rendering & Brevo API Dispatch
     // ==========================================
     const htmlContent = await ejs.renderFile(templatePath, {
-      applicantName: applicantName || "Worker",
+      applicantName: applicantName.trim() || "Worker",
       tableChoice: tableChoice || "General Seating",
     });
 
@@ -58,7 +58,7 @@ const sendTicketEmail = async (recipientEmail, applicantName, tableChoice) => {
             content: base64Ticket,
           },
           {
-            name: `${(applicantName || "Worker").replace(/\s+/g, "_")}_Ticket.png`,
+            name: `${(applicantName.trim() || "Worker").replace(/\s+/g, "_")}_Ticket.png`,
             content: base64Ticket,
           },
         ],
