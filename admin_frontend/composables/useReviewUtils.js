@@ -69,7 +69,6 @@ export const useReviewUtils = () => {
   const normalizeForWhatsApp = (phone) => {
     if (!phone) return "";
 
-    // Convert to string and strip all non-numeric characters (spaces, dashes, plus signs)
     let cleaned = String(phone).replace(/\D/g, "");
 
     // If it starts with 0 and is 11 digits long (Standard Nigerian format: 0703...)
