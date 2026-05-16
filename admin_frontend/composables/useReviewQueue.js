@@ -131,7 +131,7 @@ export const useReviewQueue = (endpoint, options = {}) => {
         : "";
 
       const isReadyForPickup =
-        !batchValue.includes("batch 2") && !batchValue.includes("pending");
+        !batchValue.includes("batch 1") && !batchValue.includes("pending");
 
       return isUndelivered && isReadyForPickup;
     }),
