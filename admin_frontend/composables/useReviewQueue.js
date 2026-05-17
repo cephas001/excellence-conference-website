@@ -123,17 +123,17 @@ export const useReviewQueue = (endpoint, options = {}) => {
       }
 
       // 2. Batch Check
-      const batchKey = Object.keys(app).find((k) =>
-        k.toLowerCase().includes("batch"),
-      );
-      const batchValue = batchKey
-        ? (app[batchKey] || "").toString().trim().toLowerCase()
-        : "";
+      // const batchKey = Object.keys(app).find((k) =>
+      //   k.toLowerCase().includes("batch"),
+      // );
+      // const batchValue = batchKey
+      //   ? (app[batchKey] || "").toString().trim().toLowerCase()
+      //   : "";
 
-      const isReadyForPickup =
-        !batchValue.includes("batch 1") && !batchValue.includes("pending");
+      // const isReadyForPickup =
+      //   !batchValue.includes("batch 1") && !batchValue.includes("pending");
 
-      return isUndelivered && isReadyForPickup;
+      return isUndelivered;
     }),
   );
 
